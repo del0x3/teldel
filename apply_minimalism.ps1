@@ -164,6 +164,20 @@ Write-Host "`n>>> [6/6] Establishing Cryptographic Network Shield & Launcher..."
 
 # Install Olauncher if present
 $launcherApk = Join-Path $PSScriptRoot "Olauncher.apk"
+if (-not (Test-Path $launcherApk)) {
+    Write-Host "    [i] Olauncher.apk not found locally. Fetching latest release from GitHub..." -ForegroundColor Cyan
+    try {
+        $release = Invoke-RestMethod -Uri "https://api.github.com/repos/tanujnotes/Olauncher/releases/latest" -Headers @{"User-Agent"="Mozilla/5.0"}
+        $asset = $release.assets | Where-Object { $_.name -like "*.apk" } | Select-Object -First 1
+        if ($asset) {
+            Write-Host "    Downloading $($asset.name)..." -ForegroundColor DarkGray
+            Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $launcherApk
+        }
+    } catch {
+        Write-Host "    [!] Could not auto-download Olauncher: $_" -ForegroundColor Yellow
+    }
+}
+
 if (Test-Path $launcherApk) {
     Write-Host "    Installing verified minimal launcher (Olauncher.apk)..." -ForegroundColor Yellow
     & $ADB install -r $launcherApk
@@ -171,7 +185,7 @@ if (Test-Path $launcherApk) {
     & $ADB shell cmd appops set app.olauncher READ_PHONE_STATE ignore 2>$null
     Write-Host "    Olauncher installed and permissions stripped." -ForegroundColor Green
 } else {
-    Write-Host "    [!] Olauncher.apk not found in directory. Run download_launcher.py to fetch it." -ForegroundColor Yellow
+    Write-Host "    [!] Olauncher.apk not found. You can run download_launcher.py later." -ForegroundColor Yellow
 }
 
 Write-Host "`n==========================================================================" -ForegroundColor Cyan
