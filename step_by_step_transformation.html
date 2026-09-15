@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пошаговый Реестр Трансформации: Хронология Шагов (1–18)</title>
+    <title>Step-by-Step Transformation Registry: Chronological Steps (1-18)</title>
     <style>
         :root {
             --bg-main: #090a0f;
@@ -348,47 +348,47 @@
 <div class="container">
     <!-- Top Navigation -->
     <nav class="nav-bar">
-        <a href="full_system_transformation_report.html" class="nav-link">🏛️ Архитектурный Отчет</a>
-        <a href="step_by_step_transformation.html" class="nav-link active">📋 Пошаговый Реестр (1–18)</a>
-        <a href="dopamine_interactive_dashboard.html" class="nav-link">🧠 Дофаминовый Аудит</a>
+        <a href="full_system_transformation_report.html" class="nav-link">🏛️ Architecture Report</a>
+        <a href="step_by_step_transformation.html" class="nav-link active">📋 18-Step Registry</a>
+        <a href="dopamine_interactive_dashboard.html" class="nav-link">🧠 Dopamine Audit</a>
     </nav>
 
     <header>
-        <div class="badge-status">18 ИЗ 18 ШАГОВ ЗАВЕРШЕНО | СТАТУС: ТЕРМИНАЛ ПРОДУКТИВНОСТИ</div>
-        <h1>Хронология Трансформации: Шаг за Шагом</h1>
-        <p class="subtitle">Полный реестр всех инженерных изменений, внесенных в Samsung Galaxy A16 (SM-A165F)</p>
+        <div class="badge-status">18 OF 18 STEPS COMPLETED | STATUS: PRODUCTIVITY TERMINAL</div>
+        <h1>Transformation Chronology: Step by Step</h1>
+        <p class="subtitle">Comprehensive engineering registry of all modifications applied to Samsung Galaxy A16 (SM-A165F)</p>
     </header>
 
     <!-- Top Summary Metrics -->
     <div class="summary-bar">
         <div class="summary-card">
-            <div class="summary-label">Всего шагов</div>
+            <div class="summary-label">Total Steps</div>
             <div class="summary-val">18 / 18</div>
         </div>
         <div class="summary-card">
-            <div class="summary-label">Блокировщики экрана</div>
-            <div class="summary-val" style="color: var(--accent-blue);">0 браузеров, 0 сторов</div>
+            <div class="summary-label">Screen Blockers</div>
+            <div class="summary-val" style="color: var(--accent-blue);">0 browsers, 0 stores</div>
         </div>
         <div class="summary-card">
-            <div class="summary-label">Вырезано демонов</div>
-            <div class="summary-val" style="color: var(--accent-red);">29 служб и агентов</div>
+            <div class="summary-label">Daemons Purged</div>
+            <div class="summary-val" style="color: var(--accent-red);">29 services & agents</div>
         </div>
         <div class="summary-card">
-            <div class="summary-label">Отклик интерфейса</div>
-            <div class="summary-val" style="color: var(--accent-cyan);">0.0 мс (Instant)</div>
+            <div class="summary-label">UI Latency</div>
+            <div class="summary-val" style="color: var(--accent-cyan);">0.0 ms (Instant)</div>
         </div>
     </div>
 
     <!-- Filter & Search Controls -->
     <div class="controls-row">
         <div class="filter-tags">
-            <button class="filter-btn active" onclick="filterSteps('all')">Все шаги (18)</button>
-            <button class="filter-btn" onclick="filterSteps('dopamine')">Дофамин и Приложения</button>
-            <button class="filter-btn" onclick="filterSteps('security')">Безопасность и Сеть</button>
-            <button class="filter-btn" onclick="filterSteps('hardware')">Железо и Скорость</button>
-            <button class="filter-btn" onclick="filterSteps('ui')">Интерфейс «Серый Камень»</button>
+            <button class="filter-btn active" onclick="filterSteps('all')">All Steps (18)</button>
+            <button class="filter-btn" onclick="filterSteps('dopamine')">Dopamine & Apps</button>
+            <button class="filter-btn" onclick="filterSteps('security')">Security & Network</button>
+            <button class="filter-btn" onclick="filterSteps('hardware')">Hardware & Speed</button>
+            <button class="filter-btn" onclick="filterSteps('ui')">'Gray Stone' UI</button>
         </div>
-        <input type="text" class="search-box" id="searchBox" placeholder="Поиск по шагам..." onkeyup="searchSteps()">
+        <input type="text" class="search-box" id="searchBox" placeholder="Search steps..." onkeyup="searchSteps()">
     </div>
 
     <!-- Step by Step List -->
@@ -401,16 +401,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Подключение ADB и Фиксация Базового Среза</div>
+                    <div class="step-title">Connecting ADB & Recording Baseline Audit</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Аудит</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Audit</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Авторизация устройства SM-A165F через USB-отладку, извлечение дампов UsageStats, событий батареи и notification listener.</p>
+                <p class="step-desc">SM-A165F device authorization via USB debugging, extracting UsageStats dumps, battery metrics, and notification listeners.</p>
                 <div class="step-details">
                     <div class="code-row">adb devices & dumpsys usagestats > full_usagestats.txt</div>
-                    <div class="effect-row"><strong>Результат:</strong> Зафиксирован исторический baseline: 10.4 ч/день экранного времени, 52.5 ч/нед в YouTube, 9019 разблокировок.</div>
+                    <div class="effect-row"><strong>Result:</strong> Historical baseline recorded: 10.4 hrs/day screen time, 52.5 hrs/week in video streaming, 9,019 unlocks.</div>
                 </div>
             </div>
         </div>
@@ -422,16 +422,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Ликвидация Развлекательных Таймкиллеров</div>
+                    <div class="step-title">Elimination of Entertainment Time-Killers</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Дофамин</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Dopamine</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Полное удаление ключевых источников медийного транса, бесконечных видеолент и кликеров для профиля User 0.</p>
+                <p class="step-desc">Complete eradication of media trance sources, infinite video feeds, and games for User 0 profile.</p>
                 <div class="step-details">
                     <div class="code-row">pm uninstall -k --user 0 com.google.android.youtube com.zhiliaoapp.musically com.instagram.android com.linkedin.android com.glovo ua.com.uklontaxi</div>
-                    <div class="effect-row"><strong>Результат:</strong> Уничтожен пассивный видеопоток (YouTube, TikTok, Instagram, игры, сервисы импульсивных заказов).</div>
+                    <div class="effect-row"><strong>Result:</strong> Passive entertainment feeds suppressed (YouTube, TikTok, Instagram, games, impulsive delivery services).</div>
                 </div>
             </div>
         </div>
@@ -443,16 +443,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Устранение Новостного Шума (Google Discover)</div>
+                    <div class="step-title">Elimination of News Noise (Google Discover)</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Дофамин</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Dopamine</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Удаление оболочки Google QuickSearchBox, подсовывающей кликбейтные новостные статьи при свайпе влево на домашнем экране.</p>
+                <p class="step-desc">Removal of Google QuickSearchBox shell pushing clickbait news articles upon swiping left on home screen.</p>
                 <div class="step-details">
                     <div class="code-row">pm uninstall -k --user 0 com.google.android.googlequicksearchbox</div>
-                    <div class="effect-row"><strong>Результат:</strong> Нулевое информационное загрязнение при разблокировке устройства.</div>
+                    <div class="effect-row"><strong>Result:</strong> Zero information pollution upon waking the device.</div>
                 </div>
             </div>
         </div>
@@ -464,16 +464,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Возведение Нулевого Браузерного Периметра (Zero-Browser)</div>
+                    <div class="step-title">Erecting Zero-Browser Perimeter</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Безопасность</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Security</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Удаление Google Chrome и всех кастомизаций браузеров в системе. Полная блокировка открытия любых веб-страниц.</p>
+                <p class="step-desc">Removal of Google Chrome and all browser customizations. Full blockage of arbitrary web page resolution.</p>
                 <div class="step-details">
                     <div class="code-row">pm uninstall -k --user 0 com.android.chrome && pm disable-user --user 0 com.sec.android.app.chromecustomizations</div>
-                    <div class="effect-row"><strong>Результат:</strong> Запрос <code>cmd package resolve-activity http://...</code> возвращает <code>No activity found</code>.</div>
+                    <div class="effect-row"><strong>Result:</strong> Query <code>cmd package resolve-activity http://...</code> returns <code>No activity found</code>.</div>
                 </div>
             </div>
         </div>
@@ -485,16 +485,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Ликвидация Магазинов Приложений</div>
+                    <div class="step-title">Liquidation of Application Stores</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Безопасность</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Security</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Удаление Samsung Galaxy Store и глубокая заморозка Google Play Store для предотвращения спонтанной загрузки софта.</p>
+                <p class="step-desc">Removal of Samsung Galaxy Store and deep freeze of Google Play Store to prevent impulsive software downloads.</p>
                 <div class="step-details">
                     <div class="code-row">pm uninstall -k --user 0 com.sec.android.app.samsungapps && pm disable-user --user 0 com.android.vending</div>
-                    <div class="effect-row"><strong>Результат:</strong> Телефон отрезан от спонтанного скачивания любых таймкиллеров и игр.</div>
+                    <div class="effect-row"><strong>Result:</strong> Phone permanently severed from spontaneous game and app installations.</div>
                 </div>
             </div>
         </div>
@@ -506,16 +506,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Блокировка Сторонней Установки (Anti-Sideloading)</div>
+                    <div class="step-title">Anti-Sideloading Enforcement</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Безопасность</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Security</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Принудительный отзыв системных привилегий на установку APK пакетов у проводника файлов и мессенджеров через AppOps.</p>
+                <p class="step-desc">Forced revocation of APK package installation privileges from file managers and messengers via AppOps.</p>
                 <div class="step-details">
                     <div class="code-row">cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES ignore && cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES ignore</div>
-                    <div class="effect-row"><strong>Результат:</strong> Даже при наличии APK-файла в памяти телефона операционная система отказывает в его запуске.</div>
+                    <div class="effect-row"><strong>Result:</strong> Even if an APK file exists in device storage, Android kernel denies package execution.</div>
                 </div>
             </div>
         </div>
@@ -527,16 +527,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Искоренение Рекламных Бэкдоров и Автоинсталлеров</div>
+                    <div class="step-title">Eradication of Adware Backdoors & Auto-Installers</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Безопасность</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Security</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Уничтожение тихих установщиков партнерских приложений (Aura/IronSource, CIDManager, OMC), которые Samsung использует для установки мусора при апдейтах.</p>
+                <p class="step-desc">Elimination of partner silent installers (Aura/IronSource, CIDManager, OMC) used to push bloatware during updates.</p>
                 <div class="step-details">
                     <div class="code-row">pm uninstall -k --user 0 com.aura.oobe.samsung.gl com.samsung.android.cidmanager com.samsung.android.app.omcagent com.samsung.android.sdm.config</div>
-                    <div class="effect-row"><strong>Результат:</strong> Телефон гарантированно защищен от внезапного появления новых игр и рекламы в фоне.</div>
+                    <div class="effect-row"><strong>Result:</strong> Guaranteed immunity from spontaneous background game and adware installations.</div>
                 </div>
             </div>
         </div>
@@ -548,16 +548,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Отключение 15 Демонов Телеметрии и Слежки</div>
+                    <div class="step-title">Disabling 15 Telemetry & Tracking Daemons</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Железо</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Hardware</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Отключение фоновых сборщиков системных логов, гео-трекеров, предустановленного антивируса McAfee и агентов Samsung Diag.</p>
+                <p class="step-desc">Disabling background system log collectors, geo-trackers, preloaded McAfee antivirus, and diagnostic agents.</p>
                 <div class="step-details">
                     <div class="code-row">pm disable-user --user 0 imslogger ipsgeofence diagmonagent iaft dsms sdhms aware.service dqagent networkdiagnostic sm.devicesecurity</div>
-                    <div class="effect-row"><strong>Результат:</strong> Разгрузка квантов времени процессора (CPU ticks), отсутствие постоянного доступа к накопителю.</div>
+                    <div class="effect-row"><strong>Result:</strong> Reduced CPU scheduling ticks, zero constant flash memory disk writes.</div>
                 </div>
             </div>
         </div>
@@ -569,16 +569,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Разгрузка Радиомодулей (Wi-Fi & Bluetooth)</div>
+                    <div class="step-title">Radio Scanning Suppression (Wi-Fi & Bluetooth)</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Железо</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Hardware</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Отключение скрытого постоянного сканирования Wi-Fi сетей и Bluetooth маячков (BLE), которое работало даже при выключенных беспроводных сетях.</p>
+                <p class="step-desc">Disabling persistent background scanning of Wi-Fi networks and Bluetooth beacons (BLE) while radios are off.</p>
                 <div class="step-details">
                     <div class="code-row">settings put global wifi_scan_always_enabled 0 && settings put global ble_scan_always_enabled 0</div>
-                    <div class="effect-row"><strong>Результат:</strong> Экономия заряда батареи и прекращение скрытого гео-позиционирования через сторонние роутеры.</div>
+                    <div class="effect-row"><strong>Result:</strong> Significant battery savings and cessation of stealth geo-triangulation via nearby routers.</div>
                 </div>
             </div>
         </div>
@@ -590,16 +590,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Аппаратная Оптимизация RAM Plus (Отключение Swap)</div>
+                    <div class="step-title">Hardware RAM Plus Optimization (Swap Deactivation)</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Железо</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Hardware</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Полная ликвидация 4 ГБ виртуального файла подкачки ZRAM, который создавал искусственные очереди ожидания на медленном флеш-накопителе UFS 2.2.</p>
+                <p class="step-desc">Complete elimination of 4 GB virtual swap file (ZRAM) creating artificial bottleneck queues on slow flash memory.</p>
                 <div class="step-details">
-                    <div class="code-row">settings put global ram_expand_size 0  (Подтверждено после перезагрузки: 0 MB)</div>
-                    <div class="effect-row"><strong>Результат:</strong> Ликвидированы микролаги шины памяти, 1.34 ГБ чистой физической LPDDR4X оперативной памяти работают на полной скорости.</div>
+                    <div class="code-row">settings put global ram_expand_size 0  (Verified after reboot: 0 MB)</div>
+                    <div class="effect-row"><strong>Result:</strong> Memory bus micro-stutters eradicated; physical LPDDR4X RAM operates at peak bus bandwidth.</div>
                 </div>
             </div>
         </div>
@@ -611,16 +611,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Мгновенный Отклик Интерфейса (0 ms Latency)</div>
+                    <div class="step-title">Instant UI Response (0 ms Latency Animations)</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Железо</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Hardware</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Отключение всех шкал отрисовки анимации окон, переходов и аниматоров в ядре интерфейса Android.</p>
+                <p class="step-desc">Disabling window animation scale, transition animation scale, and animator duration scale in Android UI core.</p>
                 <div class="step-details">
                     <div class="code-row">settings put global window_animation_scale 0 && settings put global transition_animation_scale 0 && settings put global animator_duration_scale 0</div>
-                    <div class="effect-row"><strong>Результат:</strong> Mali GPU не строит промежуточные кадры — все окна и приложения открываются мгновенно за 0 миллисекунд.</div>
+                    <div class="effect-row"><strong>Result:</strong> GPU bypasses intermediate frame rendering — all windows and apps open instantaneously in 0 milliseconds.</div>
                 </div>
             </div>
         </div>
@@ -632,16 +632,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Режим Дисплея «Серый Камень» (Grayscale & Extra Dim)</div>
+                    <div class="step-title">'Gray Stone' Display Mode (Grayscale & Extra Dim)</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Интерфейс</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Interface</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Активация монохромного режима дальтонизатора матрицы и режима приглушения экстремальной яркости (матовая газетная бумага).</p>
+                <p class="step-desc">Activation of hardware matrix daltonizer monochrome mode and extreme brightness dimming (matte paper texture).</p>
                 <div class="step-details">
                     <div class="code-row">settings put secure accessibility_display_daltonizer 0 && settings put secure accessibility_display_daltonizer_enabled 1 && settings put secure reduce_bright_colors_activated 1</div>
-                    <div class="effect-row"><strong>Результат:</strong> Устранение биологической реакции мозга на яркие цвета; радикальное снижение утомляемости зрительной коры.</div>
+                    <div class="effect-row"><strong>Result:</strong> Suppression of visual dopamine spikes; dramatic reduction of optical cortex fatigue.</div>
                 </div>
             </div>
         </div>
@@ -653,16 +653,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Зачистка Тактильных и Звуковых Микро-Триггеров</div>
+                    <div class="step-title">Purging Tactile & Audio Micro-Triggers</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Интерфейс</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Interface</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Отключение вибрации при касании клавиш и жестов, мутирование звуков блокировки и системных кликов (звонки и рабочие пуши сохранены!).</p>
+                <p class="step-desc">Disabling keypress haptics and gestures, muting lockscreen clicks and tap sounds (calls and work pings preserved!).</p>
                 <div class="step-details">
                     <div class="code-row">settings put system haptic_feedback_enabled 0 && settings put system sound_effects_enabled 0 && settings put system lockscreen_sounds_enabled 0</div>
-                    <div class="effect-row"><strong>Результат:</strong> Уничтожение кинестетического микро-кайфа при наборе текста; телефон ощущается строгим металлическим инструментом.</div>
+                    <div class="effect-row"><strong>Result:</strong> Elimination of kinesthetic micro-rewards during typing; phone feels like a solid cold metal tool.</div>
                 </div>
             </div>
         </div>
@@ -674,16 +674,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Устранение Дребезга Внимания и Таймаут 30 Секунд</div>
+                    <div class="step-title">Eliminating Attention Jitter & 30-Second Screen Timeout</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Интерфейс</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Interface</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Отключение навязчивых красных кружков с количеством непрочитанных сообщений и сокращение времени свечения пустого экрана до 30 с.</p>
+                <p class="step-desc">Disabling intrusive red unread counter badges and shortening blank screen timeout to 30 seconds.</p>
                 <div class="step-details">
                     <div class="code-row">settings put secure notification_badging 0 && settings put system screen_off_timeout 30000 && cmd overlay enable com.android.internal.systemui.navbar.gestural</div>
-                    <div class="effect-row"><strong>Результат:</strong> Префронтальная кора избавлена от тревожных цифр «непрочитано»; экран быстро гаснет при завершении задачи.</div>
+                    <div class="effect-row"><strong>Result:</strong> Prefrontal cortex freed from anxiety-inducing notification badges; display quickly dims upon task completion.</div>
                 </div>
             </div>
         </div>
@@ -695,16 +695,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Сетевой Криптографический Щит (CleanBrowsing DoT)</div>
+                    <div class="step-title">Network Cryptographic Shield (CleanBrowsing DoT)</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Безопасность</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Security</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Принудительное шифрование всех исходящих DNS-запросов через DNS-over-TLS с автоматической фильтрацией вредоносов и взрослого контента.</p>
+                <p class="step-desc">Enforcing encrypted DNS-over-TLS queries with automatic filtering of adult content, malicious domains, and proxy tunnels.</p>
                 <div class="step-details">
                     <div class="code-row">settings put global private_dns_mode hostname && settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org</div>
-                    <div class="effect-row"><strong>Результат:</strong> Защита на уровне сетевых сокетов: блокировка порнографии, фишинга, трекеров и открытых прокси.</div>
+                    <div class="effect-row"><strong>Result:</strong> Socket-level security: blocking pornography, phishing, tracking telemetry, and open bypass proxies.</div>
                 </div>
             </div>
         </div>
@@ -716,16 +716,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Установка Минималистичного Текстового Лаунчера (Olauncher)</div>
+                    <div class="step-title">Minimalist Text Launcher Installation (Olauncher)</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Интерфейс</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Interface</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Установка открытого легковесного лаунчера (v6.9.1 GPLv3, проверенный SHA-256, 0 трекеров, все разрешения заблокированы).</p>
+                <p class="step-desc">Deploying open-source lightweight launcher (v6.9.1 GPLv3, verified SHA-256, 0 trackers, all permissions revoked).</p>
                 <div class="step-details">
                     <div class="code-row">adb install Olauncher.apk && appops set app.olauncher RECORD_AUDIO ignore && appops set app.olauncher READ_PHONE_STATE ignore</div>
-                    <div class="effect-row"><strong>Результат:</strong> Экран лишен иконок и логотипов брендов — только плоский серый текст для чисто утилитарного запуска.</div>
+                    <div class="effect-row"><strong>Result:</strong> Home screen stripped of app icons and brand logos — plain flat text for purely intentional app launching.</div>
                 </div>
             </div>
         </div>
@@ -737,16 +737,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Создание Автономного Менеджера на Рабочем Столе ПК</div>
+                    <div class="step-title">Standalone Desktop Phone Manager</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Инструменты</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Tools</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Разработка двухуровневого интерактивного инструмента (Phone_Manager.bat + phone_manager.ps1) для управления периметром без консоли.</p>
+                <p class="step-desc">Development of a two-tier interactive manager (phone_manager.bat + phone_manager.ps1) for managing perimeter without ADB terminal.</p>
                 <div class="step-details">
                     <div class="code-row">phone_manager.bat</div>
-                    <div class="effect-row"><strong>Результат:</strong> Управление Play Store в 1 клик (разморозка для обновлений банков и заморозка обратно), переключатель цвета и экспресс-аудит.</div>
+                    <div class="effect-row"><strong>Result:</strong> 1-click Play Store control (unfreeze for banking updates and freeze back), color toggle, and express audit.</div>
                 </div>
             </div>
         </div>
@@ -758,16 +758,16 @@
             </div>
             <div class="step-body">
                 <div class="step-header">
-                    <div class="step-title">Глубокий Аппаратный Аудит Безопасности и Батареи</div>
+                    <div class="step-title">Deep Hardware, Kernel & Battery Audit</div>
                     <div class="step-badges">
-                        <span class="tag-cat">Железо</span>
-                        <span class="tag-done">Выполнено</span>
+                        <span class="tag-cat">Hardware</span>
+                        <span class="tag-done">Completed</span>
                     </div>
                 </div>
-                <p class="step-desc">Финальная проверка ядра через низкоуровневые интерфейсы: подтверждено отсутствие майнеров, целостность Knox и идеальное здоровье батареи.</p>
+                <p class="step-desc">Final low-level validation: confirmed zero crypto-miners, intact Knox flag (0x0), and ideal battery health.</p>
                 <div class="step-details">
                     <div class="code-row">cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq && cat /proc/net/tcp && dumpsys battery</div>
-                    <div class="effect-row"><strong>Результат:</strong> Ядра A55 спят на 500 МГц (96.5% idle), 0 скрытых соединений, здоровье батареи 99% (BSOH), температура 31.1°C.</div>
+                    <div class="effect-row"><strong>Result:</strong> A55 cores idling at 500 MHz (96.5% idle state), 0 rogue sockets, 99% battery health (BSOH), temperature 31.1°C.</div>
                 </div>
             </div>
         </div>
@@ -775,7 +775,7 @@
     </div>
 
     <footer>
-        Пошаговый инженерный журнал зафиксирован | Antigravity CLI | Samsung Galaxy A16 (SM-A165F) | 2026
+        Step-by-step engineering log verified | Antigravity CLI | Samsung Galaxy A16 (SM-A165F) | 2026
     </footer>
 </div>
 

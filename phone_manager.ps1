@@ -38,18 +38,18 @@ function Show-Header {
     Write-Host "       ANDROID PRODUCTIVITY TERMINAL - PHONE MANAGER" -ForegroundColor Yellow
     Write-Host "================================================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "  [1] Временно ВКЛЮЧИТЬ Google Play Store  (для обновлений)" -ForegroundColor Green
-    Write-Host "  [2] ВЫКЛЮЧИТЬ Google Play Store          (вернуть замок)" -ForegroundColor Red
+    Write-Host "  [1] Temporarily ENABLE Google Play Store  (for app updates)" -ForegroundColor Green
+    Write-Host "  [2] DISABLE Google Play Store          (restore lockdown)" -ForegroundColor Red
     Write-Host ""
-    Write-Host "  [3] ВЫВЕСТИ ЭКРАН ТЕЛЕФОНА НА ПК         (scrcpy трансляция)" -ForegroundColor Cyan
-    Write-Host "  [4] Переключить экран: Ч/Б <--> ЦВЕТ     (быстрый возврат цветов)" -ForegroundColor Magenta
-    Write-Host "  [5] Экспресс-аудит батареи, памяти и безопасности" -ForegroundColor White
+    Write-Host "  [3] Mirror Phone Screen to PC          (scrcpy stream)" -ForegroundColor Cyan
+    Write-Host "  [4] Toggle Display Mode: B/W <--> COLOR (quick color toggle)" -ForegroundColor Magenta
+    Write-Host "  [5] Express Battery, RAM & Security Perimeter Audit" -ForegroundColor White
     Write-Host ""
-    Write-Host "  [6] Заблокировать всё (Браузер + YouTube + Play Store + DoT)" -ForegroundColor Red
-    Write-Host "  [7] Открыть интерактивные HTML-отчеты и Дофаминовый Дашборд" -ForegroundColor Blue
-    Write-Host "  [8] Восстановить стандартные настройки Android (Откат)" -ForegroundColor DarkYellow
+    Write-Host "  [6] Full Lockdown (Zero-Browser + YouTube + Play Store + DoT)" -ForegroundColor Red
+    Write-Host "  [7] Open Interactive HTML Reports & Dopamine Dashboard" -ForegroundColor Blue
+    Write-Host "  [8] Restore Default Stock Android Settings (Rollback)" -ForegroundColor DarkYellow
     Write-Host ""
-    Write-Host "  [9] Выход" -ForegroundColor Gray
+    Write-Host "  [9] Exit" -ForegroundColor Gray
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Cyan
 }
@@ -57,27 +57,27 @@ function Show-Header {
 function Test-DeviceConnection {
     $devsText = (& $ADB devices | Out-String)
     if ($devsText -notmatch "\tdevice") {
-        Write-Host "`n[ПРЕДУПРЕЖДЕНИЕ] Телефон не обнаружен через ADB!" -ForegroundColor Yellow
-        Write-Host "1. Подключите телефон кабелем к ПК." -ForegroundColor DarkGray
-        Write-Host "2. Включите 'Отладку по USB' в меню разработчика." -ForegroundColor DarkGray
-        Write-Host "3. Подтвердите 'Разрешить отладку по USB' на экране телефона.`n" -ForegroundColor DarkGray
+        Write-Host "`n[WARNING] Device not detected via ADB!" -ForegroundColor Yellow
+        Write-Host "1. Connect your phone to PC using a USB cable." -ForegroundColor DarkGray
+        Write-Host "2. Enable 'USB Debugging' in Developer Options." -ForegroundColor DarkGray
+        Write-Host "3. Authorize 'Allow USB Debugging' on your phone screen.`n" -ForegroundColor DarkGray
         return $false
     }
     return $true
 }
 
 if (-not $ADB) {
-    Write-Host "[ОШИБКА] adb.exe не найден в PATH или стандартных папках Android SDK!" -ForegroundColor Red
-    Write-Host "Скачайте platform-tools: https://developer.android.com/tools/releases/platform-tools" -ForegroundColor Yellow
-    Write-Host "Или положите adb.exe в папку 'platform-tools' рядом со скриптом." -ForegroundColor Cyan
-    Read-Host "`nНажмите Enter для выхода..."
+    Write-Host "[ERROR] adb.exe was not found in PATH or standard Android SDK directories!" -ForegroundColor Red
+    Write-Host "Download platform-tools: https://developer.android.com/tools/releases/platform-tools" -ForegroundColor Yellow
+    Write-Host "Or place adb.exe inside a 'platform-tools' folder next to this script." -ForegroundColor Cyan
+    Read-Host "`nPress Enter to exit..."
     exit 1
 }
 
 $running = $true
 while ($running) {
     Show-Header
-    $rawChoice = Read-Host "Выберите пункт [1-9]"
+    $rawChoice = Read-Host "Select option [1-9]"
     
     if ($null -eq $rawChoice) {
         break
@@ -91,185 +91,185 @@ while ($running) {
     switch ($choice) {
         "1" {
             Clear-Host
-            Write-Host "=== Включение Google Play Store ===" -ForegroundColor Green
+            Write-Host "=== Enabling Google Play Store ===" -ForegroundColor Green
             if (Test-DeviceConnection) {
                 & $ADB shell pm enable com.android.vending
-                Write-Host "`n[+] ГОТОВО! Google Play Store доступен на телефоне." -ForegroundColor Green
-                Write-Host "Обновите нужное приложение, затем вернитесь сюда и нажмите [2] для повторной заморозки.`n" -ForegroundColor Yellow
+                Write-Host "`n[+] SUCCESS! Google Play Store is enabled on device." -ForegroundColor Green
+                Write-Host "Update required apps, then return here and choose [2] to lock it down again.`n" -ForegroundColor Yellow
             }
-            Read-Host "Нажмите Enter для возврата в меню..."
+            Read-Host "Press Enter to return to menu..."
         }
         "2" {
             Clear-Host
-            Write-Host "=== Заморозка Google Play Store ===" -ForegroundColor Red
+            Write-Host "=== Freezing Google Play Store ===" -ForegroundColor Red
             if (Test-DeviceConnection) {
                 & $ADB shell pm disable-user --user 0 com.android.vending
-                Write-Host "`n[+] ГОТОВО! Google Play Store снова заблокирован." -ForegroundColor Green
-                Write-Host "Периметр закрыт.`n" -ForegroundColor Cyan
+                Write-Host "`n[+] SUCCESS! Google Play Store is locked down." -ForegroundColor Green
+                Write-Host "Perimeter sealed.`n" -ForegroundColor Cyan
             }
-            Read-Host "Нажмите Enter для возврата в меню..."
+            Read-Host "Press Enter to return to menu..."
         }
         "3" {
             Clear-Host
-            Write-Host "=== Запуск трансляции экрана телефона на ноутбук ===" -ForegroundColor Cyan
+            Write-Host "=== Launching Phone Screen Mirror (scrcpy) ===" -ForegroundColor Cyan
             $scrcpyCmd = Get-Command "scrcpy.exe" -ErrorAction SilentlyContinue
             $localScrcpy = Join-Path $PSScriptRoot "scrcpy.exe"
             
             if ($scrcpyCmd) {
                 Start-Process "scrcpy.exe" -ArgumentList "--window-title", "Android Productivity Terminal"
-                Write-Host "`n[+] Окно экрана телефона запущено через системный scrcpy!`n" -ForegroundColor Green
+                Write-Host "`n[+] Mirroring window launched via system scrcpy!`n" -ForegroundColor Green
             } elseif (Test-Path $localScrcpy) {
                 Start-Process $localScrcpy -ArgumentList "--window-title", "Android Productivity Terminal"
-                Write-Host "`n[+] Окно экрана телефона запущено через локальный scrcpy!`n" -ForegroundColor Green
+                Write-Host "`n[+] Mirroring window launched via local scrcpy!`n" -ForegroundColor Green
             } else {
-                Write-Host "[!] scrcpy не обнаружен." -ForegroundColor Yellow
-                Write-Host "Скачайте scrcpy: https://github.com/Genymobile/scrcpy/releases" -ForegroundColor Cyan
-                Write-Host "Положите scrcpy.exe в текущую папку или добавьте в PATH." -ForegroundColor Yellow
+                Write-Host "[!] scrcpy executable was not found." -ForegroundColor Yellow
+                Write-Host "Download scrcpy: https://github.com/Genymobile/scrcpy/releases" -ForegroundColor Cyan
+                Write-Host "Place scrcpy.exe in this folder or add it to system PATH." -ForegroundColor Yellow
             }
-            Read-Host "Нажмите Enter для возврата в меню..."
+            Read-Host "Press Enter to return to menu..."
         }
         "4" {
             Clear-Host
-            Write-Host "=== Переключение цветового режима экрана ===" -ForegroundColor Magenta
+            Write-Host "=== Toggling Screen Color Mode ===" -ForegroundColor Magenta
             if (Test-DeviceConnection) {
                 $status = (& $ADB shell settings get secure accessibility_display_daltonizer_enabled)
                 if ($status) { $status = $status.Trim() }
                 if ($status -eq "1") {
-                    Write-Host "Текущий режим: МОНОХРОМ. Переключаем в ЦВЕТ..." -ForegroundColor Yellow
+                    Write-Host "Current mode: MONOCHROME. Switching to FULL COLOR..." -ForegroundColor Yellow
                     & $ADB shell settings put secure accessibility_display_daltonizer_enabled 0
-                    Write-Host "`n[+] Экран переведен в ЦВЕТНОЙ режим!`n" -ForegroundColor Green
+                    Write-Host "`n[+] Screen restored to FULL COLOR mode!`n" -ForegroundColor Green
                 } else {
-                    Write-Host "Текущий режим: ЦВЕТНОЙ. Переключаем в МОНОХРОМ..." -ForegroundColor Yellow
+                    Write-Host "Current mode: FULL COLOR. Switching to MONOCHROME..." -ForegroundColor Yellow
                     & $ADB shell settings put secure accessibility_display_daltonizer 0
                     & $ADB shell settings put secure accessibility_display_daltonizer_enabled 1
-                    Write-Host "`n[+] Экран возвращен в строгий МОНОХРОМ («Серый камень»)!`n" -ForegroundColor Green
+                    Write-Host "`n[+] Screen switched to strict MONOCHROME ('Gray Stone') mode!`n" -ForegroundColor Green
                 }
             }
-            Read-Host "Нажмите Enter для возврата в меню..."
+            Read-Host "Press Enter to return to menu..."
         }
         "5" {
             Clear-Host
-            Write-Host "================= ЭКСПРЕСС-АУДИТ ПЕРИМЕТРА И БЕЗОПАСНОСТИ =================" -ForegroundColor Cyan
+            Write-Host "================= EXPRESS PERIMETER & SECURITY AUDIT =================" -ForegroundColor Cyan
             if (Test-DeviceConnection) {
-                Write-Host "`n--- БАТАРЕЯ И ПАМЯТЬ ---" -ForegroundColor Yellow
+                Write-Host "`n--- BATTERY & MEMORY METRICS ---" -ForegroundColor Yellow
                 & $ADB shell "dumpsys battery | grep -E 'level|temperature|status'"
                 & $ADB shell "cat /proc/meminfo | head -n 2"
                 
-                Write-Host "`n--- БРАУЗЕРНЫЙ ПЕРИМЕТР ---" -ForegroundColor Yellow
+                Write-Host "`n--- BROWSER RESOLVER PERIMETER ---" -ForegroundColor Yellow
                 $br = (& $ADB shell cmd package resolve-activity http://google.com)
                 if ($br) { $br = $br.Trim() }
-                Write-Host "Резолв HTTP: $br" -ForegroundColor Green
+                Write-Host "HTTP Resolver Output: $br" -ForegroundColor Green
 
-                Write-Host "`n--- СТАТУС ПРИВАТНОГО DNS (DoT) ---" -ForegroundColor Yellow
+                Write-Host "`n--- PRIVATE DNS (DoT) STATUS ---" -ForegroundColor Yellow
                 $dnsMode = (& $ADB shell settings get global private_dns_mode).Trim()
                 $dnsHost = (& $ADB shell settings get global private_dns_specifier).Trim()
-                Write-Host "DNS Режим: $dnsMode | Хост: $dnsHost" -ForegroundColor Green
+                Write-Host "DNS Mode: $dnsMode | Host: $dnsHost" -ForegroundColor Green
 
-                Write-Host "`n--- ПРОВЕРКА ЗАБЛОКИРОВАННЫХ ВЕКТОРОВ ---" -ForegroundColor Yellow
+                Write-Host "`n--- LOCKED VECTORS CHECK ---" -ForegroundColor Yellow
                 $users = (& $ADB shell pm list users)
-                Write-Host "Пользователи: $users" -ForegroundColor Cyan
+                Write-Host "Android Profiles / Users: $users" -ForegroundColor Cyan
                 $vpn = (& $ADB shell pm list packages -d --user 0 | Select-String "vpndialogs")
                 Write-Host "VPN Consent Dialog: $vpn" -ForegroundColor Cyan
                 $inst = (& $ADB shell settings get secure install_non_market_apps).Trim()
-                Write-Host "Установка неизвестных APK (0=запрещено): $inst" -ForegroundColor Cyan
+                Write-Host "Install unknown APKs (0=blocked): $inst" -ForegroundColor Cyan
                 Write-Host "`n==========================================================================" -ForegroundColor Cyan
             }
-            Read-Host "Нажмите Enter для возврата в меню..."
+            Read-Host "Press Enter to return to menu..."
         }
         "6" {
             Clear-Host
-            Write-Host "=== Тотальная зачистка и блокировка всех лазеек ===" -ForegroundColor Red
+            Write-Host "=== Total Lockdown & Vector Sealing ===" -ForegroundColor Red
             if (Test-DeviceConnection) {
-                Write-Host "[1/7] Удаление браузеров и YouTube..." -ForegroundColor Yellow
+                Write-Host "[1/7] Disabling browsers and YouTube..." -ForegroundColor Yellow
                 & $ADB shell pm disable-user --user 0 com.android.chrome
                 & $ADB shell pm uninstall -k --user 0 com.android.chrome
                 & $ADB shell pm uninstall -k --user 0 com.google.android.youtube
                 & $ADB shell pm disable-user --user 0 com.samsung.android.video
                 & $ADB shell pm disable-user --user 0 com.android.htmlviewer
 
-                Write-Host "[2/7] Уничтожение магазинов приложений..." -ForegroundColor Yellow
+                Write-Host "[2/7] Freezing application stores..." -ForegroundColor Yellow
                 & $ADB shell pm uninstall -k --user 0 com.android.vending
                 & $ADB shell pm uninstall -k --user 0 com.sec.android.app.samsungapps
 
-                Write-Host "[3/7] Удаление Termux..." -ForegroundColor Yellow
+                Write-Host "[3/7] Removing Termux backdoor..." -ForegroundColor Yellow
                 & $ADB shell pm uninstall -k --user 0 com.termux
 
-                Write-Host "[4/7] Ликвидация Secure Folder..." -ForegroundColor Yellow
+                Write-Host "[4/7] Purging Knox Secure Folder (User 150)..." -ForegroundColor Yellow
                 & $ADB shell pm remove-user 150
                 & $ADB shell pm disable-user --user 0 com.samsung.knox.securefolder
 
-                Write-Host "[5/7] Блокировка VPN туннелей (VpnDialogs)..." -ForegroundColor Yellow
+                Write-Host "[5/7] Locking VPN dialog tunnels..." -ForegroundColor Yellow
                 & $ADB shell pm disable-user --user 0 com.android.vpndialogs
                 & $ADB shell pm disable-user --user 0 com.sec.android.easyMover
 
-                Write-Host "[6/7] Запрет установки любых сторонних APK..." -ForegroundColor Yellow
+                Write-Host "[6/7] Revoking APK installation permissions (Anti-Sideloading)..." -ForegroundColor Yellow
                 & $ADB shell settings put secure install_non_market_apps 0
                 & $ADB shell 'cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES deny; cmd appops set com.discord REQUEST_INSTALL_PACKAGES deny; cmd appops set com.whatsapp REQUEST_INSTALL_PACKAGES deny; cmd appops set org.thoughtcrime.securesms REQUEST_INSTALL_PACKAGES deny; cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES deny; cmd appops set com.google.android.apps.docs REQUEST_INSTALL_PACKAGES deny; cmd appops set com.microsoft.skydrive REQUEST_INSTALL_PACKAGES deny'
 
-                Write-Host "[7/7] Активация DNS-over-TLS CleanBrowsing Family Filter..." -ForegroundColor Yellow
+                Write-Host "[7/7] Enforcing DNS-over-TLS CleanBrowsing Family Shield..." -ForegroundColor Yellow
                 & $ADB shell settings put global private_dns_mode hostname
                 & $ADB shell settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
 
-                Write-Host "`n[+] ПЕРИМЕТР ПОЛНОСТЬЮ ЗАБЛОКИРОВАН ПО ВСЕМ ВЕКТОРАМ!" -ForegroundColor Green
+                Write-Host "`n[+] PERIMETER FULLY LOCKED DOWN ACROSS ALL VECTORS!" -ForegroundColor Green
             }
-            Read-Host "`nНажмите Enter для возврата в меню..."
+            Read-Host "`nPress Enter to return to menu..."
         }
         "7" {
             Clear-Host
-            Write-Host "=== Открытие интерактивных отчетов и дашбордов ===" -ForegroundColor Cyan
+            Write-Host "=== Opening Interactive Reports & Dashboards ===" -ForegroundColor Cyan
             $reportPath = Join-Path $PSScriptRoot "step_by_step_transformation.html"
             if (Test-Path $reportPath) {
                 Start-Process $reportPath
-                Write-Host "`n[+] Отчет открыт в стандартном веб-браузере!" -ForegroundColor Green
+                Write-Host "`n[+] Report opened in your default web browser!" -ForegroundColor Green
             } else {
-                Write-Host "[!] Файл отчета не найден: $reportPath" -ForegroundColor Yellow
+                Write-Host "[!] Report file not found: $reportPath" -ForegroundColor Yellow
             }
-            Read-Host "`nНажмите Enter для возврата в меню..."
+            Read-Host "`nPress Enter to return to menu..."
         }
         "8" {
             Clear-Host
-            Write-Host "=== Откат и восстановление настроек по умолчанию ===" -ForegroundColor DarkYellow
-            Write-Host "Вы уверены, что хотите разблокировать Play Store, вернуть цвета, анимации и стандартный DNS? (Y/N)" -ForegroundColor Yellow
+            Write-Host "=== Restore Stock Default Settings (Rollback) ===" -ForegroundColor DarkYellow
+            Write-Host "Are you sure you want to unfreeze Play Store, restore colors, animations, and standard DNS? (Y/N)" -ForegroundColor Yellow
             $ans = Read-Host
-            if ($ans -match "^[yYдД]") {
+            if ($ans -match "^[yY]") {
                 if (Test-DeviceConnection) {
-                    Write-Host "`n[1/6] Включение Google Play Store..." -ForegroundColor Cyan
+                    Write-Host "`n[1/6] Enabling Google Play Store..." -ForegroundColor Cyan
                     & $ADB shell pm enable com.android.vending
 
-                    Write-Host "[2/6] Возврат цветного режима экрана..." -ForegroundColor Cyan
+                    Write-Host "[2/6] Restoring Full Color Display..." -ForegroundColor Cyan
                     & $ADB shell settings put secure accessibility_display_daltonizer_enabled 0
                     & $ADB shell settings put secure reduce_bright_colors_activated 0
 
-                    Write-Host "[3/6] Возврат стандартных анимаций (1.0x)..." -ForegroundColor Cyan
+                    Write-Host "[3/6] Restoring Standard Window Animations (1.0x)..." -ForegroundColor Cyan
                     & $ADB shell settings put global window_animation_scale 1.0
                     & $ADB shell settings put global transition_animation_scale 1.0
                     & $ADB shell settings put global animator_duration_scale 1.0
 
-                    Write-Host "[4/6] Возврат тактильных откликов и звуков..." -ForegroundColor Cyan
+                    Write-Host "[4/6] Restoring Haptics and System Sounds..." -ForegroundColor Cyan
                     & $ADB shell settings put system haptic_feedback_enabled 1
                     & $ADB shell settings put system sound_effects_enabled 1
                     & $ADB shell settings put system lockscreen_sounds_enabled 1
 
-                    Write-Host "[5/6] Сброс приватного DNS в автоматический режим..." -ForegroundColor Cyan
+                    Write-Host "[5/6] Resetting Private DNS to Automatic (Opportunistic)..." -ForegroundColor Cyan
                     & $ADB shell settings put global private_dns_mode opportunistic
                     & $ADB shell settings put global private_dns_specifier ""
 
-                    Write-Host "[6/6] Разрешение бейджей уведомлений..." -ForegroundColor Cyan
+                    Write-Host "[6/6] Restoring Notification Badges..." -ForegroundColor Cyan
                     & $ADB shell settings put secure notification_badging 1
 
-                    Write-Host "`n[+] Базовые настройки успешно восстановлены!" -ForegroundColor Green
+                    Write-Host "`n[+] Stock system settings successfully restored!" -ForegroundColor Green
                 }
             } else {
-                Write-Host "`nОперация отменена." -ForegroundColor Gray
+                Write-Host "`nOperation cancelled." -ForegroundColor Gray
             }
-            Read-Host "`nНажмите Enter для возврата в меню..."
+            Read-Host "`nPress Enter to return to menu..."
         }
         "9" {
             $running = $false
-            Write-Host "До свидания!" -ForegroundColor Green
+            Write-Host "Goodbye!" -ForegroundColor Green
         }
         default {
-            Write-Host "Неверный пункт. Введите цифру от 1 до 9." -ForegroundColor Red
+            Write-Host "Invalid option. Enter a number from 1 to 9." -ForegroundColor Red
             Start-Sleep -Milliseconds 800
         }
     }

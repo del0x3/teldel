@@ -24,51 +24,51 @@ def main():
     adb = find_adb()
     
     print("================================================================")
-    print("      СБОР СТАТИСТИКИ И АНАЛИЗ ДОФАМИНОВОЙ ЗАВИСИМОСТИ")
+    print("       DATA COLLECTION & DOPAMINE ADDICTION MINING")
     print("================================================================")
-    print(f"[*] Используемый ADB: {adb}")
+    print(f"[*] Detected ADB: {adb}")
     
     # Check device
     try:
         res = subprocess.run([adb, "devices"], capture_output=True, text=True)
         if "device" not in res.stdout or len(res.stdout.strip().splitlines()) <= 1:
-            print("\n[!] Ошибка: телефон не обнаружен через ADB.")
-            print("1. Подключите телефон кабелем к ПК.")
-            print("2. Включите 'Отладку по USB' на телефоне.")
-            print("3. Разрешите доступ на экране устройства.")
+            print("\n[!] Error: Android phone not detected via ADB.")
+            print("1. Connect your phone via USB cable.")
+            print("2. Enable 'USB Debugging' in Developer Options.")
+            print("3. Authorize USB Debugging on your device screen.")
             sys.exit(1)
     except Exception as e:
-        print(f"\n[!] Ошибка вызова ADB: {e}")
+        print(f"\n[!] ADB execution error: {e}")
         sys.exit(1)
 
-    print("\n[1/3] Снятие usagestats из ядра Android (dumpsys usagestats)...")
+    print("\n[1/3] Extracting usagestats from Android kernel (dumpsys usagestats)...")
     stats_file = os.path.join(base_dir, "full_usagestats.txt")
     try:
         proc = subprocess.run([adb, "shell", "dumpsys", "usagestats"], capture_output=True, text=True, encoding='utf-8', errors='ignore')
         with open(stats_file, "w", encoding="utf-8", errors="ignore") as f:
             f.write(proc.stdout)
-        print(f"[+] Дамп успешно сохранен: {os.path.basename(stats_file)} ({len(proc.stdout)} символов)")
+        print(f"[+] Dump saved: {os.path.basename(stats_file)} ({len(proc.stdout)} chars)")
     except Exception as e:
-        print(f"[!] Ошибка сохранения usagestats: {e}")
+        print(f"[!] Error writing usagestats: {e}")
         sys.exit(1)
 
-    print("\n[2/3] Запуск парсера интервалов (parse_multi.py)...")
+    print("\n[2/3] Running interval parser (parse_multi.py)...")
     try:
         import parse_multi
     except Exception as e:
-        print(f"[!] Ошибка в parse_multi: {e}")
+        print(f"[!] Error in parse_multi: {e}")
 
-    print("\n[3/3] Глубокий майнинг дофаминовых петель (deep_dopamine_miner.py)...")
+    print("\n[3/3] Deep mining dopamine loops & binge sessions (deep_dopamine_miner.py)...")
     try:
         import deep_dopamine_miner
     except Exception as e:
-        print(f"[!] Ошибка в deep_dopamine_miner: {e}")
+        print(f"[!] Error in deep_dopamine_miner: {e}")
 
     dash_file = os.path.join(base_dir, "dopamine_interactive_dashboard.html")
     if os.path.exists(dash_file):
-        print(f"\n[+] Готово! Дашборд доступен: {dash_file}")
-        open_web = input("\nОткрыть интерактивный дашборд в браузере? (Y/N): ").strip()
-        if open_web.lower() in ['y', 'yes', 'д', 'да']:
+        print(f"\n[+] Analysis complete! Dashboard ready: {dash_file}")
+        open_web = input("\nOpen interactive dashboard in web browser? (Y/N): ").strip()
+        if open_web.lower() in ['y', 'yes']:
             webbrowser.open(f"file://{dash_file}")
 
 if __name__ == '__main__':

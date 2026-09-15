@@ -71,18 +71,18 @@ You will be greeted by the terminal control panel:
        ANDROID PRODUCTIVITY TERMINAL - PHONE MANAGER
 ================================================================
 
-  [1] Временно ВКЛЮЧИТЬ Google Play Store  (для обновлений)
-  [2] ВЫКЛЮЧИТЬ Google Play Store          (вернуть замок)
+  [1] Temporarily ENABLE Google Play Store  (for app updates)
+  [2] DISABLE Google Play Store          (restore lockdown)
 
-  [3] ВЫВЕСТИ ЭКРАН ТЕЛЕФОНА НА ПК         (scrcpy трансляция)
-  [4] Переключить экран: Ч/Б <--> ЦВЕТ     (быстрый возврат цветов)
-  [5] Экспресс-аудит батареи, памяти и безопасности
+  [3] Mirror Phone Screen to PC          (scrcpy stream)
+  [4] Toggle Display Mode: B/W <--> COLOR (quick color toggle)
+  [5] Express Battery, RAM & Security Perimeter Audit
 
-  [6] Заблокировать всё (Браузер + YouTube + Play Store + DoT)
-  [7] Открыть интерактивные HTML-отчеты и Дофаминовый Дашборд
-  [8] Восстановить стандартные настройки Android (Откат)
+  [6] Full Lockdown (Zero-Browser + YouTube + Play Store + DoT)
+  [7] Open Interactive HTML Reports & Dopamine Dashboard
+  [8] Restore Default Stock Android Settings (Rollback)
 
-  [9] Выход
+  [9] Exit
 ================================================================
 ```
 

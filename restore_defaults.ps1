@@ -55,7 +55,7 @@ if ($devs -notmatch "\tdevice") {
 
 if (-not $Unattended) {
     $confirm = Read-Host "Are you sure you want to revert system settings? (Y/N)"
-    if ($confirm -notmatch "^[yYдД]") {
+    if ($confirm -notmatch "^[yY]") {
         Write-Host "Rollback cancelled." -ForegroundColor Gray
         exit 0
     }

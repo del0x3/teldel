@@ -5,7 +5,7 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 json_path = os.path.join(base_dir, 'multi_interval_stats.json')
 
 if not os.path.exists(json_path):
-    print("[!] Файл multi_interval_stats.json не найден. Сначала запустите collect_stats.bat")
+    print("[!] File 'multi_interval_stats.json' not found. Run `collect_stats.bat` first.")
     exit(1)
 
 with open(json_path, 'r', encoding='utf-8') as f:
@@ -14,7 +14,7 @@ with open(json_path, 'r', encoding='utf-8') as f:
 found = False
 for k, v in data.items():
     if '9/7/2026' in k or '7' in k:
-        print(f"=== ИНТЕРВАЛ ({k}) ===")
+        print(f"=== INTERVAL ({k}) ===")
         print(f"Total: {v['total_hours']:.1f} hours ({v['total_hours']/7.0:.1f} hrs/day)")
         print("-" * 65)
         for p in v['packages'][:25]:
@@ -26,7 +26,7 @@ for k, v in data.items():
 if not found and data:
     k = list(data.keys())[0]
     v = data[k]
-    print(f"=== ИНТЕРВАЛ ({k}) ===")
+    print(f"=== INTERVAL ({k}) ===")
     print(f"Total: {v['total_hours']:.1f} hours")
     print("-" * 65)
     for p in v['packages'][:25]:

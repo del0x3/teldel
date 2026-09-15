@@ -6,8 +6,8 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 stats_file = os.path.join(base_dir, 'full_usagestats.txt')
 
 if not os.path.exists(stats_file):
-    print(f"[!] Файл {stats_file} не найден.")
-    print("[*] Соберите статистику, запустив collect_stats.bat (или python collect_stats.py)")
+    print(f"[!] File '{stats_file}' was not found.")
+    print("[*] Collect stats first by running `collect_stats.bat` (or `python collect_stats.py`).")
     exit(1)
 
 def parse_time(t_str):

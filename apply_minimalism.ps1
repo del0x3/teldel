@@ -60,7 +60,7 @@ Write-Host ""
 
 if (-not $Unattended) {
     $confirm = Read-Host "Proceed with 18-step transformation? (Y/N)"
-    if ($confirm -notmatch "^[yYдД]") {
+    if ($confirm -notmatch "^[yY]") {
         Write-Host "Transformation cancelled." -ForegroundColor Gray
         exit 0
     }
