@@ -1,0 +1,32 @@
+# Android raw device dumps & sensitive user logs
+*_dump.txt
+*usagestats*.txt
+*usage*.txt
+events_dump.txt
+notif_dump.txt
+exit_input.txt
+*.log
+
+# UI Automator XML dumps (contains personal screen text & contacts)
+*.xml
+
+# Prebuilt binaries & archives
+*.apk
+platform-tools/
+platform-tools.zip
+*.zip
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# IDE & OS files
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store

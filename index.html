@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Productivity Terminal & Dopamine Detox</title>
+    <style>
+        :root {
+            --bg-main: #090a0f;
+            --bg-card: #14151f;
+            --bg-card-hover: #1c1e2d;
+            --border: #232536;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --text-main: #f3f4f6;
+            --text-dim: #9ca3af;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 40px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 40%, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p.subtitle {
+            color: var(--text-dim);
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover {
+            border-color: var(--accent-blue);
+            background: var(--bg-card-hover);
+            transform: translateY(-3px);
+        }
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+        .card-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .card-desc {
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .card-link {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .cli-box {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 10px;
+        }
+        .cli-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .cli-code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 14px;
+            color: var(--accent-green);
+        }
+        footer {
+            margin-top: auto;
+            padding-top: 50px;
+            color: #55586d;
+            font-size: 13px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="badge">Open Source ADB Framework</div>
+    <h1>Android Productivity Terminal</h1>
+    <p class="subtitle">A surgical, root-free framework to transform modern Samsung Galaxy and Android smartphones into distraction-free, zero-browser, monochrome productivity devices.</p>
+
+    <div class="cards-grid">
+        <a href="step_by_step_transformation.html" class="card">
+            <div>
+                <div class="card-icon">📋</div>
+                <div class="card-title">18-Step Registry</div>
+                <div class="card-desc">Interactive chronological breakdown of every single ADB command, rationale, and verified system result.</div>
+            </div>
+            <div class="card-link">Explore 18 Steps &rarr;</div>
+        </a>
+
+        <a href="full_system_transformation_report.html" class="card">
+            <div>
+                <div class="card-icon">🏛️</div>
+                <div class="card-title">Architecture Report</div>
+                <div class="card-desc">Comprehensive engineering whitepaper covering Knox perimeter, memory swap reduction, and zero-trust security.</div>
+            </div>
+            <div class="card-link">Read Whitepaper &rarr;</div>
+        </a>
+
+        <a href="dopamine_interactive_dashboard.html" class="card">
+            <div>
+                <div class="card-icon">🧠</div>
+                <div class="card-title">Dopamine Audit</div>
+                <div class="card-desc">Interactive Chart.js visualizer analyzing screen time, compulsive micro-checks, and session binges.</div>
+            </div>
+            <div class="card-link">View Analytics &rarr;</div>
+        </a>
+    </div>
+
+    <div class="cli-box">
+        <div class="cli-title">Quick Start (Windows)</div>
+        <div class="cli-code">git clone https://github.com/del0x3/android-minimalism-terminal.git<br>cd android-minimalism-terminal<br>.\phone_manager.bat</div>
+    </div>
+
+    <footer>
+        Zero Root Required • Knox 0x0 Untouched • 100% Reversible via restore_defaults.ps1
+    </footer>
+</div>
+
+</body>
+</html>

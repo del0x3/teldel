@@ -1,0 +1,2474 @@
+[
+  {
+    "pkg": "org.telegram.messenger",
+    "time_str": "221:16:53",
+    "seconds": 796613,
+    "launches": 6352
+  },
+  {
+    "pkg": "com.android.chrome",
+    "time_str": "97:36:45",
+    "seconds": 351405,
+    "launches": 1337
+  },
+  {
+    "pkg": "com.google.android.youtube",
+    "time_str": "52:29:13",
+    "seconds": 188953,
+    "launches": 153
+  },
+  {
+    "pkg": "com.discord",
+    "time_str": "26:37:30",
+    "seconds": 95850,
+    "launches": 449
+  },
+  {
+    "pkg": "ai.qwenlm.chat.android",
+    "time_str": "24:00:58",
+    "seconds": 86458,
+    "launches": 321
+  },
+  {
+    "pkg": "com.sec.android.app.launcher",
+    "time_str": "18:14:27",
+    "seconds": 65667,
+    "launches": 9019
+  },
+  {
+    "pkg": "com.samsung.android.incallui",
+    "time_str": "9:19:40",
+    "seconds": 33580,
+    "launches": 549
+  },
+  {
+    "pkg": "com.google.android.gm",
+    "time_str": "6:36:48",
+    "seconds": 23808,
+    "launches": 102
+  },
+  {
+    "pkg": "com.anthropic.claude",
+    "time_str": "6:17:02",
+    "seconds": 22622,
+    "launches": 167
+  },
+  {
+    "pkg": "com.google.android.apps.maps",
+    "time_str": "4:17:45",
+    "seconds": 15465,
+    "launches": 231
+  },
+  {
+    "pkg": "com.ftband.mono",
+    "time_str": "3:27:31",
+    "seconds": 12451,
+    "launches": 450
+  },
+  {
+    "pkg": "com.android.vending",
+    "time_str": "3:15:37",
+    "seconds": 11737,
+    "launches": 450
+  },
+  {
+    "pkg": "ua.raiffeisen.myraif",
+    "time_str": "2:46:46",
+    "seconds": 10006,
+    "launches": 315
+  },
+  {
+    "pkg": "com.PixelJoy.MountainBikeXtreme",
+    "time_str": "2:42:57",
+    "seconds": 9777,
+    "launches": 20
+  },
+  {
+    "pkg": "ua.privatbank.ap24",
+    "time_str": "2:26:42",
+    "seconds": 8802,
+    "launches": 207
+  },
+  {
+    "pkg": "com.yazio.android",
+    "time_str": "2:21:39",
+    "seconds": 8499,
+    "launches": 110
+  },
+  {
+    "pkg": "com.fuib.android.spot.online",
+    "time_str": "2:16:32",
+    "seconds": 8192,
+    "launches": 305
+  },
+  {
+    "pkg": "com.google.android.gms",
+    "time_str": "1:45:13",
+    "seconds": 6313,
+    "launches": 1119
+  },
+  {
+    "pkg": "com.xiaomi.wearable",
+    "time_str": "1:42:41",
+    "seconds": 6161,
+    "launches": 138
+  },
+  {
+    "pkg": "com.microsoft.office.outlook",
+    "time_str": "1:38:54",
+    "seconds": 5934,
+    "launches": 149
+  },
+  {
+    "pkg": "com.sec.android.app.clockpackage",
+    "time_str": "1:29:09",
+    "seconds": 5349,
+    "launches": 202
+  },
+  {
+    "pkg": "com.glovo",
+    "time_str": "1:28:15",
+    "seconds": 5295,
+    "launches": 48
+  },
+  {
+    "pkg": "com.google.android.apps.walletnfcrel",
+    "time_str": "1:25:58",
+    "seconds": 5158,
+    "launches": 338
+  },
+  {
+    "pkg": "com.samsung.android.dialer",
+    "time_str": "1:12:53",
+    "seconds": 4373,
+    "launches": 364
+  },
+  {
+    "pkg": "com.sec.android.app.camera",
+    "time_str": "1:08:28",
+    "seconds": 4108,
+    "launches": 222
+  },
+  {
+    "pkg": "com.android.settings",
+    "time_str": "1:04:57",
+    "seconds": 3897,
+    "launches": 415
+  },
+  {
+    "pkg": "com.google.android.permissioncontroller",
+    "time_str": "59:24",
+    "seconds": 3564,
+    "launches": 2626
+  },
+  {
+    "pkg": "ua.alfabank.mobile.android",
+    "time_str": "55:26",
+    "seconds": 3326,
+    "launches": 88
+  },
+  {
+    "pkg": "com.samsung.android.app.notes",
+    "time_str": "49:03",
+    "seconds": 2943,
+    "launches": 84
+  },
+  {
+    "pkg": "ua.gov.diia.app",
+    "time_str": "45:37",
+    "seconds": 2737,
+    "launches": 82
+  },
+  {
+    "pkg": "com.openai.chatgpt",
+    "time_str": "44:26",
+    "seconds": 2666,
+    "launches": 46
+  },
+  {
+    "pkg": "com.osp.app.signin",
+    "time_str": "42:17",
+    "seconds": 2537,
+    "launches": 8
+  },
+  {
+    "pkg": "com.linkedin.android",
+    "time_str": "42:15",
+    "seconds": 2535,
+    "launches": 4
+  },
+  {
+    "pkg": "com.wssyncmldm",
+    "time_str": "39:47",
+    "seconds": 2387,
+    "launches": 41
+  },
+  {
+    "pkg": "com.google.android.apps.docs.editors.sheets",
+    "time_str": "35:45",
+    "seconds": 2145,
+    "launches": 77
+  },
+  {
+    "pkg": "com.samsung.android.emergency",
+    "time_str": "34:14",
+    "seconds": 2054,
+    "launches": 23
+  },
+  {
+    "pkg": "android",
+    "time_str": "33:42",
+    "seconds": 2022,
+    "launches": 242
+  },
+  {
+    "pkg": "com.viber.voip",
+    "time_str": "28:01",
+    "seconds": 1681,
+    "launches": 60
+  },
+  {
+    "pkg": "com.eway",
+    "time_str": "27:27",
+    "seconds": 1647,
+    "launches": 43
+  },
+  {
+    "pkg": "com.google.android.apps.docs.editors.docs",
+    "time_str": "26:17",
+    "seconds": 1577,
+    "launches": 24
+  },
+  {
+    "pkg": "com.kyivdigital",
+    "time_str": "25:10",
+    "seconds": 1510,
+    "launches": 29
+  },
+  {
+    "pkg": "com.deepseek.chat",
+    "time_str": "24:43",
+    "seconds": 1483,
+    "launches": 3
+  },
+  {
+    "pkg": "com.google.android.calculator",
+    "time_str": "23:25",
+    "seconds": 1405,
+    "launches": 31
+  },
+  {
+    "pkg": "com.sec.android.gallery3d",
+    "time_str": "21:54",
+    "seconds": 1314,
+    "launches": 63
+  },
+  {
+    "pkg": "us.zoom.videomeetings",
+    "time_str": "18:22",
+    "seconds": 1102,
+    "launches": 18
+  },
+  {
+    "pkg": "com.moneybookers.skrillpayments",
+    "time_str": "17:04",
+    "seconds": 1024,
+    "launches": 15
+  },
+  {
+    "pkg": "com.google.android.apps.messaging",
+    "time_str": "15:44",
+    "seconds": 944,
+    "launches": 58
+  },
+  {
+    "pkg": "ua.com.uklontaxi",
+    "time_str": "13:42",
+    "seconds": 822,
+    "launches": 24
+  },
+  {
+    "pkg": "org.thoughtcrime.securesms",
+    "time_str": "12:59",
+    "seconds": 779,
+    "launches": 11
+  },
+  {
+    "pkg": "com.google.android.healthconnect.controller",
+    "time_str": "12:23",
+    "seconds": 743,
+    "launches": 7
+  },
+  {
+    "pkg": "ua.vodafone.myvodafone",
+    "time_str": "11:34",
+    "seconds": 694,
+    "launches": 19
+  },
+  {
+    "pkg": "com.whatsapp",
+    "time_str": "10:37",
+    "seconds": 637,
+    "launches": 24
+  },
+  {
+    "pkg": "com.x8bit.bitwarden",
+    "time_str": "09:47",
+    "seconds": 587,
+    "launches": 40
+  },
+  {
+    "pkg": "com.stonecutters.islegrow",
+    "time_str": "09:23",
+    "seconds": 563,
+    "launches": 7
+  },
+  {
+    "pkg": "com.google.android.googlequicksearchbox",
+    "time_str": "08:52",
+    "seconds": 532,
+    "launches": 17
+  },
+  {
+    "pkg": "com.bitwarden.authenticator",
+    "time_str": "08:25",
+    "seconds": 505,
+    "launches": 17
+  },
+  {
+    "pkg": "com.azure.authenticator",
+    "time_str": "08:11",
+    "seconds": 491,
+    "launches": 44
+  },
+  {
+    "pkg": "com.google.android.apps.photos",
+    "time_str": "08:07",
+    "seconds": 487,
+    "launches": 12
+  },
+  {
+    "pkg": "com.google.android.apps.authenticator2",
+    "time_str": "07:40",
+    "seconds": 460,
+    "launches": 12
+  },
+  {
+    "pkg": "eu.novapost",
+    "time_str": "06:41",
+    "seconds": 401,
+    "launches": 21
+  },
+  {
+    "pkg": "ua.otpbank.android",
+    "time_str": "06:25",
+    "seconds": 385,
+    "launches": 22
+  },
+  {
+    "pkg": "com.android.intentresolver",
+    "time_str": "05:30",
+    "seconds": 330,
+    "launches": 93
+  },
+  {
+    "pkg": "com.google.android.photopicker",
+    "time_str": "05:29",
+    "seconds": 329,
+    "launches": 83
+  },
+  {
+    "pkg": "com.samsung.android.app.smartcapture",
+    "time_str": "05:06",
+    "seconds": 306,
+    "launches": 41
+  },
+  {
+    "pkg": "com.samsung.android.video",
+    "time_str": "04:44",
+    "seconds": 284,
+    "launches": 2
+  },
+  {
+    "pkg": "com.google.android.documentsui",
+    "time_str": "04:43",
+    "seconds": 283,
+    "launches": 54
+  },
+  {
+    "pkg": "com.google.android.apps.docs",
+    "time_str": "04:29",
+    "seconds": 269,
+    "launches": 12
+  },
+  {
+    "pkg": "com.google.android.packageinstaller",
+    "time_str": "04:10",
+    "seconds": 250,
+    "launches": 142
+  },
+  {
+    "pkg": "com.android.htmlviewer",
+    "time_str": "04:06",
+    "seconds": 246,
+    "launches": 17
+  },
+  {
+    "pkg": "co.unstatic.habitify",
+    "time_str": "03:59",
+    "seconds": 239,
+    "launches": 2
+  },
+  {
+    "pkg": "com.zhiliaoapp.musically",
+    "time_str": "03:57",
+    "seconds": 237,
+    "launches": 5
+  },
+  {
+    "pkg": "com.google.android.apps.tasks",
+    "time_str": "03:51",
+    "seconds": 231,
+    "launches": 7
+  },
+  {
+    "pkg": "com.google.android.calendar",
+    "time_str": "03:38",
+    "seconds": 218,
+    "launches": 7
+  },
+  {
+    "pkg": "com.sec.android.mimage.photoretouching",
+    "time_str": "03:36",
+    "seconds": 216,
+    "launches": 13
+  },
+  {
+    "pkg": "com.android.systemui",
+    "time_str": "03:16",
+    "seconds": 196,
+    "launches": 8
+  },
+  {
+    "pkg": "com.android.credentialmanager",
+    "time_str": "02:58",
+    "seconds": 178,
+    "launches": 110
+  },
+  {
+    "pkg": "ua.gov.reserveplus",
+    "time_str": "02:36",
+    "seconds": 156,
+    "launches": 7
+  },
+  {
+    "pkg": "com.samsung.android.honeyboard",
+    "time_str": "01:51",
+    "seconds": 111,
+    "launches": 4
+  },
+  {
+    "pkg": "com.sec.android.app.myfiles",
+    "time_str": "01:51",
+    "seconds": 111,
+    "launches": 22
+  },
+  {
+    "pkg": "com.burockgames.timeclocker",
+    "time_str": "01:41",
+    "seconds": 101,
+    "launches": 5
+  },
+  {
+    "pkg": "com.samsung.android.app.dressroom",
+    "time_str": "01:34",
+    "seconds": 94,
+    "launches": 9
+  },
+  {
+    "pkg": "com.sec.android.daemonapp",
+    "time_str": "01:20",
+    "seconds": 80,
+    "launches": 2
+  },
+  {
+    "pkg": "com.google.android.apps.translate",
+    "time_str": "01:20",
+    "seconds": 80,
+    "launches": 6
+  },
+  {
+    "pkg": "com.bybit.app",
+    "time_str": "01:19",
+    "seconds": 79,
+    "launches": 4
+  },
+  {
+    "pkg": "com.radio.fmradio",
+    "time_str": "01:04",
+    "seconds": 64,
+    "launches": 1
+  },
+  {
+    "pkg": "com.rammigsoftware.bluecoins",
+    "time_str": "01:00",
+    "seconds": 60,
+    "launches": 3
+  },
+  {
+    "pkg": "com.android.settings.intelligence",
+    "time_str": "00:46",
+    "seconds": 46,
+    "launches": 5
+  },
+  {
+    "pkg": "com.sec.android.app.SecSetupWizard",
+    "time_str": "00:44",
+    "seconds": 44,
+    "launches": 3
+  },
+  {
+    "pkg": "com.android.companiondevicemanager",
+    "time_str": "00:36",
+    "seconds": 36,
+    "launches": 20
+  },
+  {
+    "pkg": "com.samsung.android.app.telephonyui",
+    "time_str": "00:33",
+    "seconds": 33,
+    "launches": 2
+  },
+  {
+    "pkg": "com.google.android.apps.tachyon",
+    "time_str": "00:28",
+    "seconds": 28,
+    "launches": 4
+  },
+  {
+    "pkg": "com.samsung.android.rampart",
+    "time_str": "00:23",
+    "seconds": 23,
+    "launches": 3
+  },
+  {
+    "pkg": "com.samsung.android.service.tagservice",
+    "time_str": "00:23",
+    "seconds": 23,
+    "launches": 14
+  },
+  {
+    "pkg": "com.samsung.android.privacydashboard",
+    "time_str": "00:21",
+    "seconds": 21,
+    "launches": 3
+  },
+  {
+    "pkg": "com.samsung.android.app.contacts",
+    "time_str": "00:20",
+    "seconds": 20,
+    "launches": 2
+  },
+  {
+    "pkg": "com.samsung.android.app.routines",
+    "time_str": "00:16",
+    "seconds": 16,
+    "launches": 2
+  },
+  {
+    "pkg": "com.samsung.android.forest",
+    "time_str": "00:12",
+    "seconds": 12,
+    "launches": 3
+  },
+  {
+    "pkg": "com.samsung.android.lool",
+    "time_str": "00:12",
+    "seconds": 12,
+    "launches": 1
+  },
+  {
+    "pkg": "com.android.certinstaller",
+    "time_str": "00:09",
+    "seconds": 9,
+    "launches": 3
+  },
+  {
+    "pkg": "com.microsoft.skydrive",
+    "time_str": "00:07",
+    "seconds": 7,
+    "launches": 1
+  },
+  {
+    "pkg": "com.google.android.captiveportallogin",
+    "time_str": "00:06",
+    "seconds": 6,
+    "launches": 1
+  },
+  {
+    "pkg": "com.instagram.android",
+    "time_str": "00:03",
+    "seconds": 3,
+    "launches": 1
+  },
+  {
+    "pkg": "com.samsung.knox.securefolder",
+    "time_str": "00:03",
+    "seconds": 3,
+    "launches": 4
+  },
+  {
+    "pkg": "com.google.android.apps.restore",
+    "time_str": "00:03",
+    "seconds": 3,
+    "launches": 4
+  },
+  {
+    "pkg": "com.google.android.tts",
+    "time_str": "00:02",
+    "seconds": 2,
+    "launches": 2
+  },
+  {
+    "pkg": "com.google.android.providers.media.module",
+    "time_str": "00:01",
+    "seconds": 1,
+    "launches": 1
+  },
+  {
+    "pkg": "com.android.stk",
+    "time_str": "00:01",
+    "seconds": 1,
+    "launches": 5
+  },
+  {
+    "pkg": "com.android.server.telecom",
+    "time_str": "00:01",
+    "seconds": 1,
+    "launches": 2
+  },
+  {
+    "pkg": "com.android.vpndialogs",
+    "time_str": "00:01",
+    "seconds": 1,
+    "launches": 1
+  },
+  {
+    "pkg": "com.google.android.networkstack.tethering",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.location.nsflp2",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.ext.services",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.telephony",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.cellbroadcastservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.calendar",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.media",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.smartmirroring",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.safetyassurance",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.knox.containercore",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.downloads",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.knox.kpecore",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.parentalcare",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.verifier",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.inputshare",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.sve",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.soundalive",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.kmxservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.provider.badge",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.cmh",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.mtp",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.nfc",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.ons",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.samsungpositioning",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.as",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.setupwizard",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.settings",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.accessibility",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.imsservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mobileservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.drmboost",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.se",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.stk2",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.webview",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mdecservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.networkstack",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.rkpdapp",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.accessory.budsunitemgr",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.keychain",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.diagmonagent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.biometrics.app.setting",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.sec.android.teegris.tui_service",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.authfw",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.game.gos",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.providers.media",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.CcInfo",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.fmm",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mtp",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.nfc",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.unifiedwfc",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.samsungpass",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.scloud",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.scpm",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.sdhms",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.settingshelper",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.projection.gearhead",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.callbgprovider",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.shortcutbackupservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.providers.contacts",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.phone",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.blockednumber",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.location.fused",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.samsungpassautofill",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.epdg",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.cidmanager",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.bluetooth",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.sec.android.application.csc",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mcfds",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.provider.filterprovider",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mydevice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.smartswitchassistant",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.setupwizardlegalprovider",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.chromecustomizations",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mapsagent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.externalstorage",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.rubin.app",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.faceservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.simagent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.samsungapps",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.adservices.api",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.sm.devicesecurity",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.messaging",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.klmsagent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.volumemonitorprovider",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.facebook.services",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.printspooler",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mdx.kit",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.storyservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.game.gametools",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.da.daagent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.reminder",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.dynamiclock",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.contactkeys",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.privateaccesstokens",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.ipsgeofence",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.themecenter",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.localtransport",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.carrierdefaultapp",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.proxyhandler",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.contactkeys",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.partnerbookmarks",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.stickercenter",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.facebook.system",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.providers.trash",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mdm",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.scs",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.phone",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.sharelive",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.dsms",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.easyMover",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.safetycore",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.networkdiagnostic",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mcfserver",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.userdictionary",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.facebook.appmanager",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.clockpack",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.providers.factory",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.ipservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.sdm.config",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.arlosoft.macrodroid",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.intellivoiceservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.soagent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.sdk.handwriting",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_de_de_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.cts.priv.ctsshim",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_it_it_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.uwb.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.internal.display.cutout.emulation.corner",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.internal.display.cutout.emulation.double",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.location.nfwlocationprivacy",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.ve.vebgm",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.networkstack",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.bluetoothagent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.onetimeinitializer",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.ext.shared",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.virtualmachine.res",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.globalpostprocmgr",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.wallpapercropper",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.federatedcompute",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wallpaper.res",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.mediatek.SettingsProviderResOverlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.skms.android.agent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.mcf.autohotspot",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.virtualdevicemanager",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.telephony.auto_generated_characteristics_rro",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wifi.saeupgradeoffload.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.health.connect.backuprestore",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.easyMover.Agent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.networkstack.tethering.overlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_vi_vn_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.wsomacp",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.visualars",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.voicenote",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.monotype.android.font.foundation",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.signature",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.configupdater",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.accessibility.talkback",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.smartfpsadjuster",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.permissioncontroller",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.avatarpicker",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.visual.cloudcore",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.epdgtestapp",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wifi.p2paware.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_en_gb_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.ar.core",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.providers.downloads.ui",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.pacprocessor",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.simappdialog",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.secsoundpicker",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.incall.contentprovider",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.internal.systemui.navbar.sec_gestural",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_es_es_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.internal.display.cutout.emulation.hole",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.internal.display.cutout.emulation.tall",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.carrierconfig",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.apps.accessibility.voiceaccess",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.internal.systemui.navbar.threebutton",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.wifi.dialog",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wcmurlsnetworkstack",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.cellbroadcastreceiver",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.internal.systemui.navbar.sec_gestural_no_hint",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.gmsconfig.searchselector",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.aircommandmanager",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.sdksandbox",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wifi.softapwpathree.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.service.stplatform",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.egg",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.backupconfirm",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_en_us_l03",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wifi.softap.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.virtualdevicemanager.auto_generated_characteristics_rro",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wifi.largetcpbuffer.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.verifier.overlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_es_us_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.gmsconfig.common",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.nfc.resources.default",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.mediatek.frameworkresoverlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.monotype.android.font.samsungone",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.sharedstoragebackup",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.dreams.basic",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_fr_fr_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.ext.services",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.as.oss",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wifi.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.gmsconfig.photos",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.kgclient",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.bips",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.audio.hearing.visualization.accessibility.scribe",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.gmsconfig.geotz",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.appsearch.apk",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.smartcallprovider",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.apps.bard",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 3
+  },
+  {
+    "pkg": "com.google.android.modulemetadata",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.taskedge",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.advp.imssettings",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.location",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.documentsui",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.telephonyui.esimclient",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.phone.auto_generated_characteristics_rro",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.healthfitness.forframework",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.gsf",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "android.autoinstalls.config.samsung",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.wifi.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.container",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.calllogbackup",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.cameraextensions",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_th_th_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.gmsconfig.asi",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.gmsconfig.gsa",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.smartface.overlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.theme.font.notoserifsource",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.mediatek.FrameworkResOverlayExt",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.safetycenter.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.internal.display.cutout.emulation.waterfall",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.internal.systemui.navbar.transparent",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.connectivity.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.permissioncontroller.forframework",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.printservice.recommendation",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.syncadapters.calendar",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.managedprovisioning",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.setting.multisound",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.googlelpaoverlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wallpaper.live",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.ConnectivityUxOverlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.dreams.phototable",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.mediatek.MtkSettingsResOverlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.mainline.telemetry",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.safetyinformation",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.wifi.h2e.resources",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.messageguardsync",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.role.notes.enabled",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.internal.overlay.config.default_contextual_search",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_ru_ru_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.wallpaper.livepicker",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.internal.systemui.navbar.gestural_no_hint",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.apps.tag",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.callassistant",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.ConnectivityOverlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.gru",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.appseparation",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.gms.supervision",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.kidshome",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.knox.sandbox",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.storagemanager",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.soundpicker",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.bookmarkprovider",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.widget.pictureframe",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.app.newtrim",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.apps.healthdata",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 2
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.captiveportallogin.forframework",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.emergencylauncher",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.hearingadjust",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.bluelightfilter",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.earphonetypec",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.qsfastpairoverlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.cts.ctsshim",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.watchmanagerstub",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.modulemetadata.forframework",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.mhs.smarttethering",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.networkstack.tethering.overlay",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.facatfunction",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.wallpaperbackup",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.hiya.star",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.cellbroadcastservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_pl_pl_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.hotspot2.osulogin",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.companiondevicemanager.auto_generated_characteristics_rro",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.gms.location.history",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.internal.systemui.navbar.gestural",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.overlay.modules.mediaprovider",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.ondevicepersonalization.services",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.bluetoothmidiservice",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.android.traceur",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.google.android.cellbroadcastreceiver",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.allshare.service.mediashare",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "android.auto_generated_rro_product__",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.snap.camerakit.plugin.v1",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.clipboardedge",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.sec.android.app.magnifier",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.monotype.android.font.roboto",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.SMT.lang_hi_in_f00",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  },
+  {
+    "pkg": "com.samsung.android.app.dofviewer",
+    "time_str": "00:00",
+    "seconds": 0,
+    "launches": 0
+  }
+]

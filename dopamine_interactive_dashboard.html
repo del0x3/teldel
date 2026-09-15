@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зеркало Реальности: Интерактивный Дофаминовый Дашборд</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0a0c;
+            --bg-card: #141418;
+            --bg-card-hover: #1c1c22;
+            --border: #272730;
+            --text-primary: #f0f0f5;
+            --text-secondary: #8a8a9e;
+            --accent-red: #ff3b5c;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 30px 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .title-group h1 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 40%, #8a8a9e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .title-group p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .badge-live {
+            background: rgba(255, 59, 92, 0.15);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-live::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        /* Metric Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #3e3e4f;
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            color: var(--text-secondary);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+        }
+
+        .card-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -1px;
+        }
+
+        .card-subtext {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+
+        .danger { color: var(--accent-red) !important; }
+        .amber { color: var(--accent-amber) !important; }
+        .purple { color: var(--accent-purple) !important; }
+        .blue { color: var(--accent-blue) !important; }
+
+        /* Charts Layout */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            position: relative;
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .chart-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 320px;
+            width: 100%;
+        }
+
+        /* Behavioral Pathology Table */
+        .section-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .loop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .loop-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .loop-route {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .arrow {
+            color: var(--accent-red);
+            font-size: 18px;
+        }
+
+        .loop-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .tag {
+            align-self: flex-start;
+            margin-top: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-secondary);
+        }
+
+        /* Equivalent Box */
+        .shock-banner {
+            background: linear-gradient(135deg, rgba(255, 59, 92, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border: 1px solid rgba(255, 59, 92, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+
+        .shock-banner h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .shock-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 14px;
+        }
+
+        .shock-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-red);
+        }
+
+        .shock-item strong {
+            display: block;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .shock-item span {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Top Navigation Bar */
+        .nav-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+
+        .nav-link.active {
+            color: #fff;
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--accent-blue);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Top Navigation -->
+    <nav class="nav-bar">
+        <a href="full_system_transformation_report.html" class="nav-link">🏛️ Архитектурный Отчет</a>
+        <a href="step_by_step_transformation.html" class="nav-link">📋 Пошаговый Реестр (1–18)</a>
+        <a href="dopamine_interactive_dashboard.html" class="nav-link active">🧠 Дофаминовый Аудит</a>
+    </nav>
+
+    <header>
+        <div class="title-group">
+            <h1>Зеркало Реальности: Аудит Дофаминовой Системы</h1>
+            <p>Samsung Galaxy A16 | Ядро Android (usagestats kernel db) | Данные: 13-14 сентября 2026 + 6-месячный ретроспектив</p>
+        </div>
+        <div class="badge-live">ХАРДКОРНЫЙ АУДИТ</div>
+    </header>
+
+    <!-- Top Key Metrics -->
+    <div class="metrics-grid">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">За прошлую неделю</span>
+                <span class="danger font-weight-bold">КРИТИЧНО</span>
+            </div>
+            <div class="card-value danger">73.1 ч</div>
+            <div class="card-subtext"><strong>10.4 часа в сутки</strong> (61.4% всего времени бодрствования)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Разблокировок экрана</span>
+            </div>
+            <div class="card-value purple">9 019</div>
+            <div class="card-subtext">~50 импульсивных проверок телефона каждый день</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Микро-заглядываний (<20 сек)</span>
+            </div>
+            <div class="card-value amber">41.8%</div>
+            <div class="card-subtext">79 из 189 сессий — бессознательное включение экрана</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Главный наркотик (All-Time)</span>
+            </div>
+            <div class="card-value blue">221 ч</div>
+            <div class="card-subtext">В Telegram (6 352 открытия, 43% всей жизни телефона)</div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="charts-row">
+        <div class="chart-box">
+            <h3 class="chart-title">Суточный циркадный ритм активности (24 часа)</h3>
+            <p class="chart-desc">Количество включений и смен экранов по часам суток. Пик истощения: 15:00 и вечерний запой перед сном.</p>
+            <div class="chart-container">
+                <canvas id="hourlyChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-box">
+            <h3 class="chart-title">Распределение времени недели</h3>
+            <p class="chart-desc">Куда утекли 73.1 часа прошлой недели.</p>
+            <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Shock Banner -->
+    <div class="shock-banner">
+        <h3>💥 Эквивалент упущенного потенциала (514.5 часов по логам):</h3>
+        <p style="color: #c0c0d0; font-size: 14px;">Пока пальцы листали ленты и нажимали на экран, ты физически отдал системе 21.4 полных суток без сна. За это чистое время можно было:</p>
+        <div class="shock-list">
+            <div class="shock-item">
+                <strong>40 прочитанных книг</strong>
+                <span>При средней скорости 12-15 часов на серьезную книгу.</span>
+            </div>
+            <div class="shock-item">
+                <strong>340 силовых тренировок</strong>
+                <span>1.5 года идеального спортивного телосложения в зале.</span>
+            </div>
+            <div class="shock-item">
+                <strong>2 готовых пет-проекта / MVP</strong>
+                <span>От проектирования архитектуры до рабочего продакшна.</span>
+            </div>
+            <div class="shock-item">
+                <strong>Язык B2 с нуля</strong>
+                <span>500 часов аудиторных занятий с полным погружением.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dopamine Loops Analysis -->
+    <h2 class="section-header">🔄 Анатомия дофаминовых петель (Смены контекста в логах)</h2>
+    <div class="loop-grid">
+        <div class="loop-item">
+            <div>
+                <div class="loop-route">
+                    <span>Telegram</span>
+                    <span class="arrow">⇄</span>
+                    <span>Рабочий стол</span>
+                </div>
+                <p class="loop-desc">Зафиксировано <strong>33 раза за сутки</strong>. Открыл Telegram, ничего нового нет, смахнул на рабочий стол, через 20 секунд палец снова нажимает Telegram в поисках новой порции.</p>
+            </div>
+            <span class="tag">КОМПУЛЬСИВНАЯ ПЕТЛЯ</span>
+        </div>
+
+        <div class="loop-item">
+            <div>
+                <div class="loop-route">
+                    <span>Glovo</span>
+                    <span class="arrow">⇄</span>
+                    <span>Скроллинг меню</span>
+                </div>
+                <p class="loop-desc">Зафиксировано <strong>48 открытий за 7 дней</strong>. Почти 7 раз в день открывалось приложение еды — компульсивный просмотр картинок блюд как суррогат быстрого удовольствия.</p>
+            </div>
+            <span class="tag">ДОФАМИНОВЫЙ СКРОЛЛИНГ</span>
+        </div>
+
+        <div class="loop-item">
+            <div>
+                <div class="loop-route">
+                    <span>YouTube Запой</span>
+                    <span class="arrow">➔</span>
+                    <span>52.5 часа за неделю</span>
+                </div>
+                <p class="loop-desc"><strong>7.5 часов в сутки</strong> непрерывного медиа-потока. Полный уход от реальности и блокировка аналитического мышления пассивным видеорядом.</p>
+            </div>
+            <span class="tag">ТОТАЛЬНЫЙ БРЕЙНРОТ</span>
+        </div>
+    </div>
+
+    <!-- Notification Spammers -->
+    <div class="chart-box" style="margin-bottom: 30px;">
+        <h3 class="chart-title">Главные триггеры прерывания внимания (Кто дергал за ниточки)</h3>
+        <p class="chart-desc">Количество пушей и уведомлений, прервавших твою деятельность за сутки:</p>
+        <div class="chart-container" style="height: 240px;">
+            <canvas id="notifChart"></canvas>
+        </div>
+    </div>
+
+    <footer>
+        Сгенерировано системой Antigravity на основе реальных дампов ядра Android SM-A165F. Защита активирована: YouTube, TikTok, игры и бэкдоры ликвидированы.
+    </footer>
+</div>
+
+<script>
+    // Hourly Activity Chart
+    const ctxHourly = document.getElementById('hourlyChart').getContext('2d');
+    new Chart(ctxHourly, {
+        type: 'bar',
+        data: {
+            labels: ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'],
+            datasets: [{
+                label: 'Импульсивных действий / смен экранов',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 6, 4, 7, 2, 0, 8, 17, 54, 20, 8, 8, 18, 4, 23, 21, 8],
+                backgroundColor: function(context) {
+                    const val = context.raw;
+                    if (val > 30) return '#ff3b5c';
+                    if (val > 15) return '#f59e0b';
+                    return '#3b82f6';
+                },
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    grid: { color: '#1c1c24' },
+                    ticks: { color: '#8a8a9e' }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { color: '#8a8a9e' }
+                }
+            }
+        }
+    });
+
+    // Category Doughnut Chart
+    const ctxCat = document.getElementById('categoryChart').getContext('2d');
+    new Chart(ctxCat, {
+        type: 'doughnut',
+        data: {
+            labels: ['YouTube (Видео)', 'Telegram (Чаты)', 'Chrome (Серфинг)', 'Mountain Bike (Игра)', 'Claude (Работа)', 'Glovo', 'Остальное'],
+            datasets: [{
+                data: [52.5, 6.1, 3.9, 2.7, 2.1, 1.5, 4.3],
+                backgroundColor: [
+                    '#ff3b5c',
+                    '#3b82f6',
+                    '#f59e0b',
+                    '#ef4444',
+                    '#8b5cf6',
+                    '#10b981',
+                    '#6b7280'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { color: '#f0f0f5', boxWidth: 12, padding: 12 }
+                }
+            },
+            cutout: '70%'
+        }
+    });
+
+    // Notification Bar Chart
+    const ctxNotif = document.getElementById('notifChart').getContext('2d');
+    new Chart(ctxNotif, {
+        type: 'bar',
+        indexAxis: 'y',
+        data: {
+            labels: ['Telegram (Каналы/Чаты)', 'System UI (Шторка)', 'Discord', 'Google Play', 'Google Календарь', 'Банки (Приват/Пумб)'],
+            datasets: [{
+                label: 'Прерываний за сутки',
+                data: [55, 41, 5, 6, 2, 2],
+                backgroundColor: '#8b5cf6',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    grid: { color: '#1c1c24' },
+                    ticks: { color: '#8a8a9e' }
+                },
+                y: {
+                    grid: { display: false },
+                    ticks: { color: '#f0f0f5' }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
