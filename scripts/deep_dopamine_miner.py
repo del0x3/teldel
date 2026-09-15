@@ -5,10 +5,16 @@ from collections import defaultdict
 from datetime import datetime
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-stats_file = os.path.join(base_dir, 'full_usagestats.txt')
+candidates = [
+    os.path.join(base_dir, 'full_usagestats.txt'),
+    os.path.join(base_dir, '..', 'full_usagestats.txt'),
+    os.path.join(base_dir, '..', 'data', 'full_usagestats.txt'),
+    'full_usagestats.txt'
+]
+stats_file = next((p for p in candidates if os.path.exists(p)), None)
 
-if not os.path.exists(stats_file):
-    print(f"[!] Stats file '{stats_file}' not found.")
+if not stats_file:
+    print("[!] Stats file 'full_usagestats.txt' not found.")
     print("[*] Connect your Android phone with USB debugging and run `collect_stats.bat` first.")
     exit(1)
 

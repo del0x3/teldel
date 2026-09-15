@@ -46,5 +46,5 @@ python deep_dopamine_miner.py
 
 echo.
 echo [+] Collection and parsing complete!
-echo Parsed analytics saved to: parsed_stats.json, multi_interval_stats.json, deep_dopamine_analysis.json.
+echo Parsed analytics saved to: data/parsed_stats.json, data/multi_interval_stats.json, data/deep_dopamine_analysis.json.
 pause

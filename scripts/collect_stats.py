@@ -64,12 +64,16 @@ def main():
     except Exception as e:
         print(f"[!] Error in deep_dopamine_miner: {e}")
 
-    dash_file = os.path.join(base_dir, "dopamine_interactive_dashboard.html")
-    if os.path.exists(dash_file):
+    candidates = [
+        os.path.join(base_dir, "..", "docs", "dopamine_interactive_dashboard.html"),
+        os.path.join(base_dir, "dopamine_interactive_dashboard.html")
+    ]
+    dash_file = next((p for p in candidates if os.path.exists(p)), None)
+    if dash_file:
         print(f"\n[+] Analysis complete! Dashboard ready: {dash_file}")
         open_web = input("\nOpen interactive dashboard in web browser? (Y/N): ").strip()
         if open_web.lower() in ['y', 'yes']:
-            webbrowser.open(f"file://{dash_file}")
+            webbrowser.open(f"file://{os.path.abspath(dash_file)}")
 
 if __name__ == '__main__':
     main()
