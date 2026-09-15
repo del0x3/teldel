@@ -1,96 +1,72 @@
-# 📵 Android Productivity Terminal
+# teldel — turning my phone into a dumb terminal
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Android](https://img.shields.io/badge/Android-11%20--%2015-3DDC84?logo=android&logoColor=white)](https://www.android.com)
-[![Samsung Knox](https://img.shields.io/badge/Knox%20Warranty-0x0%20(Untouched)-brightgreen)](#-faq--no-bullshit)
-[![Root Required](https://img.shields.io/badge/Root-NOT%20Required-success)](#-quick-start)
-[![Reversible](https://img.shields.io/badge/Reversible-100%25-orange)](#-how-to-un-brick-your-addiction-rollback)
-
-> **Surgical, root-free ADB framework that converts modern Android smartphones from pocket slot machines into cold, distraction-free productivity terminals.**
+A set of ADB scripts and system tweaks I used to turn my Samsung Galaxy into a distraction-free, zero-browser utility phone. No root, doesn't trip Knox, completely reversible.
 
 ---
 
-## 💀 The Manifesto: Why the Hell Do You Need a Browser in 2026?
+### Why?
 
-Congratulations. You spent $800 on a handheld supercomputer packing 8 CPU cores, a 90Hz AMOLED panel, and military-grade cryptographic enclaves — and you’re using it to watch teenagers dance to sped-up pop songs while doomscrolling outrage at 2:15 AM.
+Last week I dumped my Android kernel usage stats and realized I averaged **10.4 hours a day** on my phone. 52 hours in a single week went to YouTube alone. That's literally a full-time job plus overtime spent staring at glowing pixels.
 
-Your phone is not a tool anymore. It’s an attention extraction rig engineered by Stanford behavioral psychologists whose annual bonuses depend entirely on keeping your eyeballs glued to an infinite stream of algorithmic brainrot.
+I didn't want to buy a $300 "minimalist" e-ink dumbphone that can't run banking apps, 2FA, or Telegram. I wanted to keep modern hardware (good camera, battery life, secure enclave, messengers, Uber, banking) while completely ripping out the casino mechanics.
 
-**Here is our foundational architectural philosophy:**
-
-> **Why the fuck do you need a web browser in your pocket in 2026?**  
-> What are you browsing? Are you enjoying accepting 47 GDPR cookie consent modals while an autoplaying video ad covers 60% of your viewport, just to read an AI-generated SEO article about *"Top 10 Garlic Presses"* with a 3,000-word prelude about someone's grandma in Minnesota?  
->  
-> **We have conversational AI.**  
-> If you need information, ask Claude or ChatGPT. Get the raw synthesis, execute the task, put the phone down, and go touch some damn grass. If you’re opening Chrome on a touchscreen, let’s be honest with each other: you’re not *researching*. You’re procrastinating on the toilet while Google auctions off your retina fixations to high-frequency ad exchanges.  
->  
-> **No browser. No store. No dopamine hooks.**
+So I plugged it into my PC and gutted the addiction loops over ADB.
 
 ---
 
-## ⚡ Key Highlights (What Gets Murdered)
+### "Wait, you deleted the web browser?"
 
-* 🚫 **Zero-Browser Perimeter:** Chrome and HTML rendering engines are completely uninstalled or frozen. Tap a link anywhere? Kernel returns `No activity found`. The rabbit hole is bricked shut.
-* 🪓 **App Store Guillotine:** Google Play Store frozen, Samsung Galaxy Store permanently removed. You can’t impulse-download an ad-riddled match-3 game at midnight when willpower is at zero.
-* 🪨 **"Gray Stone" Sensory Calm:** Hardware matrix daltonizer forces strict monochromatic grayscale + Extra Dim. Stripped of neon saturation, Instagram looks like an obituary and TikTok looks like CCTV footage from a Chernobyl basement.
-* ⚡ **0.0 ms Latency (Instant UI):** Animation scales forced to `0.0x`. The GPU stops wasting clock cycles rendering smooth transitions. Windows snap instantly like a military radio.
-* 🛑 **RAM Plus Deicide:** Killed Samsung’s 4 GB virtual swap file (`ram_expand_size 0`). No more thrashing your slow UFS flash storage just to fake memory benchmarks. Pure physical LPDDR4X speed only.
-* 🛡️ **Cryptographic DNS Condom:** System-level DNS-over-TLS through CleanBrowsing Family Filter. Adult content, telemetry trackers, and proxy bypasses blocked at the socket layer.
-* 🔕 **Sensory Silence:** Keypress vibrations killed. System clicks muted. Red unread counter badges annihilated. 30-second screen timeout enforced.
-* 🎛️ **The Desktop Leash ([`phone_manager.bat`](phone_manager.bat)):** Need to update your banking app so your debit card doesn't get declined at Whole Foods? Plug the phone into your PC, hit `[1]` to unfreeze Google Play, update, then hit `[2]` to freeze it back into carbonite.
+Yeah. People's first reaction is always: *"How do you survive without a browser on your phone?"*
+
+Honestly, what are you actually doing in a mobile browser in 2026?
+- Clicking some clickbait link from a group chat
+- Getting flashbanged by 3 cookie consent banners, a newsletter popup, and an autoplaying video ad
+- Scrolling past 12 paragraphs of AI-generated filler to find out what time a store closes
+
+If I genuinely need information on the go, I open Claude or ChatGPT. I ask the question, get the exact answer in three sentences, close the phone, and get on with my life.
+
+If I need to book a flight, fill out government paperwork, or do actual research, I open my laptop like a normal person. A mobile browser isn't a productivity tool — it's an excuse to doomscroll on the toilet while Google auctions your attention to ad brokers.
 
 ---
 
-## 📁 Clean Minimalist Architecture
+### What this actually does
 
-No messy root directory. Everything is strictly organized:
+1. **Kills entertainment apps:** YouTube, TikTok, Instagram, casual games, and food delivery apps are uninstalled for `user 0`.
+2. **Zero-Browser:** Chrome and web view customizers disabled. Tapping an HTTP link in any app returns `No activity found`. The rabbit hole simply doesn't exist.
+3. **App Store on a leash:** Google Play is frozen (`pm disable-user`) and Galaxy Store is uninstalled. You can't impulsively download games at midnight. When you legitimately need to update banking apps, plug into your PC, run `phone_manager.bat`, press `1` to temporarily unfreeze it, update, and press `2` to lock it again.
+4. **Anti-sideloading:** Revoked `REQUEST_INSTALL_PACKAGES` from Telegram, file managers, and cloud drives via `appops`. Even if you download an APK, the OS refuses to install it.
+5. **Killed telemetry & carrier junk:** Stripped 15 background diagnostic daemons, Samsung DiagMon, McAfee scanner, and persistent Wi-Fi/Bluetooth beacon snooping.
+6. **Disabled RAM Plus (ZRAM swap):** Samsung enables a 4 GB virtual swap file on flash storage by default. On budget/midrange flash storage, this just causes I/O wait micro-stutters. Setting `ram_expand_size 0` lets the phone run purely on physical LPDDR RAM.
+7. **0 ms animations:** Set `window_animation_scale`, `transition_animation_scale`, and `animator_duration_scale` to `0`. Windows snap open instantly instead of sliding around.
+8. **Grayscale ("Gray Stone"):** Hardware daltonizer set to monochrome + Extra Dim enabled. Without bright saturated colors, your monkey brain stops treating your screen like a bush of ripe berries. Instagram in black-and-white looks like surveillance footage.
+9. **Muted sensory triggers:** Haptic feedback off, keypress clicks off, lock sounds off, notification badges (the red anxiety dots) disabled, screen timeout set to 30s.
+10. **CleanBrowsing DoT:** System-wide DNS-over-TLS set to CleanBrowsing family filter. Blocks adult content, malware domains, and open bypass proxies at the socket layer.
+11. **Minimal text launcher:** Uses [Olauncher](https://github.com/tanujnotes/Olauncher) (open source, GPLv3, 0 trackers/ads). Clean text list instead of colorful app icons.
 
-```text
-├── phone_manager.bat         # 🚀 1-Click root launcher (Double-click to manage device)
-├── phone_manager.ps1         # ⚙️  Core interactive terminal engine
-├── README.md                 # 📖 The documentation you're reading right now
-├── LICENSE                   # 📜 MIT License
-├── requirements.txt          # 🐍 Zero external pip dependencies (Standard library only)
-│
-├── docs/                     # 🌐 Standalone interactive web reports (Open in browser)
-│   ├── index.html            #    Unified portal hub
-│   ├── step_by_step_transformation.html  # 18-step chronological engineering log
-│   ├── full_system_transformation_report.html # In-depth technical architecture whitepaper
-│   └── dopamine_interactive_dashboard.html # Chart.js screen addiction visualizer
-│
-├── scripts/                  # 🛠️  Modular automation, rollback & telemetry tools
-│   ├── apply_minimalism.bat  #    1-Click batch runner for 18-step transformation
-│   ├── apply_minimalism.ps1  #    Automated PowerShell deployment engine
-│   ├── restore_defaults.bat  #    1-Click emergency factory rollback
-│   ├── restore_defaults.ps1  #    Full system restoration script
-│   ├── start_screen.bat      #    Low-latency scrcpy phone mirror
-│   ├── collect_stats.bat     #    Extract dumpsys usagestats & notifications
-│   ├── collect_stats.py      #    Telemetry acquisition pipeline
-│   ├── audit_olauncher.py    #    DEX bytecode ad/tracker scanner
-│   ├── download_launcher.py  #    Automated GitHub release downloader
-│   └── dyn_rename.py         #    UIAutomator batch app renamer
-│
-└── data/                     # 📊 Anonymized sample telemetry datasets
-    ├── deep_dopamine_analysis.json
-    ├── multi_interval_stats.json
-    └── parsed_stats.json
+### What still works:
+- Phone calls & SMS
+- Work messengers (Telegram, WhatsApp, Signal)
+- Banking apps (Monobank, Privat24, etc.)
+- 2FA authenticators (Google Auth, Bitwarden)
+- Camera (photos are still taken in full color; only the screen render is monochrome)
+- Navigation & ride-sharing (Google Maps, Uber)
+
+---
+
+### Quick Start (Windows)
+
+#### 1. Enable USB Debugging on your phone:
+- Go to `Settings` -> `About phone` -> `Software information`.
+- Tap `Build number` 7 times to unlock Developer options.
+- Go to `Settings` -> `Developer options` -> turn on **USB debugging**.
+- Connect phone to PC, check "Always allow from this computer" and accept.
+
+#### 2. Run the manager:
+Just double-click:
+```cmd
+phone_manager.bat
 ```
-
----
-
-## 🚀 Quick Start
-
-### 1. Requirements
-1. Android smartphone running **Android 11 to 15** (fine-tuned on Samsung Galaxy One UI 6, compatible with all modern Android OEMs).
-2. USB cable connected to your PC.
-3. **USB Debugging enabled:**
-   * Go to `Settings` -> `About phone` -> `Software information`.
-   * Tap `Build number` 7 times until Developer options unlock.
-   * Go to `Settings` -> `Developer options` -> toggle **USB debugging** to `ON`.
-   * When plugged in, check `Always allow from this computer` -> Tap **Allow**.
-
-### 2. Run the Manager
-Double-click `phone_manager.bat` in the root folder:
+*(If you don't have ADB installed, download [Google Platform-Tools](https://developer.android.com/tools/releases/platform-tools) and extract `adb.exe` into this folder or add it to PATH).*
 
 ```text
 ================================================================
@@ -112,138 +88,139 @@ Double-click `phone_manager.bat` in the root folder:
 ================================================================
 ```
 
+To run the whole 18-step transformation in one shot:
+```powershell
+.\scripts\apply_minimalism.bat
+```
+
 ---
 
-## 🛠️ The 18-Step Manual Protocol (For Terminal Purists)
+### Repo Structure
 
-Prefer running the commands manually via ADB? Here is the complete protocol:
+```text
+├── phone_manager.bat         # Main entry point (double-click to run)
+├── phone_manager.ps1         # Terminal UI script
+│
+├── docs/                     # Interactive visualizers (double-click to open in browser)
+│   ├── index.html            # Hub linking all reports
+│   ├── step_by_step_transformation.html  # Detailed 18-step technical log
+│   ├── full_system_transformation_report.html # Architecture whitepaper
+│   └── dopamine_interactive_dashboard.html # Chart.js screen time analysis
+│
+├── scripts/                  # Individual scripts if you want to run things separately
+│   ├── apply_minimalism.bat  # Full 18-step setup
+│   ├── restore_defaults.bat  # Rollback script
+│   ├── start_screen.bat      # Scrcpy screen mirror
+│   ├── collect_stats.bat     # Dumps usagestats from phone and parses them
+│   ├── audit_olauncher.py    # Bytecode scanner verifying 0 trackers in the launcher
+│   └── ...
+│
+└── data/                     # Anonymized sample data used by the HTML dashboards
+```
+
+---
+
+### The Manual Commands (If you prefer running ADB yourself)
 
 ```bash
-# === 1. Baseline Extraction ===
+# Baseline check
 adb devices
-adb shell dumpsys usagestats > usagestats_baseline.txt
 
-# === 2. Eradicate Entertainment Feeds (User 0) ===
+# Remove timekillers
 adb shell pm uninstall -k --user 0 com.google.android.youtube
 adb shell pm uninstall -k --user 0 com.zhiliaoapp.musically
 adb shell pm uninstall -k --user 0 com.instagram.android
 adb shell pm uninstall -k --user 0 com.linkedin.android
 adb shell pm uninstall -k --user 0 com.glovo
-adb shell pm uninstall -k --user 0 ua.com.uklontaxi
-
-# === 3. Murder Google Discover Feed ===
 adb shell pm uninstall -k --user 0 com.google.android.googlequicksearchbox
 
-# === 4. Zero-Browser Perimeter ===
+# Kill browser & stores
 adb shell pm disable-user --user 0 com.android.chrome
 adb shell pm uninstall -k --user 0 com.android.chrome
 adb shell pm disable-user --user 0 com.sec.android.app.chromecustomizations
-adb shell pm disable-user --user 0 com.android.htmlviewer
-
-# === 5. App Store Lockdown ===
 adb shell pm uninstall -k --user 0 com.sec.android.app.samsungapps
 adb shell pm disable-user --user 0 com.android.vending
 
-# === 6. Anti-Sideloading Enforcer (No APK installs from chats/files) ===
+# Block APK sideloading
 adb shell settings put secure install_non_market_apps 0
-adb shell cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES deny
 adb shell cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES deny
+adb shell cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES deny
 adb shell cmd appops set com.discord REQUEST_INSTALL_PACKAGES deny
 adb shell cmd appops set com.whatsapp REQUEST_INSTALL_PACKAGES deny
-adb shell cmd appops set com.google.android.apps.docs REQUEST_INSTALL_PACKAGES deny
 
-# === 7. Purge OEM Adware Autoinstallers ===
+# Clean telemetry & bloatware
 adb shell pm uninstall -k --user 0 com.aura.oobe.samsung.gl
 adb shell pm uninstall -k --user 0 com.samsung.android.cidmanager
-adb shell pm uninstall -k --user 0 com.samsung.android.app.omcagent
-adb shell pm uninstall -k --user 0 com.samsung.android.sdm.config
-
-# === 8. Mute 15 Telemetry & Diagnostic Daemons ===
 adb shell pm disable-user --user 0 imslogger
-adb shell pm disable-user --user 0 ipsgeofence
 adb shell pm disable-user --user 0 diagmonagent
-adb shell pm disable-user --user 0 iaft
-adb shell pm disable-user --user 0 dsms
-adb shell pm disable-user --user 0 sdhms
-adb shell pm disable-user --user 0 aware.service
-adb shell pm disable-user --user 0 dqagent
-adb shell pm disable-user --user 0 networkdiagnostic
+adb shell pm disable-user --user 0 ipsgeofence
 adb shell pm disable-user --user 0 sm.devicesecurity
 
-# === 9. Radio Idle Power Saving (Stop background Wi-Fi/BT snooping) ===
-adb shell settings put global wifi_scan_always_enabled 0
-adb shell settings put global ble_scan_always_enabled 0
-
-# === 10. Disable RAM Plus (Kill slow storage swap) ===
+# Hardware & animations
 adb shell settings put global ram_expand_size 0
-
-# === 11. Instant 0 ms UI (No transition latency) ===
 adb shell settings put global window_animation_scale 0
 adb shell settings put global transition_animation_scale 0
 adb shell settings put global animator_duration_scale 0
+adb shell settings put global wifi_scan_always_enabled 0
+adb shell settings put global ble_scan_always_enabled 0
 
-# === 12. "Gray Stone" Monochromatic Display Mode ===
+# Grayscale & sound triggers
 adb shell settings put secure accessibility_display_daltonizer 0
 adb shell settings put secure accessibility_display_daltonizer_enabled 1
 adb shell settings put secure reduce_bright_colors_activated 1
-
-# === 13. Mute Tactile & Sound Triggers ===
 adb shell settings put system haptic_feedback_enabled 0
 adb shell settings put system sound_effects_enabled 0
 adb shell settings put system lockscreen_sounds_enabled 0
-
-# === 14. Kill Unread Badges & Enforce 30s Timeout ===
 adb shell settings put secure notification_badging 0
 adb shell settings put system screen_off_timeout 30000
 
-# === 15. Cryptographic DNS-over-TLS (CleanBrowsing Family) ===
+# Private DNS (CleanBrowsing DoT)
 adb shell settings put global private_dns_mode hostname
 adb shell settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
-
-# === 16. Deploy Minimal Text Launcher ===
-adb install -r Olauncher.apk
-adb shell cmd appops set app.olauncher RECORD_AUDIO ignore
-adb shell cmd appops set app.olauncher READ_PHONE_STATE ignore
-
-# === 17. Use Phone Manager for 1-Click Desktop Control ===
-# Run phone_manager.bat
-
-# === 18. Hardware Verification Audit ===
-adb shell "dumpsys battery | grep -E 'level|temperature|status'"
-adb shell "cat /proc/meminfo | head -n 2"
-adb shell "cmd package resolve-activity http://google.com"
 ```
 
 ---
 
-## 🔄 How to Un-Brick Your Addiction (Rollback)
+### How to Rollback
 
-Scared of living without infinite feeds? Regret kicking your TikTok habit? Everything is **100% reversible** in 5 seconds.
+If you decide you can't live without doomscrolling, you can revert everything back to factory defaults without wiping your phone:
 
-Run in PowerShell:
-```powershell
-.\scripts\restore_defaults.ps1
+Double-click `scripts\restore_defaults.bat` (or select option `8` in `phone_manager.bat`).
+
+Or manually:
+```bash
+adb shell pm enable com.android.vending
+adb shell pm enable com.android.chrome
+adb shell pm enable com.sec.android.app.chromecustomizations
+adb shell settings put secure accessibility_display_daltonizer_enabled 0
+adb shell settings put secure reduce_bright_colors_activated 0
+adb shell settings put global window_animation_scale 1.0
+adb shell settings put global transition_animation_scale 1.0
+adb shell settings put global animator_duration_scale 1.0
+adb shell settings put system haptic_feedback_enabled 1
+adb shell settings put system sound_effects_enabled 1
+adb shell settings put secure notification_badging 1
+adb shell settings put system screen_off_timeout 60000
+adb shell settings put global private_dns_mode opportunistic
+adb shell settings put global private_dns_specifier ""
 ```
-*(Or choose option `[8]` in `phone_manager.bat`)*
-
-This immediately re-enables Google Play Store, restores Chrome, turns colors back on, resets animations to 1.0x, turns system vibrations back on, and restores default DNS. Zero factory reset required.
 
 ---
 
-## ❓ FAQ & No-Bullshit
+### FAQ
 
-#### Will this trip Samsung Knox or void my warranty?
-**Hell no.** Knox warranty (`0x0`) only trips if you flash an unsigned bootloader or kernel binary via Odin (custom ROMs/rooting). This framework operates 100% in user space via standard, official Android Debug Bridge (`adb shell pm` and `adb shell settings`) for User 0. Your warranty, banking security flags, and Samsung Knox remain pristine.
+**Does this trip Samsung Knox or void warranty?**  
+No. Knox trips only when you flash unauthorized bootloaders or custom recovery partitions (Odin/rooting). All these changes run in user space via standard `adb shell pm` and `adb shell settings` commands. Knox stays `0x0`.
 
-#### Can I still receive phone calls, SMS, and WhatsApp messages?
-**Yes.** Phone calls, cellular SMS, 2FA tokens, authenticators, banking apps, and work messengers (Telegram, Signal, WhatsApp) continue working normally. The goal is to eradicate passive algorithmic consumption, not turn your phone into a literal brick that can't call an ambulance.
+**Can I run this on Mac or Linux?**  
+Yes. The `.bat` and `.ps1` files are convenience wrappers for Windows, but the ADB commands are standard POSIX shell commands. Just copy-paste the commands from the manual section into your terminal.
 
-#### How do I update banking apps without an app store?
-Plug your phone into your computer, run `phone_manager.bat`, and press `[1]`. Google Play Store appears on your phone. Update your apps, then press `[2]` in the menu to freeze it back into oblivion.
+**What phone was this tested on?**  
+Tested on a Samsung Galaxy A16 running One UI 6 (Android 14), but the ADB commands apply to virtually any modern Android device (One UI, Pixel UI, Motorola, etc.).
 
 ---
 
-## 📜 License
+### License
 
-MIT License. Engineered for maximum human focus, radical digital independence, and zero corporate telemetry.
-Olauncher is licensed under GNU GPLv3 by [Tanuj Notes](https://github.com/tanujnotes/Olauncher).
+MIT. Do whatever you want with it.  
+Olauncher is by [Tanuj Notes](https://github.com/tanujnotes/Olauncher) under GPLv3.
