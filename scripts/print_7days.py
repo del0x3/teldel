@@ -2,10 +2,15 @@ import os
 import json
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-json_path = os.path.join(base_dir, 'multi_interval_stats.json')
+candidates = [
+    os.path.join(base_dir, '..', 'data', 'multi_interval_stats.json'),
+    os.path.join(base_dir, 'multi_interval_stats.json'),
+    'multi_interval_stats.json'
+]
+json_path = next((p for p in candidates if os.path.exists(p)), None)
 
-if not os.path.exists(json_path):
-    print("[!] File 'multi_interval_stats.json' not found. Run `collect_stats.bat` first.")
+if not json_path:
+    print("[!] File 'multi_interval_stats.json' not found in data/ or current folder. Run `collect_stats.bat` first.")
     exit(1)
 
 with open(json_path, 'r', encoding='utf-8') as f:

@@ -163,8 +163,13 @@ Write-Host "`n>>> [6/6] Establishing Cryptographic Network Shield & Launcher..."
 & $ADB shell settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
 
 # Install Olauncher if present
-$launcherApk = Join-Path $PSScriptRoot "Olauncher.apk"
-if (-not (Test-Path $launcherApk)) {
+$launcherCandidates = @(
+    (Join-Path $PSScriptRoot "..\Olauncher.apk"),
+    (Join-Path $PSScriptRoot "Olauncher.apk")
+)
+$launcherApk = $launcherCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+if (-not $launcherApk) {
+    $launcherApk = Join-Path $PSScriptRoot "Olauncher.apk"
     Write-Host "    [i] Olauncher.apk not found locally. Fetching latest release from GitHub..." -ForegroundColor Cyan
     try {
         $release = Invoke-RestMethod -Uri "https://api.github.com/repos/tanujnotes/Olauncher/releases/latest" -Headers @{"User-Agent"="Mozilla/5.0"}

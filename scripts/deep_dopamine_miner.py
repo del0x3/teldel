@@ -131,7 +131,8 @@ deep_data = {
     'longest_binges': sorted(binge_sessions, key=lambda x: x['duration_sec'], reverse=True)[:10]
 }
 
-out_file = os.path.join(base_dir, 'deep_dopamine_analysis.json')
+data_dir = os.path.join(base_dir, '..', 'data') if os.path.exists(os.path.join(base_dir, '..', 'data')) else base_dir
+out_file = os.path.join(data_dir, 'deep_dopamine_analysis.json')
 with open(out_file, 'w', encoding='utf-8') as f:
     json.dump(deep_data, f, indent=2, default=str)
 

@@ -78,7 +78,8 @@ for p in sorted_pkgs[:50]:
 
 print(f"\nTotal Recorded App Screen Time: {total_phone_seconds / 3600.0:.1f} hours ({total_phone_seconds / 86400.0:.1f} full days)")
 
-out_json = os.path.join(base_dir, 'parsed_stats.json')
+data_dir = os.path.join(base_dir, '..', 'data') if os.path.exists(os.path.join(base_dir, '..', 'data')) else base_dir
+out_json = os.path.join(data_dir, 'parsed_stats.json')
 with open(out_json, 'w', encoding='utf-8') as f:
     json.dump(sorted_pkgs, f, indent=2)
 

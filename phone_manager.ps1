@@ -217,10 +217,13 @@ while ($running) {
         "7" {
             Clear-Host
             Write-Host "=== Opening Interactive Reports & Dashboards ===" -ForegroundColor Cyan
-            $reportPath = Join-Path $PSScriptRoot "step_by_step_transformation.html"
+            $reportPath = Join-Path $PSScriptRoot "docs\index.html"
+            if (-not (Test-Path $reportPath)) {
+                $reportPath = Join-Path $PSScriptRoot "docs\step_by_step_transformation.html"
+            }
             if (Test-Path $reportPath) {
                 Start-Process $reportPath
-                Write-Host "`n[+] Report opened in your default web browser!" -ForegroundColor Green
+                Write-Host "`n[+] Portal opened in your default web browser!" -ForegroundColor Green
             } else {
                 Write-Host "[!] Report file not found: $reportPath" -ForegroundColor Yellow
             }

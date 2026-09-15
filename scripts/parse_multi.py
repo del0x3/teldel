@@ -68,7 +68,8 @@ print("INTERVALS SUMMARY:")
 for tr, data in results.items():
     print(f"[{tr}] -> Total screen time: {data['total_hours']:.1f} hours, {len(data['packages'])} active apps")
 
-out_json = os.path.join(base_dir, 'multi_interval_stats.json')
+data_dir = os.path.join(base_dir, '..', 'data') if os.path.exists(os.path.join(base_dir, '..', 'data')) else base_dir
+out_json = os.path.join(data_dir, 'multi_interval_stats.json')
 with open(out_json, 'w', encoding='utf-8') as f:
     json.dump(results, f, indent=2)
 

@@ -2,10 +2,15 @@ import os
 import json
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-json_path = os.path.join(base_dir, 'deep_dopamine_analysis.json')
+candidates = [
+    os.path.join(base_dir, '..', 'data', 'deep_dopamine_analysis.json'),
+    os.path.join(base_dir, 'deep_dopamine_analysis.json'),
+    'deep_dopamine_analysis.json'
+]
+json_path = next((p for p in candidates if os.path.exists(p)), None)
 
-if not os.path.exists(json_path):
-    print(f"[!] File '{json_path}' not found.")
+if not json_path:
+    print("[!] File 'deep_dopamine_analysis.json' not found in data/ or current folder.")
     print("[*] Collect statistics first: run `collect_stats.bat` (or `python collect_stats.py`).")
     exit(1)
 
