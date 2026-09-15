@@ -1,0 +1,3 @@
+# Android Productivity Terminal & Dopamine Detox Suite
+# All Python scripts utilize Python standard libraries (re, json, zipfile, urllib, subprocess).
+# No external pip dependencies required. Python 3.8+ recommended.
