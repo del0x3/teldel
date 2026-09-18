@@ -41,6 +41,7 @@ if (-not $ADB) {
     Write-Error "adb.exe was not found. Please install Android platform-tools or specify -AdbPath."
     exit 1
 }
+& $ADB start-server 2>$null | Out-Null
 
 Clear-Host
 Write-Host "==========================================================================" -ForegroundColor Cyan
@@ -54,10 +55,18 @@ Write-Host " - Restores standard 1.0x animations, haptics, sounds, badges & time
 Write-Host " - Restores APK installation permissions & default network DNS" -ForegroundColor Gray
 Write-Host ""
 
-$devs = (& $ADB devices | Out-String)
+$devs = (& $ADB devices 2>$null | Out-String)
 if ($devs -notmatch "\tdevice") {
-    Write-Host "[!] No authorized ADB device detected." -ForegroundColor Red
-    Write-Host "Please connect your phone, enable USB Debugging, and authorize this computer." -ForegroundColor Yellow
+    $guardian = Join-Path $PSScriptRoot "wifi_guardian.ps1"
+    if (Test-Path $guardian) {
+        Write-Host "[*] No USB device detected. Searching and connecting via Wi-Fi Guardian..." -ForegroundColor Cyan
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $guardian -Action connect 2>$null | Out-Null
+        $devs = (& $ADB devices 2>$null | Out-String)
+    }
+}
+if ($devs -notmatch "\tdevice") {
+    Write-Host "[!] No authorized ADB device detected (USB or Wi-Fi)." -ForegroundColor Red
+    Write-Host "Please connect your phone or enable Wireless Debugging." -ForegroundColor Yellow
     exit 1
 }
 
@@ -125,10 +134,11 @@ settings put global private_dns_mode opportunistic 2>/dev/null
 # Execute the policy natively on device (sub-second performance)
 $scriptFile = Join-Path $PSScriptRoot "teldel_stock.sh"
 if (Test-Path $scriptFile) {
-    & $ADB push $scriptFile /data/local/tmp/teldel_stock.sh 2>&1 | Out-Null
-    & $ADB shell "sh /data/local/tmp/teldel_stock.sh" 2>&1 | Out-Null
+    & $ADB push $scriptFile /data/local/tmp/teldel_stock.sh 2>$null | Out-Null
+    & $ADB shell "chmod 755 /data/local/tmp/teldel_stock.sh" 2>$null | Out-Null
+    $res = (& $ADB shell "sh /data/local/tmp/teldel_stock.sh" 2>$null | Out-String)
 } else {
-    $batchScript | & $ADB shell 2>&1 | Out-Null
+    $batchScript | & $ADB shell 2>$null | Out-Null
 }
 
 $sw.Stop()

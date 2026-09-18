@@ -43,20 +43,30 @@ The device retains all critical real-world utilities:
 ```text
 teldel/
 ├── phone_manager.bat       # Master Windows CLI runner (double-click to start)
-├── phone_manager.ps1       # Interactive device management console
+├── phone_manager.ps1       # Interactive device management console (zero-warning)
 ├── connect_wireless.bat    # 1-click dynamic wireless ADB connection
 ├── disconnect_wireless.bat # 1-click wireless disconnect & port teardown
 ├── requirements.txt        # Environment spec (uses Python standard library only)
 ├── LICENSE                 # MIT License
-├── README.md               # Technical documentation
+├── README.md               # Comprehensive technical documentation
+│
+├── bin/                    # Pre-compiled binaries
+│   └── TeldelSwitcher.apk  # Native autonomous switcher (37 KB, 0 permissions prompt)
+│
+├── app/                    # Native Android Switcher application source code
+│   └── src/main/
+│       ├── AndroidManifest.xml # Dual-entry launcher points (Stock & Minimal activities)
+│       ├── java/               # Dual-engine controller (WRITE_SECURE_SETTINGS + Shizuku IPC)
+│       └── res/                # Vector icons and strings for app drawer
 │
 ├── scripts/                # Modular automation engines
-│   ├── apply_minimalism.bat   # 1-click full 18-step transformation (Windows)
-│   ├── apply_minimalism.ps1   # PowerShell automation wrapper
-│   ├── teldel_minimal.sh      # Native on-device POSIX shell engine (cross-platform / Shizuku)
+│   ├── apply_minimalism.bat   # 1-click full 18-step transformation (with auto-rollback)
+│   ├── apply_minimalism.ps1   # PowerShell automation wrapper with transactional recovery
+│   ├── teldel_minimal.sh      # Transaction-safe POSIX shell engine (cross-platform / Shizuku)
 │   ├── restore_defaults.bat   # 1-click stock restoration (Windows)
-│   ├── restore_defaults.ps1   # PowerShell rollback wrapper
+│   ├── restore_defaults.ps1   # PowerShell rollback wrapper (sub-second performance)
 │   ├── teldel_stock.sh        # Native on-device POSIX rollback engine (cross-platform / Shizuku)
+│   ├── build_switcher.ps1     # 0-warning compilation & deployment pipeline (aapt2 + d8)
 │   ├── wifi_guardian.ps1      # Dynamic mDNS & ARP auto-discovery watchdog
 │   ├── collect_stats.bat      # 1-click usage & dopamine data collection
 │   ├── collect_stats.py       # Usagestats parser & dopamine loop analyzer
@@ -130,21 +140,48 @@ Manage the device wirelessly over Wi-Fi without a physical USB cable:
 
 ---
 
-### 4. Emergency Failsafe ("Аварийный тумблер" без ПК и кабеля)
-If your computer is turned off, there is no Wi-Fi, and no USB cable available, but you urgently need to restore full color or system functionality:
+---
 
-- **Level 1 — Instant Hardware Button Toggle (Zero Software Required)**:
-  - Samsung One UI includes a native hardware bypass: **Direct Access** (`Volume Up + Side Key` pressed simultaneously).
+### 4. Autonomous On-Device Switcher App (`Teldel Switcher`)
+
+For instant switching directly on the phone without a computer, cable, or widgets, `teldel` includes a custom lightweight native Android app:
+
+- **App Drawer Native Launcher**: Visible directly in Olauncher search or One UI app list:
+  - `Switch to Stock` (One UI icon): Instantly restores color, disables grayscale/Extra Dim, and switches home back to One UI.
+  - `Switch to Minimal` (Minimalist icon): Instantly activates monochrome, Extra Dim, zero animations, and switches home to Olauncher.
+- **Dual-Engine Autonomous Architecture**:
+  - **Engine A — Direct System Permissions (`WRITE_SECURE_SETTINGS`)**: Operates 100% autonomously without requiring Shizuku or PC. Flips grayscale, Daltonizer, Extra Dim, and window animation scales instantly via native ContentResolver API. Completely reboot-proof — no need to re-pair or re-authenticate after restarting the phone.
+  - **Engine B — Shizuku Privileged IPC (`moe.shizuku.privileged.api`)**: If Shizuku is active, seamlessly executes deep package freezes and atomic `android.app.role.HOME` role changes in the background.
+- **Zero Configuration**: Pre-compiled (`bin/TeldelSwitcher.apk`, 37 KB). Installed and authorized in one click via `scripts/build_switcher.ps1`.
+
+---
+
+### 5. Transactional Safety & Automatic Rollback Layer
+
+To ensure the phone is never left in a corrupted or semi-configured state, the entire transformation pipeline is wrapped in an atomic transactional safety layer:
+
+- **Pre-Flight Validation**: Before applying any changes, `teldel_minimal.sh` checks package integrity (e.g., verifying `app.olauncher` exists). If missing, execution halts before altering any system settings.
+- **Post-Flight Health Verification**: After applying policies, the engine queries the active home role (`cmd role get-role-holders android.app.role.HOME`). If the target launcher is not active, a rollback is automatically triggered.
+- **POSIX Auto-Rollback Handler**: In `teldel_minimal.sh`, any assertion failure triggers `rollback_on_failure()`, invoking `/data/local/tmp/teldel_stock.sh` immediately.
+- **PowerShell Exception Guard**: `apply_minimalism.ps1` wraps execution in a robust `try/catch` block. On any non-zero exit code or anomalous response, it automatically invokes `restore_defaults.ps1 -Unattended`, safely restoring all stock One UI defaults without requiring manual user intervention.
+
+---
+
+### 6. Emergency Offline Failsafe ("Аварийный тумблер" без ПК и кабеля)
+If your computer is turned off, there is no Wi-Fi, and no USB cable available:
+
+- **Level 1 — Native Hardware Key Bypass (Zero Software Required)**:
+  - Samsung One UI native hardware shortcut: **Direct Access** (`Volume Up + Side Key` pressed simultaneously).
   - Configured via **Settings** > **Accessibility** > **Advanced settings** > **Side and Volume up keys** -> toggle **Color adjustment** / **Extra dim**.
-  - Restores 100% full-color display instantly with zero PC, zero root, and zero internet.
-- **Level 2 — Autonomous On-Device POSIX Execution (Shizuku + Rish)**:
-  - Shizuku runs an unprivileged ADB shell service directly on the phone (`PID: 20526`, UID 2000).
-  - Wrapper scripts deployed to device storage:
-    - `/data/local/tmp/run_stock.sh` -> executes complete stock rollback on-device.
-    - `/data/local/tmp/run_minimal.sh` -> executes 18-step minimalism lockdown on-device.
-  - Can be triggered via termux, tasker, or Shizuku runner shortcuts offline.
-- **Level 3 — Guaranteed Safety Perimeter**:
-  - Critical life utilities are never uninstalled or blocked: Phone Calls, SMS, Banking (Monobank, Privat24), Camera, Navigation, and 2FA Authenticators remain permanently operational. You can never lock yourself out of essential services.
+  - Instantly toggles full-color screen in 0 seconds with zero dependencies.
+- **Level 2 — On-Device Switcher App**:
+  - Simply open Olauncher or app search, tap `Switch to Stock` to return to One UI.
+- **Level 3 — Autonomous On-Device Shell (Shizuku + Rish)**:
+  - Shizuku service runs locally on device storage:
+    - `/data/local/tmp/run_stock.sh` -> restores complete stock state on-device.
+    - `/data/local/tmp/run_minimal.sh` -> executes minimalism lockdown on-device.
+- **Level 4 — Guaranteed Safety Perimeter**:
+  - Essential phone calls, SMS, Banking (Monobank, Privat24), Camera, Transit, and 2FA Authenticators are strictly whitelisted and never disabled. You can never be locked out of vital tools.
 
 ---
 

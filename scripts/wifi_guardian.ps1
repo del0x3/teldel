@@ -34,6 +34,9 @@ function Resolve-Adb {
 }
 
 $ADB = Resolve-Adb
+if ($ADB) {
+    & $ADB start-server 2>$null | Out-Null
+}
 $cfgFile = Join-Path $PSScriptRoot "..\data\wireless_config.json"
 
 function Find-DeviceEndpoint {
@@ -105,7 +108,7 @@ switch ($Action) {
     }
     "connect" {
         Write-Host "[+] Resolving device and connecting wirelessly to $endpoint..." -ForegroundColor Cyan
-        $res = (& $ADB connect $endpoint 2>&1 | Out-String).Trim()
+        $res = (& $ADB connect $endpoint 2>$null | Out-String).Trim()
         Write-Host $res -ForegroundColor Green
         
         $devs = (& $ADB devices | Out-String)

@@ -5,7 +5,7 @@
 
 [CmdletBinding()]
 param(
-    [switch]$Install = $true
+    [string]$Install = "true"
 )
 
 $ErrorActionPreference = "Continue"
@@ -56,7 +56,7 @@ $jarFiles = Get-ChildItem "$ROOT_DIR\build\shizuku_jars\*.jar" | Select-Object -
 $classpath = "$PLATFORM_JAR;" + ($jarFiles -join ";")
 $javaSources = Get-ChildItem "$APP_DIR\src\main\java" -Recurse -Filter *.java | Select-Object -ExpandProperty FullName
 
-& $JAVAC -source 8 -target 8 -cp $classpath -d "$BUILD_DIR\classes" $javaSources
+& $JAVAC -Xlint:-options -source 8 -target 8 -cp $classpath -d "$BUILD_DIR\classes" $javaSources
 
 # 4. Dexing with d8
 Write-Host "[4/6] Dexing bytecode with d8..." -ForegroundColor Cyan
@@ -89,12 +89,13 @@ $finalApk = "$ROOT_DIR\bin\TeldelSwitcher.apk"
 
 Write-Host "[SUCCESS] Built $finalApk!" -ForegroundColor Green
 
-if ($Install) {
+if ($Install -eq "true" -or $Install -eq "1") {
     Write-Host "[+] Deploying Teldel Switcher to Android device..." -ForegroundColor Cyan
     & adb.exe connect 192.168.0.108:5555 2>$null | Out-Null
     & adb.exe install -r "$finalApk" | Out-Host
-    Write-Host "[+] Granting Shizuku API permissions..." -ForegroundColor Cyan
+    Write-Host "[+] Granting Shizuku & System permissions..." -ForegroundColor Cyan
     & adb.exe shell "pm grant com.teldel.switcher moe.shizuku.manager.permission.API_V23" 2>$null | Out-Null
     & adb.exe shell "cmd appops set com.teldel.switcher moe.shizuku.manager.permission.API_V23 allow" 2>$null | Out-Null
+    & adb.exe shell "pm grant com.teldel.switcher android.permission.WRITE_SECURE_SETTINGS" 2>$null | Out-Null
     Write-Host "[SUCCESS] Installed and authorized com.teldel.switcher!" -ForegroundColor Green
 }

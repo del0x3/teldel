@@ -4,8 +4,7 @@
 # ==============================================================================
 
 # 1. Restore applications & application stores
-# Fast-path: check enabled packages and restore only what is missing/disabled
-ENABLED=$(pm list packages -e)
+ENABLED=$(pm list packages -e 2>/dev/null)
 
 for pkg in \
     com.android.vending \
@@ -22,7 +21,7 @@ for pkg in \
 do
     case "$ENABLED" in
         *package:$pkg*)
-            ;; # Already enabled, skip instantly
+            ;; # Already enabled
         *)
             cmd package install-existing "$pkg" 2>/dev/null
             pm enable "$pkg" 2>/dev/null
@@ -31,7 +30,7 @@ do
 done
 
 # 2. Restore installation & sideloading permissions
-settings put secure install_non_market_apps 1
+settings put secure install_non_market_apps 1 2>/dev/null
 cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES allow 2>/dev/null
 cmd appops set com.discord REQUEST_INSTALL_PACKAGES allow 2>/dev/null
 cmd appops set com.whatsapp REQUEST_INSTALL_PACKAGES allow 2>/dev/null
@@ -44,34 +43,35 @@ cmd appops set com.sec.android.app.samsungapps REQUEST_INSTALL_PACKAGES allow 2>
 cmd appops set com.android.vending REQUEST_INSTALL_PACKAGES allow 2>/dev/null
 
 # 3. Restore full-color display (Samsung One UI + AOSP daltonizer + Extra Dim)
-settings put system greyscale_mode 0
-settings put secure accessibility_display_daltonizer_enabled 0
-settings put secure accessibility_display_daltonizer 0
-settings put secure reduce_bright_colors_activated 0
+settings put system greyscale_mode 0 2>/dev/null
+settings put secure accessibility_display_daltonizer_enabled 0 2>/dev/null
+settings put secure accessibility_display_daltonizer 0 2>/dev/null
+settings put secure reduce_bright_colors_activated 0 2>/dev/null
 
-# 4. Restore stock Samsung One UI launcher (Atomic Role Manager Switch - Keep Olauncher warm)
+# 4. Restore stock Samsung One UI launcher
 cmd role add-role-holder --user 0 android.app.role.HOME com.sec.android.app.launcher 2>/dev/null
 input keyevent 3 2>/dev/null
 
 # 5. Restore animations & hardware settings
-settings put global window_animation_scale 1.0
-settings put global transition_animation_scale 1.0
-settings put global animator_duration_scale 1.0
-settings put global ram_expand_size 4
-settings put global wifi_scan_always_enabled 1
-settings put global ble_scan_always_enabled 1
+settings put global window_animation_scale 1.0 2>/dev/null
+settings put global transition_animation_scale 1.0 2>/dev/null
+settings put global animator_duration_scale 1.0 2>/dev/null
+settings put global ram_expand_size 4 2>/dev/null
+settings put global wifi_scan_always_enabled 1 2>/dev/null
+settings put global ble_scan_always_enabled 1 2>/dev/null
 
 # 6. Restore sensory feedback, notification badges, banners & screen timeout
-settings put system haptic_feedback_enabled 1
-settings put system sound_effects_enabled 1
-settings put system lockscreen_sounds_enabled 1
-settings put secure notification_badging 1
-settings put system badge_app_icon_type 0
-settings put global heads_up_notifications_enabled 1
-settings put system screen_off_timeout 60000
+settings put system haptic_feedback_enabled 1 2>/dev/null
+settings put system sound_effects_enabled 1 2>/dev/null
+settings put system lockscreen_sounds_enabled 1 2>/dev/null
+settings put secure notification_badging 1 2>/dev/null
+settings put system badge_app_icon_type 0 2>/dev/null
+settings put global heads_up_notifications_enabled 1 2>/dev/null
+settings put system screen_off_timeout 60000 2>/dev/null
 
 # 7. Restore network DNS (opportunistic DHCP default)
 settings delete global private_dns_specifier 2>/dev/null
 settings put global private_dns_mode opportunistic 2>/dev/null
 
 echo "TELDEL_STOCK_APPLIED"
+exit 0

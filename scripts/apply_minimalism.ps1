@@ -40,6 +40,7 @@ if (-not $ADB) {
     Write-Error "adb.exe was not found. Please install Android platform-tools or specify -AdbPath."
     exit 1
 }
+& $ADB start-server 2>$null | Out-Null
 
 Clear-Host
 Write-Host "==========================================================================" -ForegroundColor Cyan
@@ -49,10 +50,18 @@ Write-Host "This script transforms your connected device into a minimal terminal
 Write-Host "No root required. 100% reversible via restore_defaults.ps1." -ForegroundColor Green
 Write-Host ""
 
-$devs = (& $ADB devices | Out-String)
+$devs = (& $ADB devices 2>$null | Out-String)
 if ($devs -notmatch "\tdevice") {
-    Write-Host "[!] No authorized ADB device detected." -ForegroundColor Red
-    Write-Host "Please connect your phone, enable USB Debugging, and authorize this computer." -ForegroundColor Yellow
+    $guardian = Join-Path $PSScriptRoot "wifi_guardian.ps1"
+    if (Test-Path $guardian) {
+        Write-Host "[*] No USB device detected. Searching and connecting via Wi-Fi Guardian..." -ForegroundColor Cyan
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $guardian -Action connect 2>$null | Out-Null
+        $devs = (& $ADB devices 2>$null | Out-String)
+    }
+}
+if ($devs -notmatch "\tdevice") {
+    Write-Host "[!] No authorized ADB device detected (USB or Wi-Fi)." -ForegroundColor Red
+    Write-Host "Please connect your phone or enable Wireless Debugging." -ForegroundColor Yellow
     exit 1
 }
 
@@ -147,21 +156,46 @@ cmd role add-role-holder --user 0 android.app.role.HOME app.olauncher 2>/dev/nul
 input keyevent 3 2>/dev/null
 '@
 
-# Execute the policy natively on device (sub-second performance)
+# Execute the policy natively on device with transaction safety
 $scriptFile = Join-Path $PSScriptRoot "teldel_minimal.sh"
-if (Test-Path $scriptFile) {
-    & $ADB push $scriptFile /data/local/tmp/teldel_minimal.sh 2>&1 | Out-Null
-    & $ADB shell "sh /data/local/tmp/teldel_minimal.sh" 2>&1 | Out-Null
-} else {
-    $batchScript | & $ADB shell 2>&1 | Out-Null
+$stockFile = Join-Path $PSScriptRoot "teldel_stock.sh"
+
+try {
+    if (Test-Path $stockFile) {
+        & $ADB push $stockFile /data/local/tmp/teldel_stock.sh 2>$null | Out-Null
+        & $ADB shell "chmod 755 /data/local/tmp/teldel_stock.sh" 2>$null | Out-Null
+    }
+
+    if (Test-Path $scriptFile) {
+        & $ADB push $scriptFile /data/local/tmp/teldel_minimal.sh 2>$null | Out-Null
+        & $ADB shell "chmod 755 /data/local/tmp/teldel_minimal.sh" 2>$null | Out-Null
+        $res = (& $ADB shell "sh /data/local/tmp/teldel_minimal.sh" 2>$null | Out-String)
+    } else {
+        $res = ($batchScript | & $ADB shell 2>$null | Out-String)
+    }
+
+    if ($LASTEXITCODE -ne 0 -or $res -notmatch "TELDEL_MINIMAL_APPLIED") {
+        throw "Transformation engine reported error: $res"
+    }
+
+    $sw.Stop()
+    $elapsedMs = [math]::Round($sw.Elapsed.TotalMilliseconds, 1)
+    $elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 3)
+
+    Write-Host "`n==========================================================================" -ForegroundColor Cyan
+    Write-Host "   [SUCCESS] TRANSFORMATION COMPLETE IN $elapsedSeconds s ($elapsedMs ms)! " -ForegroundColor Green
+    Write-Host "==========================================================================" -ForegroundColor Cyan
+    Write-Host "Device converted to minimal terminal. To rollback, run restore_defaults.bat." -ForegroundColor Yellow
+    Write-Host ""
+} catch {
+    $sw.Stop()
+    Write-Host "`n==========================================================================" -ForegroundColor Red
+    Write-Host "   [CRITICAL] SETUP ANOMALY DETECTED: $_" -ForegroundColor Red
+    Write-Host "   [SAFETY LOCK] Auto-initiating rollback to full default stock One UI..." -ForegroundColor Yellow
+    Write-Host "==========================================================================" -ForegroundColor Red
+
+    & (Join-Path $PSScriptRoot "restore_defaults.ps1") -Unattended -AdbPath $ADB
+
+    Write-Host "`n[RECOVERED] Device safely restored to stock default settings. Zero corruption." -ForegroundColor Green
+    exit 1
 }
-
-$sw.Stop()
-$elapsedMs = [math]::Round($sw.Elapsed.TotalMilliseconds, 1)
-$elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 3)
-
-Write-Host "`n==========================================================================" -ForegroundColor Cyan
-Write-Host "   [SUCCESS] TRANSFORMATION COMPLETE IN $elapsedSeconds s ($elapsedMs ms)! " -ForegroundColor Green
-Write-Host "==========================================================================" -ForegroundColor Cyan
-Write-Host "Device converted to minimal terminal. To rollback, run restore_defaults.bat." -ForegroundColor Yellow
-Write-Host ""

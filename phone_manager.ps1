@@ -106,7 +106,8 @@ function Get-DeviceStatus {
 grey=$(settings get system greyscale_mode 2>/dev/null)
 home=$(cmd role get-role-holders android.app.role.HOME 2>/dev/null)
 vending=$(pm list packages -e com.android.vending 2>/dev/null)
-bat=$(dumpsys battery 2>/dev/null | grep -o 'level: [0-9]*' | head -n 1 | cut -d ' ' -f 2)
+bat=$(cmd battery get -f level 2>/dev/null)
+[ -z "$bat" ] && bat=$(dumpsys battery 2>/dev/null | grep -E '^[[:space:]]*level:' | awk '{print $2}')
 dns=$(settings get global private_dns_mode 2>/dev/null)
 wlan_ip=$(ip -4 addr show wlan0 2>/dev/null | grep -o 'inet [0-9.]*' | cut -d ' ' -f 2)
 echo "$grey|$home|$vending|$bat|$dns|$wlan_ip"
