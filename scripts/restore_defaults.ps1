@@ -76,51 +76,33 @@ if (-not $Unattended) {
 Write-Host "`n>>> Executing high-speed batched restoration payload..." -ForegroundColor Cyan
 $sw = [System.Diagnostics.Stopwatch]::StartNew()
 
-# Construct single-stream batched shell script (zero Windows process-spawn overhead)
+# Construct single-stream batched shell script
 $batchScript = @'
-# 1. Restore applications & application stores
-cmd package install-existing com.android.vending
-pm enable com.android.vending
-cmd package install-existing com.sec.android.app.samsungapps
-pm enable com.sec.android.app.samsungapps
-cmd package install-existing com.android.chrome
-pm enable com.android.chrome
-pm enable com.sec.android.app.chromecustomizations
-cmd package install-existing com.google.android.youtube
-pm enable com.google.android.youtube
-cmd package install-existing com.google.android.googlequicksearchbox
-pm enable com.google.android.googlequicksearchbox
-pm enable com.samsung.android.video
-pm enable com.android.htmlviewer
-pm enable com.android.vpndialogs
-pm enable com.sec.android.easyMover
-pm enable com.samsung.knox.securefolder
+DISABLED=$(pm list packages -d)
+for pkg in com.android.vending com.sec.android.app.samsungapps com.android.chrome com.sec.android.app.chromecustomizations com.google.android.youtube com.google.android.googlequicksearchbox com.samsung.android.video com.android.htmlviewer com.android.vpndialogs com.sec.android.easyMover com.samsung.knox.securefolder; do
+    case "$DISABLED" in *package:$pkg*) cmd package install-existing "$pkg" 2>/dev/null; pm enable "$pkg" 2>/dev/null ;; esac
+done
 
-# 2. Restore installation & sideloading permissions
 settings put secure install_non_market_apps 1
-cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES allow
-cmd appops set com.discord REQUEST_INSTALL_PACKAGES allow
-cmd appops set com.whatsapp REQUEST_INSTALL_PACKAGES allow
-cmd appops set org.thoughtcrime.securesms REQUEST_INSTALL_PACKAGES allow
-cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES allow
-cmd appops set com.google.android.apps.docs REQUEST_INSTALL_PACKAGES allow
-cmd appops set com.microsoft.skydrive REQUEST_INSTALL_PACKAGES allow
-cmd appops set com.android.chrome REQUEST_INSTALL_PACKAGES allow
-cmd appops set com.sec.android.app.samsungapps REQUEST_INSTALL_PACKAGES allow
-cmd appops set com.android.vending REQUEST_INSTALL_PACKAGES allow
+cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES allow 2>/dev/null
+cmd appops set com.discord REQUEST_INSTALL_PACKAGES allow 2>/dev/null
+cmd appops set com.whatsapp REQUEST_INSTALL_PACKAGES allow 2>/dev/null
+cmd appops set org.thoughtcrime.securesms REQUEST_INSTALL_PACKAGES allow 2>/dev/null
+cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES allow 2>/dev/null
+cmd appops set com.google.android.apps.docs REQUEST_INSTALL_PACKAGES allow 2>/dev/null
+cmd appops set com.microsoft.skydrive REQUEST_INSTALL_PACKAGES allow 2>/dev/null
+cmd appops set com.android.chrome REQUEST_INSTALL_PACKAGES allow 2>/dev/null
+cmd appops set com.sec.android.app.samsungapps REQUEST_INSTALL_PACKAGES allow 2>/dev/null
+cmd appops set com.android.vending REQUEST_INSTALL_PACKAGES allow 2>/dev/null
 
-# 3. Restore full-color display (Samsung One UI + AOSP daltonizer + Extra Dim)
 settings put system greyscale_mode 0
 settings put secure accessibility_display_daltonizer_enabled 0
 settings put secure accessibility_display_daltonizer 0
 settings put secure reduce_bright_colors_activated 0
 
-# 4. Restore stock Samsung One UI launcher & notification listeners
-cmd package set-home-activity com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity
-pm disable-user --user 0 app.olauncher
-am start -a android.intent.action.MAIN -c android.intent.category.HOME
+cmd role add-role-holder --user 0 android.app.role.HOME com.sec.android.app.launcher 2>/dev/null
+input keyevent 3 2>/dev/null
 
-# 5. Restore animations & hardware settings
 settings put global window_animation_scale 1.0
 settings put global transition_animation_scale 1.0
 settings put global animator_duration_scale 1.0
@@ -128,32 +110,33 @@ settings put global ram_expand_size 4
 settings put global wifi_scan_always_enabled 1
 settings put global ble_scan_always_enabled 1
 
-# 6. Restore sensory feedback, notification badges & screen timeout
 settings put system haptic_feedback_enabled 1
 settings put system sound_effects_enabled 1
 settings put system lockscreen_sounds_enabled 1
 settings put secure notification_badging 1
 settings put system badge_app_icon_type 0
+settings put global heads_up_notifications_enabled 1
 settings put system screen_off_timeout 60000
 
-# 7. Restore network DNS (opportunistic DHCP default)
-settings delete global private_dns_specifier
-settings put global private_dns_mode opportunistic
+settings delete global private_dns_specifier 2>/dev/null
+settings put global private_dns_mode opportunistic 2>/dev/null
 '@
 
-# Pipe the entire batch payload into a single adb shell process
+# Execute the policy natively on device (sub-second performance)
 $scriptFile = Join-Path $PSScriptRoot "teldel_stock.sh"
 if (Test-Path $scriptFile) {
-    Get-Content $scriptFile | & $ADB shell 2>&1 | Out-Null
+    & $ADB push $scriptFile /data/local/tmp/teldel_stock.sh 2>&1 | Out-Null
+    & $ADB shell "sh /data/local/tmp/teldel_stock.sh" 2>&1 | Out-Null
 } else {
     $batchScript | & $ADB shell 2>&1 | Out-Null
 }
 
 $sw.Stop()
-$elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 2)
+$elapsedMs = [math]::Round($sw.Elapsed.TotalMilliseconds, 1)
+$elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 3)
 
 Write-Host "`n==========================================================================" -ForegroundColor Cyan
-Write-Host "   [SUCCESS] SYSTEM RESTORED TO STOCK IN $elapsedSeconds SECONDS!         " -ForegroundColor Green
+Write-Host "   [SUCCESS] SYSTEM RESTORED TO STOCK IN $elapsedSeconds s ($elapsedMs ms)! " -ForegroundColor Green
 Write-Host "==========================================================================" -ForegroundColor Cyan
 Write-Host "All stock One UI apps, stores, colorful screen, launcher, badges & DNS restored." -ForegroundColor Yellow
 Write-Host ""

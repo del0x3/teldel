@@ -1,25 +1,32 @@
 #!/system/bin/sh
 # ==============================================================================
-# teldel - Stock One UI Profile (On-Device Native Shell Engine)
+# teldel - Stock One UI Profile (Autonomous High-Speed Native Engine)
 # ==============================================================================
 
 # 1. Restore applications & application stores
-cmd package install-existing com.android.vending 2>/dev/null
-pm enable com.android.vending 2>/dev/null
-cmd package install-existing com.sec.android.app.samsungapps 2>/dev/null
-pm enable com.sec.android.app.samsungapps 2>/dev/null
-cmd package install-existing com.android.chrome 2>/dev/null
-pm enable com.android.chrome 2>/dev/null
-pm enable com.sec.android.app.chromecustomizations 2>/dev/null
-cmd package install-existing com.google.android.youtube 2>/dev/null
-pm enable com.google.android.youtube 2>/dev/null
-cmd package install-existing com.google.android.googlequicksearchbox 2>/dev/null
-pm enable com.google.android.googlequicksearchbox 2>/dev/null
-pm enable com.samsung.android.video 2>/dev/null
-pm enable com.android.htmlviewer 2>/dev/null
-pm enable com.android.vpndialogs 2>/dev/null
-pm enable com.sec.android.easyMover 2>/dev/null
-pm enable com.samsung.knox.securefolder 2>/dev/null
+# Fast-path: query disabled packages once to restore only what is disabled
+DISABLED=$(pm list packages -d)
+
+for pkg in \
+    com.android.vending \
+    com.sec.android.app.samsungapps \
+    com.android.chrome \
+    com.sec.android.app.chromecustomizations \
+    com.google.android.youtube \
+    com.google.android.googlequicksearchbox \
+    com.samsung.android.video \
+    com.android.htmlviewer \
+    com.android.vpndialogs \
+    com.sec.android.easyMover \
+    com.samsung.knox.securefolder
+do
+    case "$DISABLED" in
+        *package:$pkg*)
+            cmd package install-existing "$pkg" 2>/dev/null
+            pm enable "$pkg" 2>/dev/null
+            ;;
+    esac
+done
 
 # 2. Restore installation & sideloading permissions
 settings put secure install_non_market_apps 1
@@ -40,11 +47,9 @@ settings put secure accessibility_display_daltonizer_enabled 0
 settings put secure accessibility_display_daltonizer 0
 settings put secure reduce_bright_colors_activated 0
 
-# 4. Restore stock Samsung One UI launcher & disable Olauncher
+# 4. Restore stock Samsung One UI launcher (Atomic Role Manager Switch - Keep Olauncher warm)
 cmd role add-role-holder --user 0 android.app.role.HOME com.sec.android.app.launcher 2>/dev/null
-cmd package set-home-activity com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity 2>/dev/null
-pm disable-user --user 0 app.olauncher 2>/dev/null
-am start -a android.intent.action.MAIN -c android.intent.category.HOME 2>/dev/null
+input keyevent 3 2>/dev/null
 
 # 5. Restore animations & hardware settings
 settings put global window_animation_scale 1.0
@@ -65,6 +70,6 @@ settings put system screen_off_timeout 60000
 
 # 7. Restore network DNS (opportunistic DHCP default)
 settings delete global private_dns_specifier 2>/dev/null
-settings put global private_dns_mode opportunistic
+settings put global private_dns_mode opportunistic 2>/dev/null
 
 echo "TELDEL_STOCK_APPLIED"
