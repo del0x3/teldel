@@ -72,7 +72,19 @@ public abstract class BaseSwitcherActivity extends Activity {
                 }
             };
             Shizuku.addBinderReceivedListenerSticky(listener);
-            handler.postDelayed(this::cleanupAndExit, 1500);
+            handler.postDelayed(() -> {
+                if (!executedShizuku) {
+                    Toast.makeText(getApplicationContext(), "⚠️ Для включения Chrome/Play Store запустите Shizuku", Toast.LENGTH_LONG).show();
+                    try {
+                        Intent intent = getPackageManager().getLaunchIntentForPackage("moe.shizuku.privileged.api");
+                        if (intent != null) {
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    } catch (Throwable ignored) {}
+                }
+                cleanupAndExit();
+            }, 1500);
         }
     }
 

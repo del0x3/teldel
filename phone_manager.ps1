@@ -87,6 +87,20 @@ function Resolve-WirelessDevice {
     return $false
 }
 
+function Ensure-ShizukuServer {
+    if (-not $ADB) { return }
+    $running = (& $ADB shell "ps -A | grep -c shizuku_server" 2>$null | Out-String).Trim()
+    if ($running -eq "0" -or -not $running) {
+        $starterLocal = Join-Path $PSScriptRoot "scripts\shizuku_starter"
+        if (Test-Path $starterLocal) {
+            & $ADB push $starterLocal /data/local/tmp/shizuku_starter 2>$null | Out-Null
+            & $ADB shell "chmod 755 /data/local/tmp/shizuku_starter; /data/local/tmp/shizuku_starter" 2>$null | Out-Null
+        } else {
+            & $ADB shell "if [ -f /data/local/tmp/shizuku_starter ]; then /data/local/tmp/shizuku_starter; fi" 2>$null | Out-Null
+        }
+    }
+}
+
 function Get-DeviceStatus {
     $devsText = (& $ADB devices 2>$null | Out-String)
     
@@ -99,6 +113,9 @@ function Get-DeviceStatus {
     if ($devsText -notmatch "\tdevice") {
         return @{ Connected = $false }
     }
+    
+    # Keep Shizuku privileged daemon active on device
+    Ensure-ShizukuServer
     
     $isWireless = ($devsText -match ":[0-9]{4,5}\tdevice")
     

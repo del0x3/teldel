@@ -74,6 +74,13 @@ $deviceModel = (& $ADB shell getprop ro.product.model).Trim()
 Write-Host "[+] Connected Device: $deviceModel" -ForegroundColor Green
 Write-Host ""
 
+# Ensure on-device Shizuku daemon is armed
+$starterLocal = Join-Path $PSScriptRoot "shizuku_starter"
+if (Test-Path $starterLocal) {
+    & $ADB push $starterLocal /data/local/tmp/shizuku_starter 2>$null | Out-Null
+    & $ADB shell "chmod 755 /data/local/tmp/shizuku_starter; /data/local/tmp/shizuku_starter" 2>$null | Out-Null
+}
+
 if (-not $Unattended) {
     $confirm = Read-Host "Are you sure you want to revert all system restrictions to stock? (Y/N)"
     if ($confirm -notmatch "^[yY]") {
