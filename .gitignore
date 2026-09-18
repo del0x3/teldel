@@ -10,13 +10,17 @@ exit_input.txt
 *device_config.json
 
 # UI Automator XML dumps (contains personal screen text & contacts)
-*.xml
+*dump*.xml
 
-# Prebuilt binaries & archives
-*.apk
+# Build artifacts & keystores
+build/
+*.keystore
+
+# Prebuilt binaries & archives (keep repo APKs)
+scripts/*.apk
+*.zip
 platform-tools/
 platform-tools.zip
-*.zip
 
 # Python cache & virtual environments
 __pycache__/

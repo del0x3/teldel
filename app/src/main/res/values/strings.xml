@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Teldel Switcher</string>
+    <string name="switch_to_stock">Switch to Stock</string>
+    <string name="switch_to_minimal">Switch to Minimal</string>
+</resources>
