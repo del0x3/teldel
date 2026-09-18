@@ -108,8 +108,13 @@ try {
 
     foreach ($pkg in $allPkgs) {
         if (-not $instSet.Contains($pkg)) {
-            & $ADB shell cmd package install-existing $pkg 2>$null | Out-Null
-            & $ADB shell pm enable $pkg 2>$null | Out-Null
+            $res = (& $ADB shell cmd package install-existing $pkg 2>&1 | Out-String)
+            if ($res -match "NameNotFoundException|doesn't exist") {
+                # Third-party user app with orphaned data blocking Play Store: purge ghost lock
+                & $ADB shell pm uninstall $pkg 2>$null | Out-Null
+            } else {
+                & $ADB shell pm enable $pkg 2>$null | Out-Null
+            }
         }
     }
 } catch {
