@@ -159,10 +159,16 @@ Write-Host "`n>>> [5/6] Engaging Sensory Detox ('Gray Stone' Mode)..." -Foregrou
 & $ADB shell settings put system haptic_feedback_enabled 0
 & $ADB shell settings put system sound_effects_enabled 0
 & $ADB shell settings put system lockscreen_sounds_enabled 0
-# Focus guard: Disable notification badges & set 30s screen timeout
+# Focus guard: Disable notification badges & strip badge listener
 & $ADB shell settings put secure notification_badging 0
+& $ADB shell settings put system badge_app_icon_type 0
+$curListeners = (& $ADB shell settings get secure enabled_notification_listeners | Out-String).Trim()
+if ($curListeners -match "com\.sec\.android\.app\.launcher") {
+    $cleanListeners = ($curListeners -split ":" | Where-Object { $_ -notmatch "com\.sec\.android\.app\.launcher" }) -join ":"
+    & $ADB shell "settings put secure enabled_notification_listeners '$cleanListeners'"
+}
 & $ADB shell settings put system screen_off_timeout 30000
-Write-Host "    Done: Grayscale active, haptics muted, red badges removed, 30s timeout set." -ForegroundColor Green
+Write-Host "    Done: Grayscale active, haptics muted, red badges and listeners removed, 30s timeout set." -ForegroundColor Green
 
 Write-Host "`n>>> [6/6] Establishing Cryptographic Network Shield & Launcher..." -ForegroundColor Cyan
 # CleanBrowsing DoT family filter
