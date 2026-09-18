@@ -196,11 +196,11 @@ while ($running) {
                 & $ADB shell pm disable-user --user 0 com.android.htmlviewer
 
                 Write-Host "[2/7] Freezing application stores..." -ForegroundColor Yellow
-                & $ADB shell pm uninstall -k --user 0 com.android.vending
+                & $ADB shell pm disable-user --user 0 com.android.vending
                 & $ADB shell pm uninstall -k --user 0 com.sec.android.app.samsungapps
 
                 Write-Host "[3/7] Removing Termux backdoor..." -ForegroundColor Yellow
-                & $ADB shell pm uninstall -k --user 0 com.termux
+                & $ADB shell pm uninstall --user 0 com.termux
 
                 Write-Host "[4/7] Purging Knox Secure Folder (User 150)..." -ForegroundColor Yellow
                 & $ADB shell pm remove-user 150

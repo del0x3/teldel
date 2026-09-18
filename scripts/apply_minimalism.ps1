@@ -73,13 +73,19 @@ $distractions = @(
     "com.instagram.android",
     "com.linkedin.android",
     "com.glovo",
-    "ua.com.uklontaxi",
     "com.google.android.googlequicksearchbox"
 )
 foreach ($pkg in $distractions) {
-    & $ADB shell pm uninstall -k --user 0 $pkg 2>$null
+    $path = (& $ADB shell pm path $pkg 2>$null | Out-String)
+    if ($path -match "/data/app") {
+        # Third-party user app: disable cleanly instead of 'uninstall -k' to prevent corrupting PackageManager
+        & $ADB shell pm disable-user --user 0 $pkg 2>$null
+    } else {
+        # System app: uninstall for user 0 (cleanly restorable via install-existing)
+        & $ADB shell pm uninstall -k --user 0 $pkg 2>$null
+    }
 }
-Write-Host "    Done: Entertainment feeds & news tickers removed." -ForegroundColor Green
+Write-Host "    Done: Entertainment feeds & news tickers neutralized." -ForegroundColor Green
 
 Write-Host "`n>>> [2/6] Enforcing Zero-Browser & Store Lockdown..." -ForegroundColor Cyan
 & $ADB shell pm disable-user --user 0 com.android.chrome 2>$null
