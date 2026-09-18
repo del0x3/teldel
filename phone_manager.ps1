@@ -36,22 +36,64 @@ if ($ADB) {
     & $ADB start-server 2>$null | Out-Null
 }
 
+function Resolve-WirelessDevice {
+    $cfgFile = Join-Path $PSScriptRoot "data\wireless_config.json"
+    $savedIp = ""
+    $savedPort = 5555
+    if (Test-Path $cfgFile) {
+        try {
+            $cfg = Get-Content $cfgFile -Raw | ConvertFrom-Json
+            if ($cfg.last_ip) { $savedIp = $cfg.last_ip }
+            if ($cfg.port) { $savedPort = [int]$cfg.port }
+        } catch {}
+    }
+
+    # Tier 1: Fast-path saved endpoint
+    if ($savedIp) {
+        & $ADB connect "$($savedIp):$savedPort" 2>$null | Out-Null
+        $cur = (& $ADB devices 2>$null | Out-String)
+        if ($cur -match "$($savedIp):$savedPort\tdevice") { return $true }
+    }
+
+    # Tier 2: mDNS ZeroConf (Android 11+ Wireless Debugging)
+    $mdns = (& $ADB mdns services 2>$null | Out-String)
+    if ($mdns -match '([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+):([0-9]+)') {
+        & $ADB connect "$($Matches[1]):$($Matches[2])" 2>$null | Out-Null
+        $cur = (& $ADB devices 2>$null | Out-String)
+        if ($cur -match "\tdevice") { return $true }
+    }
+
+    # Tier 3: Dynamic Subnet ARP probe
+    $arpOut = (arp -a | Out-String)
+    $lines = $arpOut -split "`r?`n"
+    foreach ($line in $lines) {
+        if ($line -match '([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s+([0-9a-fA-F-]+)\s+dynamic') {
+            $cIp = $Matches[1]
+            if ($cIp -notlike '169.254*' -and $cIp -notlike '224*' -and $cIp -notmatch '\.1$') {
+                $probe = Test-NetConnection -ComputerName $cIp -Port 5555 -InformationLevel Quiet -WarningAction SilentlyContinue
+                if ($probe) {
+                    & $ADB connect "${cIp}:5555" 2>$null | Out-Null
+                    $cur = (& $ADB devices 2>$null | Out-String)
+                    if ($cur -match "\tdevice") {
+                        try {
+                            @{ last_ip = $cIp; port = 5555; auto_connect = $true } | ConvertTo-Json | Set-Content $cfgFile -Encoding UTF8
+                        } catch {}
+                        return $true
+                    }
+                }
+            }
+        }
+    }
+    return $false
+}
+
 function Get-DeviceStatus {
     $devsText = (& $ADB devices 2>$null | Out-String)
     
     # Auto-connect over Wi-Fi if no USB device is attached
     if ($devsText -notmatch "\tdevice") {
-        $cfgFile = Join-Path $PSScriptRoot "data\wireless_config.json"
-        if (Test-Path $cfgFile) {
-            try {
-                $cfg = Get-Content $cfgFile -Raw | ConvertFrom-Json
-                if ($cfg.last_ip -and $cfg.auto_connect) {
-                    $port = if ($cfg.port) { $cfg.port } else { 5555 }
-                    & $ADB connect "$($cfg.last_ip):$port" 2>$null | Out-Null
-                    $devsText = (& $ADB devices 2>$null | Out-String)
-                }
-            } catch {}
-        }
+        [void](Resolve-WirelessDevice)
+        $devsText = (& $ADB devices 2>$null | Out-String)
     }
     
     if ($devsText -notmatch "\tdevice") {
