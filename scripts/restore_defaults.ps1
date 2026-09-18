@@ -78,9 +78,9 @@ $sw = [System.Diagnostics.Stopwatch]::StartNew()
 
 # Construct single-stream batched shell script
 $batchScript = @'
-DISABLED=$(pm list packages -d)
+ENABLED=$(pm list packages -e)
 for pkg in com.android.vending com.sec.android.app.samsungapps com.android.chrome com.sec.android.app.chromecustomizations com.google.android.youtube com.google.android.googlequicksearchbox com.samsung.android.video com.android.htmlviewer com.android.vpndialogs com.sec.android.easyMover com.samsung.knox.securefolder; do
-    case "$DISABLED" in *package:$pkg*) cmd package install-existing "$pkg" 2>/dev/null; pm enable "$pkg" 2>/dev/null ;; esac
+    case "$ENABLED" in *package:$pkg*) ;; *) cmd package install-existing "$pkg" 2>/dev/null; pm enable "$pkg" 2>/dev/null ;; esac
 done
 
 settings put secure install_non_market_apps 1

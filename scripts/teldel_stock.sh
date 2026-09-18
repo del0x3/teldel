@@ -4,8 +4,8 @@
 # ==============================================================================
 
 # 1. Restore applications & application stores
-# Fast-path: query disabled packages once to restore only what is disabled
-DISABLED=$(pm list packages -d)
+# Fast-path: check enabled packages and restore only what is missing/disabled
+ENABLED=$(pm list packages -e)
 
 for pkg in \
     com.android.vending \
@@ -20,8 +20,10 @@ for pkg in \
     com.sec.android.easyMover \
     com.samsung.knox.securefolder
 do
-    case "$DISABLED" in
+    case "$ENABLED" in
         *package:$pkg*)
+            ;; # Already enabled, skip instantly
+        *)
             cmd package install-existing "$pkg" 2>/dev/null
             pm enable "$pkg" 2>/dev/null
             ;;
