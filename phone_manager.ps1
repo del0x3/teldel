@@ -42,14 +42,15 @@ function Show-Header {
     Write-Host "  [2] DISABLE Google Play Store          (restore lockdown)" -ForegroundColor Red
     Write-Host ""
     Write-Host "  [3] Mirror Phone Screen to PC          (scrcpy stream)" -ForegroundColor Cyan
-    Write-Host "  [4] Toggle Display Mode: B/W <--> COLOR (quick color toggle)" -ForegroundColor Magenta
+    Write-Host "  [4] Toggle Display Mode: B/W <--> COLOR (quick toggle)" -ForegroundColor Magenta
     Write-Host "  [5] Express Battery, RAM & Security Perimeter Audit" -ForegroundColor White
     Write-Host ""
-    Write-Host "  [6] Full Lockdown (Zero-Browser + YouTube + Play Store + DoT)" -ForegroundColor Red
-    Write-Host "  [7] Open Interactive HTML Reports & Dopamine Dashboard" -ForegroundColor Blue
-    Write-Host "  [8] Restore Default Stock Android Settings (Rollback)" -ForegroundColor DarkYellow
+    Write-Host "  [6] Apply Full Minimalism Transformation (18-step setup)" -ForegroundColor DarkCyan
+    Write-Host "  [7] Collect Usage Statistics & Dopamine Addiction Audit" -ForegroundColor Yellow
+    Write-Host "  [8] Open Interactive HTML Reports & Dashboard" -ForegroundColor Blue
+    Write-Host "  [9] Restore Default Stock Android Settings (Rollback)" -ForegroundColor DarkYellow
     Write-Host ""
-    Write-Host "  [9] Exit" -ForegroundColor Gray
+    Write-Host "  [0] Exit" -ForegroundColor Gray
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Cyan
 }
@@ -77,13 +78,13 @@ if (-not $ADB) {
 $running = $true
 while ($running) {
     Show-Header
-    $rawChoice = Read-Host "Select option [1-9]"
+    $rawChoice = Read-Host "Select option [0-9]"
     
     if ($null -eq $rawChoice) {
         break
     }
     
-    $choice = $rawChoice.Trim()
+    $choice = $rawChoice.Trim().ToLower()
     if ($choice -eq "") {
         continue
     }
@@ -186,47 +187,29 @@ while ($running) {
         }
         "6" {
             Clear-Host
-            Write-Host "=== Total Lockdown & Vector Sealing ===" -ForegroundColor Red
+            Write-Host "=== Applying Full Minimalism Transformation ===" -ForegroundColor Cyan
             if (Test-DeviceConnection) {
-                Write-Host "[1/7] Disabling browsers and YouTube..." -ForegroundColor Yellow
-                & $ADB shell pm disable-user --user 0 com.android.chrome
-                & $ADB shell pm uninstall -k --user 0 com.android.chrome
-                & $ADB shell pm uninstall -k --user 0 com.google.android.youtube
-                & $ADB shell pm disable-user --user 0 com.samsung.android.video
-                & $ADB shell pm disable-user --user 0 com.android.htmlviewer
-
-                Write-Host "[2/7] Freezing application stores..." -ForegroundColor Yellow
-                & $ADB shell pm disable-user --user 0 com.android.vending
-                & $ADB shell pm uninstall -k --user 0 com.sec.android.app.samsungapps
-
-                Write-Host "[3/7] Removing Termux backdoor..." -ForegroundColor Yellow
-                & $ADB shell pm uninstall --user 0 com.termux
-
-                Write-Host "[4/7] Purging Knox Secure Folder (User 150)..." -ForegroundColor Yellow
-                & $ADB shell pm remove-user 150
-                & $ADB shell pm disable-user --user 0 com.samsung.knox.securefolder
-
-                Write-Host "[5/7] Locking VPN dialog tunnels..." -ForegroundColor Yellow
-                & $ADB shell pm disable-user --user 0 com.android.vpndialogs
-                & $ADB shell pm disable-user --user 0 com.sec.android.easyMover
-
-                Write-Host "[6/7] Revoking APK installation permissions (Anti-Sideloading)..." -ForegroundColor Yellow
-                & $ADB shell settings put secure install_non_market_apps 0
-                & $ADB shell 'cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES deny; cmd appops set com.discord REQUEST_INSTALL_PACKAGES deny; cmd appops set com.whatsapp REQUEST_INSTALL_PACKAGES deny; cmd appops set org.thoughtcrime.securesms REQUEST_INSTALL_PACKAGES deny; cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES deny; cmd appops set com.google.android.apps.docs REQUEST_INSTALL_PACKAGES deny; cmd appops set com.microsoft.skydrive REQUEST_INSTALL_PACKAGES deny'
-
-                Write-Host "[7/7] Enforcing DNS-over-TLS CleanBrowsing Family Shield & Grayscale..." -ForegroundColor Yellow
-                & $ADB shell settings put global private_dns_mode hostname
-                & $ADB shell settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
-                & $ADB shell settings put system greyscale_mode 1
-                & $ADB shell settings put secure accessibility_display_daltonizer 0
-                & $ADB shell settings put secure accessibility_display_daltonizer_enabled 1
-                & $ADB shell settings put secure reduce_bright_colors_activated 1
-
-                Write-Host "`n[+] PERIMETER FULLY LOCKED DOWN ACROSS ALL VECTORS!" -ForegroundColor Green
+                $applyScript = Join-Path $PSScriptRoot "scripts\apply_minimalism.ps1"
+                if (Test-Path $applyScript) {
+                    & $applyScript -AdbPath $ADB
+                } else {
+                    Write-Host "[!] apply_minimalism.ps1 not found at $applyScript" -ForegroundColor Red
+                }
             }
             Read-Host "`nPress Enter to return to menu..."
         }
         "7" {
+            Clear-Host
+            Write-Host "=== Collecting Usage Statistics & Dopamine Analysis ===" -ForegroundColor Yellow
+            $statsScript = Join-Path $PSScriptRoot "scripts\collect_stats.py"
+            if (Test-Path $statsScript) {
+                python $statsScript
+            } else {
+                Write-Host "[!] collect_stats.py not found at $statsScript" -ForegroundColor Red
+            }
+            Read-Host "`nPress Enter to return to menu..."
+        }
+        "8" {
             Clear-Host
             Write-Host "=== Opening Interactive Reports & Dashboards ===" -ForegroundColor Cyan
             $reportPath = Join-Path $PSScriptRoot "docs\index.html"
@@ -241,7 +224,7 @@ while ($running) {
             }
             Read-Host "`nPress Enter to return to menu..."
         }
-        "8" {
+        "9" {
             Clear-Host
             Write-Host "=== Restore Stock Default Settings (Rollback) ===" -ForegroundColor DarkYellow
             Write-Host "Are you sure you want to restore all stock settings, apps, colors, and DNS? (Y/N)" -ForegroundColor Yellow
@@ -250,7 +233,7 @@ while ($running) {
                 if (Test-DeviceConnection) {
                     $restoreScript = Join-Path $PSScriptRoot "scripts\restore_defaults.ps1"
                     if (Test-Path $restoreScript) {
-                        & $restoreScript -Unattended -AdbPath $ADB
+                        & $restoreScript -AdbPath $ADB
                     } else {
                         Write-Host "[!] restore_defaults.ps1 not found at $restoreScript" -ForegroundColor Red
                     }
@@ -260,12 +243,12 @@ while ($running) {
             }
             Read-Host "`nPress Enter to return to menu..."
         }
-        "9" {
+        { $_ -in "0", "q", "exit" } {
             $running = $false
             Write-Host "Goodbye!" -ForegroundColor Green
         }
         default {
-            Write-Host "Invalid option. Enter a number from 1 to 9." -ForegroundColor Red
+            Write-Host "Invalid option. Enter a number from 0 to 9." -ForegroundColor Red
             Start-Sleep -Milliseconds 800
         }
     }

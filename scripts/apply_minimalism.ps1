@@ -205,7 +205,7 @@ if (Test-Path $launcherApk) {
     & $ADB shell am start -a android.intent.action.MAIN -c android.intent.category.HOME 2>$null
     Write-Host "    Olauncher installed, activated as default launcher, and permissions stripped." -ForegroundColor Green
 } else {
-    Write-Host "    [!] Olauncher.apk not found. You can run download_launcher.py later." -ForegroundColor Yellow
+    Write-Host "    [!] Olauncher.apk was not found and could not be downloaded." -ForegroundColor Yellow
 }
 
 Write-Host "`n==========================================================================" -ForegroundColor Cyan

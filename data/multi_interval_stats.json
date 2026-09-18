@@ -1,201 +1,148 @@
 {
-  "9/13/2026, 3:36\u0442\u0410\u043fPM\u0442\u0410\u0419\u0442\u0410\u0423\u0442\u0410\u04199/14/2026, 3:36\u0442\u0410\u043fPM": {
+  "9/17/2026, 11:34\u202fAM\u2009\u2013\u20099/18/2026, 11:34\u202fAM": {
     "total_hours": 0.0,
     "packages": []
   },
-  "9/14/2026, 2:46\u0442\u0410\u0419\u0442\u0410\u0423\u0442\u0410\u04193:36\u0442\u0410\u043fPM": {
-    "total_hours": 0.21138888888888888,
+  "9/17/2026, 2:53\u202fPM\u2009\u2013\u20099/18/2026, 11:33\u202fAM": {
+    "total_hours": 6.434166666666667,
     "packages": [
-      {
-        "pkg": "com.android.settings",
-        "time_str": "07:44",
-        "seconds": 464,
-        "launches": 11
-      },
-      {
-        "pkg": "com.sec.android.app.launcher",
-        "time_str": "03:46",
-        "seconds": 226,
-        "launches": 6
-      },
-      {
-        "pkg": "com.moneybookers.skrillpayments",
-        "time_str": "00:25",
-        "seconds": 25,
-        "launches": 1
-      },
-      {
-        "pkg": "com.samsung.android.rampart",
-        "time_str": "00:17",
-        "seconds": 17,
-        "launches": 2
-      },
-      {
-        "pkg": "com.android.systemui",
-        "time_str": "00:17",
-        "seconds": 17,
-        "launches": 5
-      },
-      {
-        "pkg": "com.samsung.android.lool",
-        "time_str": "00:12",
-        "seconds": 12,
-        "launches": 1
-      }
-    ]
-  },
-  "9/10/2026, 2:41\u0442\u0410\u043fPM\u0442\u0410\u0419\u0442\u0410\u0423\u0442\u0410\u04199/14/2026, 3:36\u0442\u0410\u043fPM": {
-    "total_hours": 42.327777777777776,
-    "packages": [
-      {
-        "pkg": "com.google.android.youtube",
-        "time_str": "30:11:08",
-        "seconds": 108668,
-        "launches": 103
-      },
       {
         "pkg": "org.telegram.messenger",
-        "time_str": "4:55:17",
-        "seconds": 17717,
-        "launches": 83
-      },
-      {
-        "pkg": "com.android.chrome",
-        "time_str": "2:38:55",
-        "seconds": 9535,
-        "launches": 33
-      },
-      {
-        "pkg": "com.PixelJoy.MountainBikeXtreme",
-        "time_str": "1:11:25",
-        "seconds": 4285,
-        "launches": 11
-      },
-      {
-        "pkg": "com.glovo",
-        "time_str": "35:32",
-        "seconds": 2132,
+        "time_str": "4:04:38",
+        "seconds": 14678,
         "launches": 23
       },
       {
-        "pkg": "com.anthropic.claude",
-        "time_str": "33:08",
-        "seconds": 1988,
-        "launches": 19
-      },
-      {
-        "pkg": "com.sec.android.app.launcher",
-        "time_str": "25:34",
-        "seconds": 1534,
-        "launches": 154
-      },
-      {
-        "pkg": "com.discord",
-        "time_str": "25:01",
-        "seconds": 1501,
-        "launches": 6
-      },
-      {
-        "pkg": "com.deepseek.chat",
-        "time_str": "24:43",
-        "seconds": 1483,
-        "launches": 3
-      },
-      {
-        "pkg": "com.stonecutters.islegrow",
-        "time_str": "09:23",
-        "seconds": 563,
-        "launches": 7
-      },
-      {
-        "pkg": "com.android.vending",
-        "time_str": "08:19",
-        "seconds": 499,
-        "launches": 5
-      },
-      {
-        "pkg": "com.android.settings",
-        "time_str": "08:03",
-        "seconds": 483,
-        "launches": 12
-      },
-      {
-        "pkg": "com.google.android.googlequicksearchbox",
-        "time_str": "06:51",
-        "seconds": 411,
-        "launches": 12
-      },
-      {
-        "pkg": "com.fuib.android.spot.online",
-        "time_str": "04:55",
-        "seconds": 295,
+        "pkg": "com.openai.chatgpt",
+        "time_str": "45:56",
+        "seconds": 2756,
         "launches": 13
       },
       {
-        "pkg": "com.samsung.android.incallui",
-        "time_str": "04:22",
-        "seconds": 262,
+        "pkg": "com.google.android.youtube",
+        "time_str": "28:11",
+        "seconds": 1691,
         "launches": 2
       },
       {
-        "pkg": "co.unstatic.habitify",
-        "time_str": "03:59",
-        "seconds": 239,
-        "launches": 2
-      },
-      {
-        "pkg": "com.zhiliaoapp.musically",
-        "time_str": "03:57",
-        "seconds": 237,
-        "launches": 5
-      },
-      {
-        "pkg": "ua.privatbank.ap24",
-        "time_str": "03:05",
-        "seconds": 185,
-        "launches": 5
-      },
-      {
-        "pkg": "com.google.android.gms",
-        "time_str": "01:23",
-        "seconds": 83,
-        "launches": 10
-      },
-      {
-        "pkg": "com.google.android.permissioncontroller",
-        "time_str": "00:42",
-        "seconds": 42,
-        "launches": 36
-      },
-      {
-        "pkg": "com.google.android.apps.messaging",
-        "time_str": "00:38",
-        "seconds": 38,
-        "launches": 1
-      },
-      {
-        "pkg": "com.google.android.apps.walletnfcrel",
-        "time_str": "00:32",
-        "seconds": 32,
+        "pkg": "com.discord",
+        "time_str": "12:00",
+        "seconds": 720,
         "launches": 4
       },
       {
-        "pkg": "com.google.android.calendar",
-        "time_str": "00:32",
-        "seconds": 32,
+        "pkg": "com.sec.android.app.launcher",
+        "time_str": "09:09",
+        "seconds": 549,
+        "launches": 65
+      },
+      {
+        "pkg": "com.mobox.taxi",
+        "time_str": "06:40",
+        "seconds": 400,
+        "launches": 16
+      },
+      {
+        "pkg": "com.android.settings",
+        "time_str": "05:51",
+        "seconds": 351,
+        "launches": 6
+      },
+      {
+        "pkg": "com.samsung.android.incallui",
+        "time_str": "05:15",
+        "seconds": 315,
+        "launches": 8
+      },
+      {
+        "pkg": "ua.com.uklontaxi",
+        "time_str": "03:18",
+        "seconds": 198,
+        "launches": 12
+      },
+      {
+        "pkg": "com.android.vending",
+        "time_str": "03:08",
+        "seconds": 188,
+        "launches": 8
+      },
+      {
+        "pkg": "com.samsung.android.dialer",
+        "time_str": "03:06",
+        "seconds": 186,
+        "launches": 6
+      },
+      {
+        "pkg": "ua.com.ontaxi.client",
+        "time_str": "02:45",
+        "seconds": 165,
+        "launches": 8
+      },
+      {
+        "pkg": "ee.mtakso.client",
+        "time_str": "02:18",
+        "seconds": 138,
+        "launches": 7
+      },
+      {
+        "pkg": "com.sec.android.app.clockpackage",
+        "time_str": "02:08",
+        "seconds": 128,
+        "launches": 5
+      },
+      {
+        "pkg": "com.google.android.calculator",
+        "time_str": "02:06",
+        "seconds": 126,
         "launches": 1
       },
       {
-        "pkg": "com.kyivdigital",
-        "time_str": "00:31",
-        "seconds": 31,
+        "pkg": "com.samsung.android.app.routines",
+        "time_str": "01:35",
+        "seconds": 95,
+        "launches": 2
+      },
+      {
+        "pkg": "app.olauncher",
+        "time_str": "01:33",
+        "seconds": 93,
+        "launches": 9
+      },
+      {
+        "pkg": "ua.privatbank.ap24",
+        "time_str": "01:16",
+        "seconds": 76,
         "launches": 1
       },
       {
-        "pkg": "com.moneybookers.skrillpayments",
-        "time_str": "00:25",
-        "seconds": 25,
+        "pkg": "com.google.android.permissioncontroller",
+        "time_str": "00:52",
+        "seconds": 52,
+        "launches": 18
+      },
+      {
+        "pkg": "com.ftband.mono",
+        "time_str": "00:51",
+        "seconds": 51,
+        "launches": 7
+      },
+      {
+        "pkg": "com.wssyncmldm",
+        "time_str": "00:34",
+        "seconds": 34,
         "launches": 1
+      },
+      {
+        "pkg": "com.whatsapp",
+        "time_str": "00:30",
+        "seconds": 30,
+        "launches": 1
+      },
+      {
+        "pkg": "ua.gov.reserveplus",
+        "time_str": "00:29",
+        "seconds": 29,
+        "launches": 5
       },
       {
         "pkg": "com.sec.android.app.camera",
@@ -204,75 +151,87 @@
         "launches": 2
       },
       {
-        "pkg": "com.samsung.android.rampart",
-        "time_str": "00:17",
-        "seconds": 17,
+        "pkg": "com.google.android.apps.messaging",
+        "time_str": "00:22",
+        "seconds": 22,
+        "launches": 1
+      },
+      {
+        "pkg": "com.xiaomi.wearable",
+        "time_str": "00:20",
+        "seconds": 20,
         "launches": 2
       },
       {
-        "pkg": "com.android.systemui",
-        "time_str": "00:17",
-        "seconds": 17,
-        "launches": 5
-      },
-      {
-        "pkg": "com.samsung.android.lool",
-        "time_str": "00:12",
-        "seconds": 12,
-        "launches": 1
-      },
-      {
-        "pkg": "com.instagram.android",
-        "time_str": "00:03",
-        "seconds": 3,
-        "launches": 1
+        "pkg": "com.viber.voip",
+        "time_str": "00:18",
+        "seconds": 18,
+        "launches": 2
       },
       {
         "pkg": "com.android.credentialmanager",
-        "time_str": "00:03",
-        "seconds": 3,
-        "launches": 7
+        "time_str": "00:11",
+        "seconds": 11,
+        "launches": 4
       },
       {
-        "pkg": "com.google.android.photopicker",
-        "time_str": "00:03",
-        "seconds": 3,
+        "pkg": "com.google.android.gms",
+        "time_str": "00:10",
+        "seconds": 10,
+        "launches": 3
+      },
+      {
+        "pkg": "android",
+        "time_str": "00:04",
+        "seconds": 4,
+        "launches": 2
+      },
+      {
+        "pkg": "com.samsung.android.lool",
+        "time_str": "00:04",
+        "seconds": 4,
         "launches": 1
       },
       {
-        "pkg": "com.google.android.packageinstaller",
+        "pkg": "com.sec.android.gallery3d",
         "time_str": "00:02",
         "seconds": 2,
-        "launches": 1
-      },
-      {
-        "pkg": "com.google.android.documentsui",
-        "time_str": "00:00",
-        "seconds": 0,
         "launches": 1
       }
     ]
   },
-  "9/7/2026, 2:36\u0442\u0410\u043fPM\u0442\u0410\u0419\u0442\u0410\u0423\u0442\u0410\u04199/14/2026, 3:36\u0442\u0410\u043fPM": {
-    "total_hours": 73.09388888888888,
+  "9/7/2026, 2:36\u202fPM\u2009\u2013\u20099/18/2026, 11:33\u202fAM": {
+    "total_hours": 93.61472222222223,
     "packages": [
       {
         "pkg": "com.google.android.youtube",
-        "time_str": "52:29:13",
-        "seconds": 188953,
-        "launches": 153
+        "time_str": "52:57:25",
+        "seconds": 190645,
+        "launches": 155
       },
       {
         "pkg": "org.telegram.messenger",
-        "time_str": "6:04:33",
-        "seconds": 21873,
-        "launches": 122
+        "time_str": "14:36:38",
+        "seconds": 52598,
+        "launches": 265
       },
       {
         "pkg": "com.android.chrome",
-        "time_str": "3:53:08",
-        "seconds": 13988,
-        "launches": 43
+        "time_str": "5:30:54",
+        "seconds": 19854,
+        "launches": 30
+      },
+      {
+        "pkg": "com.openai.chatgpt",
+        "time_str": "4:32:22",
+        "seconds": 16342,
+        "launches": 85
+      },
+      {
+        "pkg": "com.anthropic.claude",
+        "time_str": "2:55:04",
+        "seconds": 10504,
+        "launches": 67
       },
       {
         "pkg": "com.PixelJoy.MountainBikeXtreme",
@@ -281,10 +240,10 @@
         "launches": 20
       },
       {
-        "pkg": "com.anthropic.claude",
-        "time_str": "2:07:25",
-        "seconds": 7645,
-        "launches": 32
+        "pkg": "com.discord",
+        "time_str": "2:00:57",
+        "seconds": 7257,
+        "launches": 47
       },
       {
         "pkg": "com.glovo",
@@ -293,16 +252,16 @@
         "launches": 48
       },
       {
-        "pkg": "com.discord",
-        "time_str": "49:59",
-        "seconds": 2999,
-        "launches": 13
+        "pkg": "com.sec.android.app.launcher",
+        "time_str": "1:06:06",
+        "seconds": 3966,
+        "launches": 538
       },
       {
-        "pkg": "com.sec.android.app.launcher",
-        "time_str": "43:02",
-        "seconds": 2582,
-        "launches": 265
+        "pkg": "app.olauncher",
+        "time_str": "53:06",
+        "seconds": 3186,
+        "launches": 170
       },
       {
         "pkg": "com.linkedin.android",
@@ -311,16 +270,52 @@
         "launches": 4
       },
       {
+        "pkg": "com.android.settings",
+        "time_str": "26:32",
+        "seconds": 1592,
+        "launches": 38
+      },
+      {
         "pkg": "com.deepseek.chat",
         "time_str": "24:43",
         "seconds": 1483,
         "launches": 3
       },
       {
-        "pkg": "ua.com.uklontaxi",
-        "time_str": "13:42",
-        "seconds": 822,
+        "pkg": "com.samsung.android.incallui",
+        "time_str": "22:27",
+        "seconds": 1347,
         "launches": 24
+      },
+      {
+        "pkg": "ua.com.uklontaxi",
+        "time_str": "17:01",
+        "seconds": 1021,
+        "launches": 36
+      },
+      {
+        "pkg": "com.samsung.android.app.notes",
+        "time_str": "14:05",
+        "seconds": 845,
+        "launches": 16
+      },
+      {
+        "pkg": "com.android.vending",
+        "time_str": "13:16",
+        "seconds": 796,
+        "launches": 18
+      },
+      {
+        "pkg": "com.google.android.apps.maps",
+        "time_str": "10:55",
+        "seconds": 655,
+        "launches": 17
+      },
+      {
+        "pkg": "com.fuib.android.spot.online",
+        "time_str": "10:54",
+        "seconds": 654,
+        "launches": 25
       },
       {
         "pkg": "com.stonecutters.islegrow",
@@ -329,40 +324,46 @@
         "launches": 7
       },
       {
-        "pkg": "com.google.android.googlequicksearchbox",
-        "time_str": "08:52",
-        "seconds": 532,
-        "launches": 17
+        "pkg": "ua.privatbank.ap24",
+        "time_str": "09:13",
+        "seconds": 553,
+        "launches": 12
       },
       {
-        "pkg": "com.android.settings",
-        "time_str": "08:28",
-        "seconds": 508,
+        "pkg": "com.mobox.taxi",
+        "time_str": "08:17",
+        "seconds": 497,
+        "launches": 19
+      },
+      {
+        "pkg": "com.termux",
+        "time_str": "08:17",
+        "seconds": 497,
+        "launches": 3
+      },
+      {
+        "pkg": "com.sec.android.app.camera",
+        "time_str": "07:17",
+        "seconds": 437,
+        "launches": 26
+      },
+      {
+        "pkg": "com.xiaomi.wearable",
+        "time_str": "06:49",
+        "seconds": 409,
         "launches": 13
       },
       {
-        "pkg": "com.android.vending",
-        "time_str": "08:24",
-        "seconds": 504,
-        "launches": 6
+        "pkg": "com.samsung.android.dialer",
+        "time_str": "05:23",
+        "seconds": 323,
+        "launches": 27
       },
       {
-        "pkg": "com.fuib.android.spot.online",
-        "time_str": "07:43",
-        "seconds": 463,
-        "launches": 23
-      },
-      {
-        "pkg": "com.samsung.android.incallui",
-        "time_str": "06:04",
-        "seconds": 364,
-        "launches": 6
-      },
-      {
-        "pkg": "co.unstatic.habitify",
-        "time_str": "03:59",
-        "seconds": 239,
-        "launches": 2
+        "pkg": "com.google.android.apps.docs",
+        "time_str": "04:33",
+        "seconds": 273,
+        "launches": 8
       },
       {
         "pkg": "com.zhiliaoapp.musically",
@@ -371,40 +372,64 @@
         "launches": 5
       },
       {
-        "pkg": "com.sec.android.app.camera",
-        "time_str": "03:23",
-        "seconds": 203,
-        "launches": 5
-      },
-      {
-        "pkg": "com.samsung.android.app.notes",
-        "time_str": "03:20",
-        "seconds": 200,
-        "launches": 2
-      },
-      {
-        "pkg": "ua.privatbank.ap24",
-        "time_str": "03:05",
-        "seconds": 185,
-        "launches": 5
-      },
-      {
         "pkg": "com.ftband.mono",
-        "time_str": "02:36",
-        "seconds": 156,
+        "time_str": "03:41",
+        "seconds": 221,
+        "launches": 16
+      },
+      {
+        "pkg": "com.sec.android.gallery3d",
+        "time_str": "03:34",
+        "seconds": 214,
+        "launches": 3
+      },
+      {
+        "pkg": "com.google.android.permissioncontroller",
+        "time_str": "03:32",
+        "seconds": 212,
+        "launches": 121
+      },
+      {
+        "pkg": "ua.com.ontaxi.client",
+        "time_str": "02:45",
+        "seconds": 165,
         "launches": 8
       },
       {
-        "pkg": "com.google.android.gms",
-        "time_str": "02:06",
-        "seconds": 126,
-        "launches": 20
+        "pkg": "com.google.android.calculator",
+        "time_str": "02:34",
+        "seconds": 154,
+        "launches": 16
       },
       {
         "pkg": "com.whatsapp",
-        "time_str": "01:58",
-        "seconds": 118,
-        "launches": 10
+        "time_str": "02:28",
+        "seconds": 148,
+        "launches": 11
+      },
+      {
+        "pkg": "com.google.android.apps.docs.editors.docs",
+        "time_str": "02:23",
+        "seconds": 143,
+        "launches": 6
+      },
+      {
+        "pkg": "com.google.android.gms",
+        "time_str": "02:20",
+        "seconds": 140,
+        "launches": 26
+      },
+      {
+        "pkg": "ee.mtakso.client",
+        "time_str": "02:18",
+        "seconds": 138,
+        "launches": 7
+      },
+      {
+        "pkg": "com.sec.android.app.clockpackage",
+        "time_str": "02:08",
+        "seconds": 128,
+        "launches": 5
       },
       {
         "pkg": "us.zoom.videomeetings",
@@ -413,28 +438,58 @@
         "launches": 8
       },
       {
-        "pkg": "com.google.android.apps.maps",
-        "time_str": "01:42",
-        "seconds": 102,
-        "launches": 1
-      },
-      {
         "pkg": "com.burockgames.timeclocker",
         "time_str": "01:41",
         "seconds": 101,
         "launches": 5
       },
       {
-        "pkg": "com.google.android.permissioncontroller",
-        "time_str": "01:16",
-        "seconds": 76,
-        "launches": 64
+        "pkg": "com.samsung.android.app.routines",
+        "time_str": "01:35",
+        "seconds": 95,
+        "launches": 2
       },
       {
-        "pkg": "com.openai.chatgpt",
-        "time_str": "01:08",
-        "seconds": 68,
+        "pkg": "com.google.android.calendar",
+        "time_str": "01:24",
+        "seconds": 84,
+        "launches": 6
+      },
+      {
+        "pkg": "com.microsoft.office.outlook",
+        "time_str": "01:23",
+        "seconds": 83,
+        "launches": 1
+      },
+      {
+        "pkg": "com.google.android.apps.docs.editors.sheets",
+        "time_str": "01:05",
+        "seconds": 65,
         "launches": 4
+      },
+      {
+        "pkg": "com.google.android.apps.messaging",
+        "time_str": "01:01",
+        "seconds": 61,
+        "launches": 2
+      },
+      {
+        "pkg": "com.x8bit.bitwarden",
+        "time_str": "00:58",
+        "seconds": 58,
+        "launches": 1
+      },
+      {
+        "pkg": "com.google.android.photopicker",
+        "time_str": "00:54",
+        "seconds": 54,
+        "launches": 9
+      },
+      {
+        "pkg": "com.moneybookers.skrillpayments",
+        "time_str": "00:51",
+        "seconds": 51,
+        "launches": 2
       },
       {
         "pkg": "com.google.android.apps.walletnfcrel",
@@ -443,46 +498,58 @@
         "launches": 7
       },
       {
-        "pkg": "com.google.android.apps.messaging",
-        "time_str": "00:38",
-        "seconds": 38,
-        "launches": 1
-      },
-      {
-        "pkg": "com.samsung.android.dialer",
-        "time_str": "00:38",
-        "seconds": 38,
-        "launches": 4
-      },
-      {
-        "pkg": "com.google.android.calendar",
-        "time_str": "00:35",
-        "seconds": 35,
-        "launches": 2
-      },
-      {
-        "pkg": "com.kyivdigital",
-        "time_str": "00:31",
-        "seconds": 31,
-        "launches": 1
-      },
-      {
-        "pkg": "com.google.android.photopicker",
-        "time_str": "00:29",
-        "seconds": 29,
+        "pkg": "com.radio.fmradio",
+        "time_str": "00:42",
+        "seconds": 42,
         "launches": 3
       },
       {
-        "pkg": "com.moneybookers.skrillpayments",
-        "time_str": "00:25",
-        "seconds": 25,
+        "pkg": "com.wssyncmldm",
+        "time_str": "00:40",
+        "seconds": 40,
+        "launches": 2
+      },
+      {
+        "pkg": "com.samsung.android.lool",
+        "time_str": "00:37",
+        "seconds": 37,
+        "launches": 3
+      },
+      {
+        "pkg": "com.google.android.apps.photos",
+        "time_str": "00:36",
+        "seconds": 36,
         "launches": 1
       },
       {
-        "pkg": "com.google.android.apps.docs.editors.sheets",
-        "time_str": "00:20",
-        "seconds": 20,
+        "pkg": "com.kyivdigital",
+        "time_str": "00:33",
+        "seconds": 33,
+        "launches": 2
+      },
+      {
+        "pkg": "ua.gov.reserveplus",
+        "time_str": "00:29",
+        "seconds": 29,
+        "launches": 5
+      },
+      {
+        "pkg": "android",
+        "time_str": "00:28",
+        "seconds": 28,
+        "launches": 17
+      },
+      {
+        "pkg": "eu.novapost",
+        "time_str": "00:19",
+        "seconds": 19,
         "launches": 1
+      },
+      {
+        "pkg": "com.viber.voip",
+        "time_str": "00:18",
+        "seconds": 18,
+        "launches": 2
       },
       {
         "pkg": "com.samsung.android.rampart",
@@ -497,16 +564,58 @@
         "launches": 5
       },
       {
-        "pkg": "com.samsung.android.lool",
-        "time_str": "00:12",
-        "seconds": 12,
-        "launches": 1
+        "pkg": "com.android.credentialmanager",
+        "time_str": "00:15",
+        "seconds": 15,
+        "launches": 11
       },
       {
         "pkg": "com.google.android.documentsui",
-        "time_str": "00:09",
-        "seconds": 9,
-        "launches": 4
+        "time_str": "00:15",
+        "seconds": 15,
+        "launches": 6
+      },
+      {
+        "pkg": "com.sec.android.app.myfiles",
+        "time_str": "00:14",
+        "seconds": 14,
+        "launches": 3
+      },
+      {
+        "pkg": "com.google.android.apps.authenticator2",
+        "time_str": "00:06",
+        "seconds": 6,
+        "launches": 5
+      },
+      {
+        "pkg": "com.samsung.android.app.contacts",
+        "time_str": "00:06",
+        "seconds": 6,
+        "launches": 1
+      },
+      {
+        "pkg": "com.android.intentresolver",
+        "time_str": "00:05",
+        "seconds": 5,
+        "launches": 2
+      },
+      {
+        "pkg": "com.samsung.android.emergency",
+        "time_str": "00:04",
+        "seconds": 4,
+        "launches": 1
+      },
+      {
+        "pkg": "com.google.android.packageinstaller",
+        "time_str": "00:04",
+        "seconds": 4,
+        "launches": 2
+      },
+      {
+        "pkg": "ai.qwenlm.chat.android",
+        "time_str": "00:04",
+        "seconds": 4,
+        "launches": 1
       },
       {
         "pkg": "com.instagram.android",
@@ -515,21 +624,21 @@
         "launches": 1
       },
       {
-        "pkg": "com.android.credentialmanager",
-        "time_str": "00:03",
-        "seconds": 3,
-        "launches": 7
-      },
-      {
-        "pkg": "android",
+        "pkg": "com.android.companiondevicemanager",
         "time_str": "00:02",
         "seconds": 2,
         "launches": 1
       },
       {
-        "pkg": "com.google.android.packageinstaller",
+        "pkg": "com.bitwarden.authenticator",
         "time_str": "00:02",
         "seconds": 2,
+        "launches": 2
+      },
+      {
+        "pkg": "com.osp.app.signin",
+        "time_str": "00:01",
+        "seconds": 1,
         "launches": 1
       },
       {
@@ -537,47 +646,53 @@
         "time_str": "00:00",
         "seconds": 0,
         "launches": 1
+      },
+      {
+        "pkg": "com.rammigsoftware.bluecoins",
+        "time_str": "00:00",
+        "seconds": 0,
+        "launches": 1
       }
     ]
   },
-  "3/10/2026, 6:06\u0442\u0410\u043fPM\u0442\u0410\u0419\u0442\u0410\u0423\u0442\u0410\u04199/14/2026, 3:36\u0442\u0410\u043fPM": {
-    "total_hours": 456.44555555555553,
+  "3/10/2026, 6:06\u202fPM\u2009\u2013\u20099/18/2026, 11:33\u202fAM": {
+    "total_hours": 370.9627777777778,
     "packages": [
       {
         "pkg": "org.telegram.messenger",
-        "time_str": "221:16:53",
-        "seconds": 796613,
-        "launches": 6352
-      },
-      {
-        "pkg": "com.android.chrome",
-        "time_str": "97:36:45",
-        "seconds": 351405,
-        "launches": 1337
+        "time_str": "229:48:59",
+        "seconds": 827339,
+        "launches": 6495
       },
       {
         "pkg": "com.discord",
-        "time_str": "26:37:30",
-        "seconds": 95850,
-        "launches": 449
+        "time_str": "27:48:28",
+        "seconds": 100108,
+        "launches": 483
       },
       {
         "pkg": "ai.qwenlm.chat.android",
-        "time_str": "24:00:58",
-        "seconds": 86458,
-        "launches": 321
+        "time_str": "24:01:03",
+        "seconds": 86463,
+        "launches": 322
       },
       {
         "pkg": "com.sec.android.app.launcher",
-        "time_str": "18:14:27",
-        "seconds": 65667,
-        "launches": 9019
+        "time_str": "18:37:30",
+        "seconds": 67050,
+        "launches": 9292
       },
       {
         "pkg": "com.samsung.android.incallui",
-        "time_str": "9:19:40",
-        "seconds": 33580,
-        "launches": 549
+        "time_str": "9:36:03",
+        "seconds": 34563,
+        "launches": 567
+      },
+      {
+        "pkg": "com.anthropic.claude",
+        "time_str": "7:04:41",
+        "seconds": 25481,
+        "launches": 202
       },
       {
         "pkg": "com.google.android.gm",
@@ -586,28 +701,22 @@
         "launches": 102
       },
       {
-        "pkg": "com.anthropic.claude",
-        "time_str": "6:17:02",
-        "seconds": 22622,
-        "launches": 167
+        "pkg": "com.openai.chatgpt",
+        "time_str": "5:15:40",
+        "seconds": 18940,
+        "launches": 127
       },
       {
         "pkg": "com.google.android.apps.maps",
-        "time_str": "4:17:45",
-        "seconds": 15465,
-        "launches": 231
+        "time_str": "4:26:59",
+        "seconds": 16019,
+        "launches": 247
       },
       {
         "pkg": "com.ftband.mono",
-        "time_str": "3:27:31",
-        "seconds": 12451,
-        "launches": 450
-      },
-      {
-        "pkg": "com.android.vending",
-        "time_str": "3:15:37",
-        "seconds": 11737,
-        "launches": 450
+        "time_str": "3:28:35",
+        "seconds": 12515,
+        "launches": 458
       },
       {
         "pkg": "ua.raiffeisen.myraif",
@@ -617,45 +726,39 @@
       },
       {
         "pkg": "ua.privatbank.ap24",
-        "time_str": "2:26:42",
-        "seconds": 8802,
-        "launches": 207
-      },
-      {
-        "pkg": "com.yazio.android",
-        "time_str": "2:21:39",
-        "seconds": 8499,
-        "launches": 110
+        "time_str": "2:32:51",
+        "seconds": 9171,
+        "launches": 214
       },
       {
         "pkg": "com.fuib.android.spot.online",
-        "time_str": "2:16:32",
-        "seconds": 8192,
-        "launches": 305
-      },
-      {
-        "pkg": "com.google.android.gms",
-        "time_str": "1:45:13",
-        "seconds": 6313,
-        "launches": 1119
+        "time_str": "2:19:44",
+        "seconds": 8384,
+        "launches": 307
       },
       {
         "pkg": "com.xiaomi.wearable",
-        "time_str": "1:42:41",
-        "seconds": 6161,
-        "launches": 138
+        "time_str": "1:49:30",
+        "seconds": 6570,
+        "launches": 151
+      },
+      {
+        "pkg": "com.google.android.gms",
+        "time_str": "1:45:27",
+        "seconds": 6327,
+        "launches": 1125
       },
       {
         "pkg": "com.microsoft.office.outlook",
-        "time_str": "1:38:54",
-        "seconds": 5934,
-        "launches": 149
+        "time_str": "1:40:17",
+        "seconds": 6017,
+        "launches": 150
       },
       {
         "pkg": "com.sec.android.app.clockpackage",
-        "time_str": "1:29:09",
-        "seconds": 5349,
-        "launches": 202
+        "time_str": "1:31:18",
+        "seconds": 5478,
+        "launches": 207
       },
       {
         "pkg": "com.google.android.apps.walletnfcrel",
@@ -664,28 +767,34 @@
         "launches": 338
       },
       {
+        "pkg": "com.android.settings",
+        "time_str": "1:23:01",
+        "seconds": 4981,
+        "launches": 440
+      },
+      {
         "pkg": "com.samsung.android.dialer",
-        "time_str": "1:12:53",
-        "seconds": 4373,
-        "launches": 364
+        "time_str": "1:17:39",
+        "seconds": 4659,
+        "launches": 387
       },
       {
         "pkg": "com.sec.android.app.camera",
-        "time_str": "1:08:28",
-        "seconds": 4108,
-        "launches": 222
-      },
-      {
-        "pkg": "com.android.settings",
-        "time_str": "1:04:57",
-        "seconds": 3897,
-        "launches": 415
+        "time_str": "1:12:22",
+        "seconds": 4342,
+        "launches": 243
       },
       {
         "pkg": "com.google.android.permissioncontroller",
-        "time_str": "59:24",
-        "seconds": 3564,
-        "launches": 2626
+        "time_str": "1:01:40",
+        "seconds": 3700,
+        "launches": 2683
+      },
+      {
+        "pkg": "com.samsung.android.app.notes",
+        "time_str": "59:49",
+        "seconds": 3589,
+        "launches": 98
       },
       {
         "pkg": "ua.alfabank.mobile.android",
@@ -694,58 +803,58 @@
         "launches": 88
       },
       {
-        "pkg": "com.samsung.android.app.notes",
-        "time_str": "49:03",
-        "seconds": 2943,
-        "launches": 84
-      },
-      {
         "pkg": "ua.gov.diia.app",
         "time_str": "45:37",
         "seconds": 2737,
         "launches": 82
       },
       {
-        "pkg": "com.openai.chatgpt",
-        "time_str": "44:26",
-        "seconds": 2666,
-        "launches": 46
-      },
-      {
         "pkg": "com.osp.app.signin",
-        "time_str": "42:17",
-        "seconds": 2537,
-        "launches": 8
+        "time_str": "42:19",
+        "seconds": 2539,
+        "launches": 9
       },
       {
         "pkg": "com.wssyncmldm",
-        "time_str": "39:47",
-        "seconds": 2387,
-        "launches": 41
+        "time_str": "40:27",
+        "seconds": 2427,
+        "launches": 43
       },
       {
         "pkg": "com.google.android.apps.docs.editors.sheets",
-        "time_str": "35:45",
-        "seconds": 2145,
-        "launches": 77
+        "time_str": "36:30",
+        "seconds": 2190,
+        "launches": 80
       },
       {
         "pkg": "com.samsung.android.emergency",
-        "time_str": "34:14",
-        "seconds": 2054,
-        "launches": 23
+        "time_str": "34:18",
+        "seconds": 2058,
+        "launches": 24
       },
       {
         "pkg": "android",
-        "time_str": "33:42",
-        "seconds": 2022,
-        "launches": 242
+        "time_str": "34:08",
+        "seconds": 2048,
+        "launches": 258
+      },
+      {
+        "pkg": "com.google.android.apps.docs.editors.docs",
+        "time_str": "28:41",
+        "seconds": 1721,
+        "launches": 30
       },
       {
         "pkg": "com.viber.voip",
-        "time_str": "28:01",
-        "seconds": 1681,
-        "launches": 60
+        "time_str": "28:19",
+        "seconds": 1699,
+        "launches": 62
+      },
+      {
+        "pkg": "com.google.android.youtube",
+        "time_str": "28:11",
+        "seconds": 1691,
+        "launches": 2
       },
       {
         "pkg": "com.eway",
@@ -754,34 +863,28 @@
         "launches": 43
       },
       {
-        "pkg": "com.google.android.apps.docs.editors.docs",
-        "time_str": "26:17",
-        "seconds": 1577,
-        "launches": 24
+        "pkg": "com.google.android.calculator",
+        "time_str": "26:00",
+        "seconds": 1560,
+        "launches": 47
+      },
+      {
+        "pkg": "com.sec.android.gallery3d",
+        "time_str": "25:28",
+        "seconds": 1528,
+        "launches": 66
       },
       {
         "pkg": "com.kyivdigital",
-        "time_str": "25:10",
-        "seconds": 1510,
-        "launches": 29
+        "time_str": "25:12",
+        "seconds": 1512,
+        "launches": 30
       },
       {
         "pkg": "com.deepseek.chat",
         "time_str": "24:43",
         "seconds": 1483,
         "launches": 3
-      },
-      {
-        "pkg": "com.google.android.calculator",
-        "time_str": "23:25",
-        "seconds": 1405,
-        "launches": 31
-      },
-      {
-        "pkg": "com.sec.android.gallery3d",
-        "time_str": "21:54",
-        "seconds": 1314,
-        "launches": 63
       },
       {
         "pkg": "us.zoom.videomeetings",
@@ -791,15 +894,15 @@
       },
       {
         "pkg": "com.moneybookers.skrillpayments",
-        "time_str": "17:04",
-        "seconds": 1024,
-        "launches": 15
+        "time_str": "17:30",
+        "seconds": 1050,
+        "launches": 16
       },
       {
         "pkg": "com.google.android.apps.messaging",
-        "time_str": "15:44",
-        "seconds": 944,
-        "launches": 58
+        "time_str": "16:06",
+        "seconds": 966,
+        "launches": 59
       },
       {
         "pkg": "org.thoughtcrime.securesms",
@@ -821,21 +924,33 @@
       },
       {
         "pkg": "com.whatsapp",
-        "time_str": "10:37",
-        "seconds": 637,
-        "launches": 24
+        "time_str": "11:07",
+        "seconds": 667,
+        "launches": 25
       },
       {
         "pkg": "com.x8bit.bitwarden",
-        "time_str": "09:47",
-        "seconds": 587,
-        "launches": 40
+        "time_str": "10:46",
+        "seconds": 646,
+        "launches": 41
+      },
+      {
+        "pkg": "com.google.android.apps.docs",
+        "time_str": "09:02",
+        "seconds": 542,
+        "launches": 20
+      },
+      {
+        "pkg": "com.google.android.apps.photos",
+        "time_str": "08:44",
+        "seconds": 524,
+        "launches": 13
       },
       {
         "pkg": "com.bitwarden.authenticator",
-        "time_str": "08:25",
-        "seconds": 505,
-        "launches": 17
+        "time_str": "08:28",
+        "seconds": 508,
+        "launches": 19
       },
       {
         "pkg": "com.azure.authenticator",
@@ -844,22 +959,16 @@
         "launches": 44
       },
       {
-        "pkg": "com.google.android.apps.photos",
-        "time_str": "08:07",
-        "seconds": 487,
-        "launches": 12
-      },
-      {
         "pkg": "com.google.android.apps.authenticator2",
-        "time_str": "07:40",
-        "seconds": 460,
-        "launches": 12
+        "time_str": "07:47",
+        "seconds": 467,
+        "launches": 17
       },
       {
         "pkg": "eu.novapost",
-        "time_str": "06:41",
-        "seconds": 401,
-        "launches": 21
+        "time_str": "07:00",
+        "seconds": 420,
+        "launches": 22
       },
       {
         "pkg": "ua.otpbank.android",
@@ -868,16 +977,16 @@
         "launches": 22
       },
       {
-        "pkg": "com.android.intentresolver",
-        "time_str": "05:30",
-        "seconds": 330,
-        "launches": 93
+        "pkg": "com.google.android.photopicker",
+        "time_str": "05:54",
+        "seconds": 354,
+        "launches": 89
       },
       {
-        "pkg": "com.google.android.photopicker",
-        "time_str": "05:29",
-        "seconds": 329,
-        "launches": 83
+        "pkg": "com.android.intentresolver",
+        "time_str": "05:35",
+        "seconds": 335,
+        "launches": 95
       },
       {
         "pkg": "com.samsung.android.app.smartcapture",
@@ -886,28 +995,28 @@
         "launches": 41
       },
       {
+        "pkg": "com.google.android.documentsui",
+        "time_str": "04:49",
+        "seconds": 289,
+        "launches": 56
+      },
+      {
         "pkg": "com.samsung.android.video",
         "time_str": "04:44",
         "seconds": 284,
         "launches": 2
       },
       {
-        "pkg": "com.google.android.documentsui",
-        "time_str": "04:43",
-        "seconds": 283,
-        "launches": 54
-      },
-      {
-        "pkg": "com.google.android.apps.docs",
-        "time_str": "04:29",
-        "seconds": 269,
-        "launches": 12
+        "pkg": "com.google.android.calendar",
+        "time_str": "04:27",
+        "seconds": 267,
+        "launches": 11
       },
       {
         "pkg": "com.google.android.packageinstaller",
-        "time_str": "04:10",
-        "seconds": 250,
-        "launches": 142
+        "time_str": "04:12",
+        "seconds": 252,
+        "launches": 143
       },
       {
         "pkg": "com.android.htmlviewer",
@@ -919,12 +1028,6 @@
         "pkg": "com.google.android.apps.tasks",
         "time_str": "03:51",
         "seconds": 231,
-        "launches": 7
-      },
-      {
-        "pkg": "com.google.android.calendar",
-        "time_str": "03:38",
-        "seconds": 218,
         "launches": 7
       },
       {
@@ -941,21 +1044,33 @@
       },
       {
         "pkg": "com.android.credentialmanager",
-        "time_str": "02:58",
-        "seconds": 178,
-        "launches": 110
+        "time_str": "03:10",
+        "seconds": 190,
+        "launches": 114
+      },
+      {
+        "pkg": "com.android.vending",
+        "time_str": "03:08",
+        "seconds": 188,
+        "launches": 8
       },
       {
         "pkg": "ua.gov.reserveplus",
-        "time_str": "02:36",
-        "seconds": 156,
-        "launches": 7
+        "time_str": "03:06",
+        "seconds": 186,
+        "launches": 12
       },
       {
         "pkg": "com.sec.android.app.myfiles",
-        "time_str": "01:51",
-        "seconds": 111,
-        "launches": 22
+        "time_str": "02:05",
+        "seconds": 125,
+        "launches": 25
+      },
+      {
+        "pkg": "com.samsung.android.app.routines",
+        "time_str": "01:52",
+        "seconds": 112,
+        "launches": 4
       },
       {
         "pkg": "com.samsung.android.honeyboard",
@@ -988,16 +1103,10 @@
         "launches": 4
       },
       {
-        "pkg": "com.radio.fmradio",
-        "time_str": "01:04",
-        "seconds": 64,
-        "launches": 1
-      },
-      {
         "pkg": "com.rammigsoftware.bluecoins",
-        "time_str": "01:00",
-        "seconds": 60,
-        "launches": 3
+        "time_str": "01:01",
+        "seconds": 61,
+        "launches": 4
       },
       {
         "pkg": "com.android.settings.intelligence",
@@ -1013,9 +1122,15 @@
       },
       {
         "pkg": "com.android.companiondevicemanager",
-        "time_str": "00:36",
-        "seconds": 36,
-        "launches": 20
+        "time_str": "00:38",
+        "seconds": 38,
+        "launches": 21
+      },
+      {
+        "pkg": "com.samsung.android.lool",
+        "time_str": "00:37",
+        "seconds": 37,
+        "launches": 3
       },
       {
         "pkg": "com.samsung.android.app.telephonyui",
@@ -1028,6 +1143,12 @@
         "time_str": "00:28",
         "seconds": 28,
         "launches": 4
+      },
+      {
+        "pkg": "com.samsung.android.app.contacts",
+        "time_str": "00:27",
+        "seconds": 27,
+        "launches": 3
       },
       {
         "pkg": "com.samsung.android.service.tagservice",
@@ -1048,28 +1169,10 @@
         "launches": 3
       },
       {
-        "pkg": "com.samsung.android.app.contacts",
-        "time_str": "00:20",
-        "seconds": 20,
-        "launches": 2
-      },
-      {
-        "pkg": "com.samsung.android.app.routines",
-        "time_str": "00:16",
-        "seconds": 16,
-        "launches": 2
-      },
-      {
         "pkg": "com.samsung.android.forest",
         "time_str": "00:12",
         "seconds": 12,
         "launches": 3
-      },
-      {
-        "pkg": "com.samsung.android.lool",
-        "time_str": "00:12",
-        "seconds": 12,
-        "launches": 1
       },
       {
         "pkg": "com.android.certinstaller",
@@ -1136,6 +1239,12 @@
         "time_str": "00:00",
         "seconds": 0,
         "launches": 4
+      },
+      {
+        "pkg": "app.olauncher",
+        "time_str": "00:00",
+        "seconds": 0,
+        "launches": 2
       },
       {
         "pkg": "com.google.android.apps.bard",

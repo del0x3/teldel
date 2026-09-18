@@ -1,9 +1,9 @@
 {
-  "total_events": 1874,
-  "total_sessions": 189,
-  "micro_checks_count": 79,
+  "total_events": 2005,
+  "total_sessions": 312,
+  "micro_checks_count": 147,
   "binge_sessions_count": 2,
-  "night_activity_count": 8,
+  "night_activity_count": 0,
   "hourly_distribution": {
     "0": 0,
     "1": 0,
@@ -11,135 +11,159 @@
     "3": 0,
     "4": 0,
     "5": 0,
-    "6": 0,
-    "7": 0,
-    "8": 6,
-    "9": 4,
-    "10": 7,
+    "6": 6,
+    "7": 119,
+    "8": 28,
+    "9": 31,
+    "10": 28,
     "11": 2,
-    "12": 0,
-    "13": 8,
-    "14": 17,
-    "15": 54,
-    "16": 20,
-    "17": 8,
-    "18": 8,
-    "19": 18,
-    "20": 4,
-    "21": 23,
-    "22": 21,
-    "23": 8
+    "12": 11,
+    "13": 15,
+    "14": 20,
+    "15": 15,
+    "16": 21,
+    "17": 16,
+    "18": 12,
+    "19": 0,
+    "20": 2,
+    "21": 0,
+    "22": 52,
+    "23": 0
   },
   "top_app_switches": [
     [
       "messenger -> launcher",
+      20
+    ],
+    [
+      "launcher -> chatgpt",
       18
     ],
     [
       "launcher -> messenger",
-      15
+      16
     ],
     [
-      "systemui -> settings",
-      5
+      "chatgpt -> launcher",
+      14
     ],
     [
-      "launcher -> online",
-      4
-    ],
-    [
-      "messenger -> permissioncontroller",
-      4
-    ],
-    [
-      "permissioncontroller -> messenger",
-      4
-    ],
-    [
-      "settings -> launcher",
-      4
-    ],
-    [
-      "settings -> systemui",
-      4
-    ],
-    [
-      "online -> launcher",
-      3
+      "discord -> launcher",
+      9
     ],
     [
       "launcher -> discord",
+      9
+    ],
+    [
+      "launcher -> mono",
+      5
+    ],
+    [
+      "mono -> launcher",
+      5
+    ],
+    [
+      "launcher -> vending",
+      5
+    ],
+    [
+      "messenger -> permissioncontroller",
       3
     ],
     [
-      "launcher -> chrome",
+      "permissioncontroller -> messenger",
       3
     ],
     [
-      "chrome -> launcher",
+      "launcher -> permissioncontroller",
       3
     ],
     [
-      "launcher -> settings",
+      "launcher -> dialer",
       3
     ],
     [
-      "online -> permissioncontroller",
-      2
+      "dialer -> launcher",
+      3
     ],
     [
-      "permissioncontroller -> online",
-      2
+      "dialer -> incallui",
+      3
     ]
   ],
   "top_notifications_received": [
     [
       "org.telegram.messenger",
-      55
-    ],
-    [
-      "com.android.systemui",
-      41
-    ],
-    [
-      "android",
-      7
+      28
     ],
     [
       "com.android.vending",
-      6
+      14
     ],
     [
-      "com.discord",
-      5
+      "com.android.systemui",
+      8
+    ],
+    [
+      "android",
+      8
+    ],
+    [
+      "com.samsung.android.incallui",
+      8
+    ],
+    [
+      "com.wssyncmldm",
+      4
     ],
     [
       "com.google.android.calendar",
+      3
+    ],
+    [
+      "com.whatsapp",
       2
     ],
     [
-      "com.android.phone",
+      "com.openai.chatgpt",
+      2
+    ],
+    [
+      "com.sec.android.app.clockpackage",
+      2
+    ],
+    [
+      "com.google.android.youtube",
+      2
+    ],
+    [
+      "com.discord",
       1
     ],
     [
-      "ua.privatbank.ap24",
+      "com.samsung.android.app.routines",
       1
     ],
     [
-      "com.yazio.android",
+      "com.anthropic.claude",
+      1
+    ],
+    [
+      "com.xiaomi.wearable",
       1
     ]
   ],
   "longest_binges": [
     {
       "pkg": "org.telegram.messenger",
-      "duration_sec": 2121.0,
-      "start": "2026-09-13 16:49:49"
+      "duration_sec": 6380.0,
+      "start": "2026-09-17 20:28:40"
     },
     {
       "pkg": "org.telegram.messenger",
-      "duration_sec": 2074.0,
-      "start": "2026-09-13 17:39:28"
+      "duration_sec": 4617.0,
+      "start": "2026-09-17 18:32:22"
     }
   ]
 }

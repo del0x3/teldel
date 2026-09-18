@@ -78,45 +78,50 @@ phone_manager.bat
   [2] DISABLE Google Play Store          (restore lockdown)
 
   [3] Mirror Phone Screen to PC          (scrcpy stream)
-  [4] Toggle Display Mode: B/W <--> COLOR (quick color toggle)
+  [4] Toggle Display Mode: B/W <--> COLOR (quick toggle)
   [5] Express Battery, RAM & Security Perimeter Audit
 
-  [6] Full Lockdown (Zero-Browser + YouTube + Play Store + DoT)
-  [7] Open Interactive HTML Reports & Dopamine Dashboard
-  [8] Restore Default Stock Android Settings (Rollback)
+  [6] Apply Full Minimalism Transformation (18-step setup)
+  [7] Collect Usage Statistics & Dopamine Addiction Audit
+  [8] Open Interactive HTML Reports & Dashboard
+  [9] Restore Default Stock Android Settings (Rollback)
 
-  [9] Exit
+  [0] Exit
 ================================================================
 ```
 
-To run the whole 18-step transformation in one shot:
+To run the whole 18-step transformation directly:
 ```powershell
 .\scripts\apply_minimalism.bat
 ```
 
 ---
 
-### Repo Structure
+### Clean & Minimal Repo Structure
 
 ```text
-├── phone_manager.bat         # Main entry point (double-click to run)
-├── phone_manager.ps1         # Terminal UI script
+├── phone_manager.bat         # Master entry point (double-click to run)
+├── phone_manager.ps1         # Unified interactive console UI
 │
-├── docs/                     # Interactive visualizers (double-click to open in browser)
+├── docs/                     # Interactive HTML visualizers & documentation
 │   ├── index.html            # Hub linking all reports
 │   ├── step_by_step_transformation.html  # Detailed 18-step technical log
 │   ├── full_system_transformation_report.html # Architecture whitepaper
 │   └── dopamine_interactive_dashboard.html # Chart.js screen time analysis
 │
-├── scripts/                  # Individual scripts if you want to run things separately
-│   ├── apply_minimalism.bat  # Full 18-step setup
-│   ├── restore_defaults.bat  # Rollback script
-│   ├── start_screen.bat      # Scrcpy screen mirror
-│   ├── collect_stats.bat     # Dumps usagestats from phone and parses them
-│   ├── audit_olauncher.py    # Bytecode scanner verifying 0 trackers in the launcher
-│   └── ...
+├── scripts/                  # Clean modular automation engines
+│   ├── apply_minimalism.bat  # 1-click full 18-step setup
+│   ├── apply_minimalism.ps1  # Core minimalism engine
+│   ├── restore_defaults.bat  # 1-click full rollback
+│   ├── restore_defaults.ps1  # Core restoration engine
+│   ├── collect_stats.bat     # 1-click usage & dopamine collection
+│   ├── collect_stats.py      # Usage dump, parser & dopamine loop miner
+│   └── audit_olauncher.py    # Bytecode scanner verifying 0 trackers in launcher
 │
-└── data/                     # Anonymized sample data used by the HTML dashboards
+└── data/                     # Generated analytics JSON data
+    ├── parsed_stats.json
+    ├── multi_interval_stats.json
+    └── deep_dopamine_analysis.json
 ```
 
 ---

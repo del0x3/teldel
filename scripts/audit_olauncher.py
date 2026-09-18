@@ -8,7 +8,7 @@ apk_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(base_dir, 'Olaunch
 
 if not os.path.exists(apk_path):
     print(f"[!] Target APK not found: {apk_path}")
-    print("Run `python download_launcher.py` to download the latest release.")
+    print("[*] Place Olauncher.apk in scripts/ or pass the path as an argument: python audit_olauncher.py <path_to_apk>")
     sys.exit(1)
 
 print(f"Auditing APK bytecode: {apk_path}")
