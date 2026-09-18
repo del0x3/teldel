@@ -133,15 +133,23 @@ while ($running) {
             Write-Host "=== Toggling Screen Color Mode ===" -ForegroundColor Magenta
             if (Test-DeviceConnection) {
                 $status = (& $ADB shell settings get secure accessibility_display_daltonizer_enabled)
+                $samsungStatus = (& $ADB shell settings get system greyscale_mode)
                 if ($status) { $status = $status.Trim() }
-                if ($status -eq "1") {
+                if ($samsungStatus) { $samsungStatus = $samsungStatus.Trim() }
+
+                if ($status -eq "1" -or $samsungStatus -eq "1") {
                     Write-Host "Current mode: MONOCHROME. Switching to FULL COLOR..." -ForegroundColor Yellow
+                    & $ADB shell settings put system greyscale_mode 0
                     & $ADB shell settings put secure accessibility_display_daltonizer_enabled 0
+                    & $ADB shell settings put secure accessibility_display_daltonizer 0
+                    & $ADB shell settings put secure reduce_bright_colors_activated 0
                     Write-Host "`n[+] Screen restored to FULL COLOR mode!`n" -ForegroundColor Green
                 } else {
                     Write-Host "Current mode: FULL COLOR. Switching to MONOCHROME..." -ForegroundColor Yellow
+                    & $ADB shell settings put system greyscale_mode 1
                     & $ADB shell settings put secure accessibility_display_daltonizer 0
                     & $ADB shell settings put secure accessibility_display_daltonizer_enabled 1
+                    & $ADB shell settings put secure reduce_bright_colors_activated 1
                     Write-Host "`n[+] Screen switched to strict MONOCHROME ('Gray Stone') mode!`n" -ForegroundColor Green
                 }
             }
@@ -206,9 +214,13 @@ while ($running) {
                 & $ADB shell settings put secure install_non_market_apps 0
                 & $ADB shell 'cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES deny; cmd appops set com.discord REQUEST_INSTALL_PACKAGES deny; cmd appops set com.whatsapp REQUEST_INSTALL_PACKAGES deny; cmd appops set org.thoughtcrime.securesms REQUEST_INSTALL_PACKAGES deny; cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES deny; cmd appops set com.google.android.apps.docs REQUEST_INSTALL_PACKAGES deny; cmd appops set com.microsoft.skydrive REQUEST_INSTALL_PACKAGES deny'
 
-                Write-Host "[7/7] Enforcing DNS-over-TLS CleanBrowsing Family Shield..." -ForegroundColor Yellow
+                Write-Host "[7/7] Enforcing DNS-over-TLS CleanBrowsing Family Shield & Grayscale..." -ForegroundColor Yellow
                 & $ADB shell settings put global private_dns_mode hostname
                 & $ADB shell settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
+                & $ADB shell settings put system greyscale_mode 1
+                & $ADB shell settings put secure accessibility_display_daltonizer 0
+                & $ADB shell settings put secure accessibility_display_daltonizer_enabled 1
+                & $ADB shell settings put secure reduce_bright_colors_activated 1
 
                 Write-Host "`n[+] PERIMETER FULLY LOCKED DOWN ACROSS ALL VECTORS!" -ForegroundColor Green
             }
@@ -232,35 +244,16 @@ while ($running) {
         "8" {
             Clear-Host
             Write-Host "=== Restore Stock Default Settings (Rollback) ===" -ForegroundColor DarkYellow
-            Write-Host "Are you sure you want to unfreeze Play Store, restore colors, animations, and standard DNS? (Y/N)" -ForegroundColor Yellow
+            Write-Host "Are you sure you want to restore all stock settings, apps, colors, and DNS? (Y/N)" -ForegroundColor Yellow
             $ans = Read-Host
             if ($ans -match "^[yY]") {
                 if (Test-DeviceConnection) {
-                    Write-Host "`n[1/6] Enabling Google Play Store..." -ForegroundColor Cyan
-                    & $ADB shell pm enable com.android.vending
-
-                    Write-Host "[2/6] Restoring Full Color Display..." -ForegroundColor Cyan
-                    & $ADB shell settings put secure accessibility_display_daltonizer_enabled 0
-                    & $ADB shell settings put secure reduce_bright_colors_activated 0
-
-                    Write-Host "[3/6] Restoring Standard Window Animations (1.0x)..." -ForegroundColor Cyan
-                    & $ADB shell settings put global window_animation_scale 1.0
-                    & $ADB shell settings put global transition_animation_scale 1.0
-                    & $ADB shell settings put global animator_duration_scale 1.0
-
-                    Write-Host "[4/6] Restoring Haptics and System Sounds..." -ForegroundColor Cyan
-                    & $ADB shell settings put system haptic_feedback_enabled 1
-                    & $ADB shell settings put system sound_effects_enabled 1
-                    & $ADB shell settings put system lockscreen_sounds_enabled 1
-
-                    Write-Host "[5/6] Resetting Private DNS to Automatic (Opportunistic)..." -ForegroundColor Cyan
-                    & $ADB shell settings put global private_dns_mode opportunistic
-                    & $ADB shell settings put global private_dns_specifier ""
-
-                    Write-Host "[6/6] Restoring Notification Badges..." -ForegroundColor Cyan
-                    & $ADB shell settings put secure notification_badging 1
-
-                    Write-Host "`n[+] Stock system settings successfully restored!" -ForegroundColor Green
+                    $restoreScript = Join-Path $PSScriptRoot "scripts\restore_defaults.ps1"
+                    if (Test-Path $restoreScript) {
+                        & $restoreScript -Unattended -AdbPath $ADB
+                    } else {
+                        Write-Host "[!] restore_defaults.ps1 not found at $restoreScript" -ForegroundColor Red
+                    }
                 }
             } else {
                 Write-Host "`nOperation cancelled." -ForegroundColor Gray

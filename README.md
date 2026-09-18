@@ -183,26 +183,54 @@ adb shell settings put global private_dns_specifier family-filter-dns.cleanbrows
 
 ### How to Rollback
 
-If you decide you can't live without doomscrolling, you can revert everything back to factory defaults without wiping your phone:
+If you decide you want to revert everything back to stock settings without wiping your phone or losing data:
 
 Double-click `scripts\restore_defaults.bat` (or select option `8` in `phone_manager.bat`).
 
+The rollback script automatically:
+1. **Reinstalls & unfreezes applications**: Restores Chrome, YouTube, Google Play Store, Galaxy Store, and preinstalled apps via `cmd package install-existing` and `pm enable`.
+2. **Restores full-color display**: Deactivates Samsung One UI native monochrome (`system greyscale_mode 0`), hardware daltonizer, and Extra Dim.
+3. **Restores stock Samsung One UI launcher**: Automatically reactivates Samsung One UI Home as default and uninstalls `Olauncher`.
+4. **Restores installation permissions**: Re-enables APK sideloading and `REQUEST_INSTALL_PACKAGES` for messengers, files, and browsers.
+5. **Restores system feel & DNS**: Resets animations to 1.0x, haptics, sounds, badges, and sets Private DNS back to opportunistic default.
+
 Or manually:
 ```bash
+# 1. Reinstall and enable core apps
+adb shell cmd package install-existing com.android.vending
+adb shell cmd package install-existing com.sec.android.app.samsungapps
+adb shell cmd package install-existing com.android.chrome
+adb shell cmd package install-existing com.google.android.youtube
 adb shell pm enable com.android.vending
+adb shell pm enable com.sec.android.app.samsungapps
 adb shell pm enable com.android.chrome
-adb shell pm enable com.sec.android.app.chromecustomizations
+adb shell pm enable com.google.android.youtube
+
+# 2. Restore full color display (Samsung + AOSP)
+adb shell settings put system greyscale_mode 0
 adb shell settings put secure accessibility_display_daltonizer_enabled 0
 adb shell settings put secure reduce_bright_colors_activated 0
+
+# 3. Restore Samsung One UI Home
+adb shell cmd package set-home-activity com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity
+adb shell pm uninstall app.olauncher
+adb shell am start -a android.intent.action.MAIN -c android.intent.category.HOME
+
+# 4. Restore APK installations & Sideloading
+adb shell settings put secure install_non_market_apps 1
+adb shell cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES allow
+
+# 5. Restore animations, sounds, and network DNS
 adb shell settings put global window_animation_scale 1.0
 adb shell settings put global transition_animation_scale 1.0
 adb shell settings put global animator_duration_scale 1.0
 adb shell settings put system haptic_feedback_enabled 1
 adb shell settings put system sound_effects_enabled 1
+adb shell settings put system lockscreen_sounds_enabled 1
 adb shell settings put secure notification_badging 1
 adb shell settings put system screen_off_timeout 60000
+adb shell settings delete global private_dns_specifier
 adb shell settings put global private_dns_mode opportunistic
-adb shell settings put global private_dns_specifier ""
 ```
 
 ---

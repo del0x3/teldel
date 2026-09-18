@@ -144,7 +144,8 @@ Write-Host "`n>>> [4/6] Tuning Hardware, Memory & UI Latency (0 ms)..." -Foregro
 Write-Host "    Done: RAM Plus disabled, animations set to 0.0 ms, radio scanning muted." -ForegroundColor Green
 
 Write-Host "`n>>> [5/6] Engaging Sensory Detox ('Gray Stone' Mode)..." -ForegroundColor Cyan
-# Grayscale daltonizer + Extra Dim
+# Grayscale daltonizer + Samsung Greyscale + Extra Dim
+& $ADB shell settings put system greyscale_mode 1
 & $ADB shell settings put secure accessibility_display_daltonizer 0
 & $ADB shell settings put secure accessibility_display_daltonizer_enabled 1
 & $ADB shell settings put secure reduce_bright_colors_activated 1
@@ -188,7 +189,9 @@ if (Test-Path $launcherApk) {
     & $ADB install -r $launcherApk
     & $ADB shell cmd appops set app.olauncher RECORD_AUDIO ignore 2>$null
     & $ADB shell cmd appops set app.olauncher READ_PHONE_STATE ignore 2>$null
-    Write-Host "    Olauncher installed and permissions stripped." -ForegroundColor Green
+    & $ADB shell cmd package set-home-activity app.olauncher/.MainActivity 2>$null
+    & $ADB shell am start -a android.intent.action.MAIN -c android.intent.category.HOME 2>$null
+    Write-Host "    Olauncher installed, activated as default launcher, and permissions stripped." -ForegroundColor Green
 } else {
     Write-Host "    [!] Olauncher.apk not found. You can run download_launcher.py later." -ForegroundColor Yellow
 }
