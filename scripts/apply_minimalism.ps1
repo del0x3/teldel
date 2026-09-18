@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Automated 18-Step Android Productivity & Dopamine Detox Transformation Script (High-Speed Engine).
+    Automated 18-Step Android Productivity & Dopamine Detox Transformation Script (Ultra-Fast Engine).
 .DESCRIPTION
     Transforms a connected Android / Samsung Galaxy device into a zero-distraction,
     monochrome, privacy-hardened productivity terminal via a single-stream batched ADB shell execution.
@@ -18,6 +18,8 @@ function Resolve-Adb {
     if ($cmd) { return $cmd.Source }
     $localAdb = Join-Path $PSScriptRoot "platform-tools\adb.exe"
     if (Test-Path $localAdb) { return $localAdb }
+    $parentAdb = Join-Path $PSScriptRoot "..\platform-tools\adb.exe"
+    if (Test-Path $parentAdb) { return $parentAdb }
     if ($env:LOCALAPPDATA) {
         $appDataAdb = Join-Path $env:LOCALAPPDATA "Android\Sdk\platform-tools\adb.exe"
         if (Test-Path $appDataAdb) { return $appDataAdb }
@@ -43,7 +45,7 @@ Clear-Host
 Write-Host "==========================================================================" -ForegroundColor Cyan
 Write-Host "       ANDROID PRODUCTIVITY TERMINAL - 18-STEP AUTOMATED SETUP            " -ForegroundColor Yellow
 Write-Host "==========================================================================" -ForegroundColor Cyan
-Write-Host "This script will transform your connected device into a minimal terminal." -ForegroundColor White
+Write-Host "This script transforms your connected device into a minimal terminal." -ForegroundColor White
 Write-Host "No root required. 100% reversible via restore_defaults.ps1." -ForegroundColor Green
 Write-Host ""
 
@@ -69,8 +71,23 @@ if (-not $Unattended) {
 Write-Host "`n>>> Applying high-speed 18-step policy batch payload..." -ForegroundColor Cyan
 $sw = [System.Diagnostics.Stopwatch]::StartNew()
 
+# Pre-check Olauncher presence to avoid slow APK reinstall overhead
+$olauncherInstalled = ((& $ADB shell pm path app.olauncher 2>$null | Out-String).Trim() -match "package:")
+if (-not $olauncherInstalled) {
+    $launcherCandidates = @(
+        (Join-Path $PSScriptRoot "..\Olauncher.apk"),
+        (Join-Path $PSScriptRoot "Olauncher.apk")
+    )
+    $launcherApk = $launcherCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+    if ($launcherApk) {
+        Write-Host "    [+] First-time install of verified minimal launcher (Olauncher)..." -ForegroundColor DarkGray
+        & $ADB install -r $launcherApk 2>$null | Out-Null
+    }
+}
+
+# Single-stream in-memory execution payload across all 18 security and sensory policies
 $batchScript = @'
-# 1. Neutralize distractions & feeds
+# 1. Neutralize entertainment & distraction feeds
 pm disable-user --user 0 com.google.android.youtube
 pm disable-user --user 0 com.zhiliaoapp.musically
 pm disable-user --user 0 com.instagram.android
@@ -109,7 +126,7 @@ pm disable-user --user 0 ipsgeofence
 pm disable-user --user 0 diagmonagent
 pm disable-user --user 0 sm.devicesecurity
 
-# 5. Hardware & 0ms animations
+# 5. Hardware tuning & 0ms animations
 settings put global ram_expand_size 0
 settings put global window_animation_scale 0
 settings put global transition_animation_scale 0
@@ -132,28 +149,17 @@ settings put system screen_off_timeout 30000
 # 7. DNS-over-TLS CleanBrowsing
 settings put global private_dns_mode hostname
 settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
-'@
 
-# Execute the entire policy in a single ADB subshell
-$batchScript | & $ADB shell 2>&1 | Out-Null
-
-# Handle Olauncher installation & activation
-$launcherCandidates = @(
-    (Join-Path $PSScriptRoot "..\Olauncher.apk"),
-    (Join-Path $PSScriptRoot "Olauncher.apk")
-)
-$launcherApk = $launcherCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
-
-if ($launcherApk) {
-    & $ADB install -r $launcherApk 2>$null | Out-Null
-    $launcherSetup = @'
+# 8. Launcher activation
+pm enable app.olauncher
 cmd appops set app.olauncher RECORD_AUDIO ignore
 cmd appops set app.olauncher READ_PHONE_STATE ignore
 cmd package set-home-activity app.olauncher/.MainActivity
 am start -a android.intent.action.MAIN -c android.intent.category.HOME
 '@
-    $launcherSetup | & $ADB shell 2>&1 | Out-Null
-}
+
+# Execute the entire policy in a single ADB subshell
+$batchScript | & $ADB shell 2>&1 | Out-Null
 
 $sw.Stop()
 $elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 2)

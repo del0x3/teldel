@@ -137,24 +137,26 @@ while ($running) {
             Clear-Host
             Write-Host "=== Toggling Screen Color Mode ===" -ForegroundColor Magenta
             if (Test-DeviceConnection) {
-                $status = (& $ADB shell settings get secure accessibility_display_daltonizer_enabled)
-                $samsungStatus = (& $ADB shell settings get system greyscale_mode)
-                if ($status) { $status = $status.Trim() }
-                if ($samsungStatus) { $samsungStatus = $samsungStatus.Trim() }
-
-                if ($status -eq "1" -or $samsungStatus -eq "1") {
-                    Write-Host "Current mode: MONOCHROME. Switching to FULL COLOR..." -ForegroundColor Yellow
-                    & $ADB shell settings put system greyscale_mode 0
-                    & $ADB shell settings put secure accessibility_display_daltonizer_enabled 0
-                    & $ADB shell settings put secure accessibility_display_daltonizer 0
-                    & $ADB shell settings put secure reduce_bright_colors_activated 0
+                $toggleCmd = @'
+cur=$(settings get system greyscale_mode)
+if [ "$cur" = "1" ]; then
+    settings put system greyscale_mode 0
+    settings put secure accessibility_display_daltonizer_enabled 0
+    settings put secure accessibility_display_daltonizer 0
+    settings put secure reduce_bright_colors_activated 0
+    echo "COLOR"
+else
+    settings put system greyscale_mode 1
+    settings put secure accessibility_display_daltonizer 0
+    settings put secure accessibility_display_daltonizer_enabled 1
+    settings put secure reduce_bright_colors_activated 1
+    echo "MONOCHROME"
+fi
+'@
+                $mode = ($toggleCmd | & $ADB shell).Trim()
+                if ($mode -match "COLOR") {
                     Write-Host "`n[+] Screen restored to FULL COLOR mode!`n" -ForegroundColor Green
                 } else {
-                    Write-Host "Current mode: FULL COLOR. Switching to MONOCHROME..." -ForegroundColor Yellow
-                    & $ADB shell settings put system greyscale_mode 1
-                    & $ADB shell settings put secure accessibility_display_daltonizer 0
-                    & $ADB shell settings put secure accessibility_display_daltonizer_enabled 1
-                    & $ADB shell settings put secure reduce_bright_colors_activated 1
                     Write-Host "`n[+] Screen switched to strict MONOCHROME ('Gray Stone') mode!`n" -ForegroundColor Green
                 }
             }
@@ -164,28 +166,25 @@ while ($running) {
             Clear-Host
             Write-Host "================= EXPRESS PERIMETER & SECURITY AUDIT =================" -ForegroundColor Cyan
             if (Test-DeviceConnection) {
-                Write-Host "`n--- BATTERY & MEMORY METRICS ---" -ForegroundColor Yellow
-                & $ADB shell "dumpsys battery | grep -E 'level|temperature|status'"
-                & $ADB shell "cat /proc/meminfo | head -n 2"
-                
-                Write-Host "`n--- BROWSER RESOLVER PERIMETER ---" -ForegroundColor Yellow
-                $br = (& $ADB shell cmd package resolve-activity http://google.com)
-                if ($br) { $br = $br.Trim() }
-                Write-Host "HTTP Resolver Output: $br" -ForegroundColor Green
+                $auditScript = @'
+echo "--- BATTERY & MEMORY METRICS ---"
+dumpsys battery | grep -E 'level|temperature|status'
+cat /proc/meminfo | head -n 2
 
-                Write-Host "`n--- PRIVATE DNS (DoT) STATUS ---" -ForegroundColor Yellow
-                $dnsMode = (& $ADB shell settings get global private_dns_mode).Trim()
-                $dnsHost = (& $ADB shell settings get global private_dns_specifier).Trim()
-                Write-Host "DNS Mode: $dnsMode | Host: $dnsHost" -ForegroundColor Green
+echo "--- BROWSER RESOLVER PERIMETER ---"
+cmd package resolve-activity http://google.com
 
-                Write-Host "`n--- LOCKED VECTORS CHECK ---" -ForegroundColor Yellow
-                $users = (& $ADB shell pm list users)
-                Write-Host "Android Profiles / Users: $users" -ForegroundColor Cyan
-                $vpn = (& $ADB shell pm list packages -d --user 0 | Select-String "vpndialogs")
-                Write-Host "VPN Consent Dialog: $vpn" -ForegroundColor Cyan
-                $inst = (& $ADB shell settings get secure install_non_market_apps).Trim()
-                Write-Host "Install unknown APKs (0=blocked): $inst" -ForegroundColor Cyan
-                Write-Host "`n==========================================================================" -ForegroundColor Cyan
+echo "--- PRIVATE DNS (DoT) STATUS ---"
+echo "DNS Mode: $(settings get global private_dns_mode) | Host: $(settings get global private_dns_specifier)"
+
+echo "--- LOCKED VECTORS CHECK ---"
+echo "Android Profiles / Users: $(pm list users)"
+echo "VPN Consent Dialog: $(pm list packages -d --user 0 | grep vpndialogs)"
+echo "Install unknown APKs (0=blocked): $(settings get secure install_non_market_apps)"
+'@
+                $auditOut = ($auditScript | & $ADB shell | Out-String)
+                Write-Host $auditOut -ForegroundColor Green
+                Write-Host "==========================================================================" -ForegroundColor Cyan
             }
             Read-Host "Press Enter to return to menu..."
         }

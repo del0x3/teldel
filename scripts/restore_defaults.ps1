@@ -117,7 +117,7 @@ settings put secure reduce_bright_colors_activated 0
 
 # 4. Restore stock Samsung One UI launcher & notification listeners
 cmd package set-home-activity com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity
-pm uninstall app.olauncher
+pm disable-user --user 0 app.olauncher
 am start -a android.intent.action.MAIN -c android.intent.category.HOME
 
 # 5. Restore animations & hardware settings
