@@ -6,6 +6,8 @@ events_dump.txt
 notif_dump.txt
 exit_input.txt
 *.log
+*wireless_config.json
+*device_config.json
 
 # UI Automator XML dumps (contains personal screen text & contacts)
 *.xml

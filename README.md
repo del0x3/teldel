@@ -107,9 +107,16 @@ Double-click `phone_manager.bat` or run:
   [8] Open Interactive HTML Reports & Dashboard
   [9] Restore Default Stock Android Settings (Rollback)
 
+  [W] Wireless ADB Menu: Wi-Fi Pairing / Cable-Free Mode
   [0] Exit
 ================================================================
 ```
+
+### 3. Cable-Free / Wireless Operation (No USB Required)
+To manage the device wirelessly over Wi-Fi without a physical USB cable:
+1. Connect via USB once and press `[W]` -> `[1]` in `phone_manager.bat` to enable TCP/IP port 5555.
+2. Unplug the USB cable. `phone_manager.bat` will automatically auto-detect the phone's Wi-Fi IP and connect wirelessly.
+3. If the phone was rebooted or USB was never connected: navigate to **Developer Options** > **Wireless Debugging** > **Pair device with pairing code**, and select `[W]` -> `[4]` in `phone_manager.bat`.
 
 ---
 

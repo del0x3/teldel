@@ -38,9 +38,27 @@ if ($ADB) {
 
 function Get-DeviceStatus {
     $devsText = (& $ADB devices 2>$null | Out-String)
+    
+    # Auto-connect over Wi-Fi if no USB device is attached
+    if ($devsText -notmatch "\tdevice") {
+        $cfgFile = Join-Path $PSScriptRoot "data\wireless_config.json"
+        if (Test-Path $cfgFile) {
+            try {
+                $cfg = Get-Content $cfgFile -Raw | ConvertFrom-Json
+                if ($cfg.last_ip -and $cfg.auto_connect) {
+                    $port = if ($cfg.port) { $cfg.port } else { 5555 }
+                    & $ADB connect "$($cfg.last_ip):$port" 2>$null | Out-Null
+                    $devsText = (& $ADB devices 2>$null | Out-String)
+                }
+            } catch {}
+        }
+    }
+    
     if ($devsText -notmatch "\tdevice") {
         return @{ Connected = $false }
     }
+    
+    $isWireless = ($devsText -match ":[0-9]{4,5}\tdevice")
     
     $query = @'
 grey=$(settings get system greyscale_mode 2>/dev/null)
@@ -48,13 +66,31 @@ home=$(cmd role get-role-holders android.app.role.HOME 2>/dev/null)
 vending=$(pm list packages -e com.android.vending 2>/dev/null)
 bat=$(dumpsys battery 2>/dev/null | grep -o 'level: [0-9]*' | head -n 1 | cut -d ' ' -f 2)
 dns=$(settings get global private_dns_mode 2>/dev/null)
-echo "$grey|$home|$vending|$bat|$dns"
+wlan_ip=$(ip -4 addr show wlan0 2>/dev/null | grep -o 'inet [0-9.]*' | cut -d ' ' -f 2)
+echo "$grey|$home|$vending|$bat|$dns|$wlan_ip"
 '@
     $raw = ($query | & $ADB shell 2>$null | Out-String).Trim()
     $parts = $raw -split "\|"
     
+    $wlanIp = if ($parts.Length -gt 5 -and $parts[5]) { $parts[5].Trim() } else { "" }
+    
+    # If on USB and Wi-Fi IP is discovered, ensure port 5555 is armed and config updated
+    if (-not $isWireless -and $wlanIp) {
+        $cfgFile = Join-Path $PSScriptRoot "data\wireless_config.json"
+        try {
+            $cfg = @{
+                last_ip = $wlanIp
+                port = 5555
+                auto_connect = $true
+            }
+            $cfg | ConvertTo-Json | Set-Content $cfgFile -Encoding UTF8
+        } catch {}
+    }
+    
     return @{
         Connected   = $true
+        IsWireless  = $isWireless
+        WlanIp      = $wlanIp
         IsGrey      = ($parts[0] -eq "1")
         IsMinimal   = ($parts[1] -match "olauncher")
         IsPlayStore = ($parts[2] -match "com.android.vending")
@@ -81,18 +117,27 @@ function Show-Header {
         $storeColor = if ($st.IsPlayStore) { "Yellow" } else { "Green" }
         
         $dnsText = if ($st.IsDnsSecure) { "CleanBrowsing DoT" } else { "Default DHCP" }
+        $connText = if ($st.IsWireless) { "Wi-Fi Wireless" } else { "USB Cable" }
+        $connColor = if ($st.IsWireless) { "Cyan" } else { "Green" }
         
-        Write-Host " [STATUS] Battery: " -NoNewline -ForegroundColor White
-        Write-Host "$($st.Battery)" -NoNewline -ForegroundColor Cyan
-        Write-Host " | Mode: " -NoNewline -ForegroundColor White
+        Write-Host " [STATUS] Link: " -NoNewline -ForegroundColor DarkGray
+        Write-Host "[$connText]" -NoNewline -ForegroundColor $connColor
+        Write-Host " | Bat: " -NoNewline -ForegroundColor DarkGray
+        Write-Host "$($st.Battery)" -NoNewline -ForegroundColor White
+        Write-Host " | Mode: " -NoNewline -ForegroundColor DarkGray
         Write-Host "[$modeText]" -NoNewline -ForegroundColor $modeColor
-        Write-Host " | Screen: " -NoNewline -ForegroundColor White
+        Write-Host " | Screen: " -NoNewline -ForegroundColor DarkGray
         Write-Host "[$colorText]" -ForegroundColor $colorColor
         Write-Host "          Store: " -NoNewline -ForegroundColor DarkGray
         Write-Host "[$storeText]" -NoNewline -ForegroundColor $storeColor
-        Write-Host " | DNS: [$dnsText]" -ForegroundColor DarkGray
+        Write-Host " | DNS: [$dnsText]" -NoNewline -ForegroundColor DarkGray
+        if ($st.WlanIp) {
+            Write-Host " | IP: $($st.WlanIp)" -ForegroundColor DarkGray
+        } else {
+            Write-Host ""
+        }
     } else {
-        Write-Host " [STATUS] Device: DISCONNECTED (Connect phone with USB debugging)" -ForegroundColor DarkGray
+        Write-Host " [STATUS] Device: DISCONNECTED (Connect USB cable or enable Wi-Fi ADB)" -ForegroundColor DarkGray
     }
     Write-Host "================================================================" -ForegroundColor Cyan
     Write-Host ""
@@ -108,18 +153,19 @@ function Show-Header {
     Write-Host "  [8] Open Interactive HTML Reports & Dashboard" -ForegroundColor Blue
     Write-Host "  [9] Restore Default Stock Android Settings (Rollback)" -ForegroundColor DarkYellow
     Write-Host ""
+    Write-Host "  [W] Wireless ADB Menu: Wi-Fi Pairing / Cable-Free Mode" -ForegroundColor Cyan
     Write-Host "  [0] Exit" -ForegroundColor Gray
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Cyan
 }
 
 function Test-DeviceConnection {
-    $devsText = (& $ADB devices | Out-String)
-    if ($devsText -notmatch "\tdevice") {
-        Write-Host "`n[WARNING] Device not detected via ADB!" -ForegroundColor Yellow
-        Write-Host "1. Connect your phone to PC using a USB cable." -ForegroundColor DarkGray
-        Write-Host "2. Enable 'USB Debugging' in Developer Options." -ForegroundColor DarkGray
-        Write-Host "3. Authorize 'Allow USB Debugging' on your phone screen.`n" -ForegroundColor DarkGray
+    $st = Get-DeviceStatus
+    if (-not $st.Connected) {
+        Write-Host "`n[WARNING] Device not detected via USB or Wireless ADB!" -ForegroundColor Yellow
+        Write-Host "1. Connect phone via USB OR ensure phone and PC are on same Wi-Fi." -ForegroundColor DarkGray
+        Write-Host "2. Enable 'USB Debugging' (or 'Wireless Debugging') in Developer Options." -ForegroundColor DarkGray
+        Write-Host "3. Authorize connection on your phone screen.`n" -ForegroundColor DarkGray
         return $false
     }
     return $true
@@ -299,6 +345,87 @@ echo "Install unknown APKs (0=blocked): $(settings get secure install_non_market
                 }
             } else {
                 Write-Host "`nOperation cancelled." -ForegroundColor Gray
+            }
+            Read-Host "`nPress Enter to return to menu..."
+        }
+        { $_ -in "W", "w" } {
+            Clear-Host
+            Write-Host "================================================================" -ForegroundColor Cyan
+            Write-Host "       WIRELESS ADB (Wi-Fi) MANAGEMENT CONSOLE                  " -ForegroundColor Yellow
+            Write-Host "================================================================" -ForegroundColor Cyan
+            Write-Host ""
+            
+            $cfgFile = Join-Path $PSScriptRoot "data\wireless_config.json"
+            $savedIp = ""
+            if (Test-Path $cfgFile) {
+                try {
+                    $cfg = Get-Content $cfgFile -Raw | ConvertFrom-Json
+                    $savedIp = $cfg.last_ip
+                } catch {}
+            }
+            
+            Write-Host "  Last Saved Phone Wi-Fi IP: " -NoNewline -ForegroundColor DarkGray
+            if ($savedIp) { Write-Host "$savedIp:5555" -ForegroundColor Green } else { Write-Host "None" -ForegroundColor Yellow }
+            Write-Host ""
+            Write-Host "  [1] Switch USB to Wireless Mode (Arm port 5555 via USB)" -ForegroundColor Green
+            Write-Host "  [2] Connect to Saved Phone IP ($savedIp:5555)" -ForegroundColor Cyan
+            Write-Host "  [3] Connect to Custom IP:Port (Enter IP manually)" -ForegroundColor White
+            Write-Host "  [4] Pair via Android 11+ Wireless Debugging (Enter Code)" -ForegroundColor Magenta
+            Write-Host "  [5] Disconnect all Wireless ADB sessions" -ForegroundColor Red
+            Write-Host ""
+            Write-Host "  [0] Back to Main Menu" -ForegroundColor Gray
+            Write-Host "================================================================" -ForegroundColor Cyan
+            
+            $wChoice = Read-Host "Select wireless option [0-5]"
+            switch ($wChoice) {
+                "1" {
+                    Write-Host "`n>>> Querying device Wi-Fi IP and enabling TCP mode..." -ForegroundColor Cyan
+                    $ip = (& $ADB shell "ip -4 addr show wlan0 | grep -o 'inet [0-9.]*' | cut -d ' ' -f 2" 2>$null | Out-String).Trim()
+                    if ($ip) {
+                        & $ADB tcpip 5555
+                        $cfg = @{ last_ip = $ip; port = 5555; auto_connect = $true }
+                        $cfg | ConvertTo-Json | Set-Content $cfgFile -Encoding UTF8
+                        Write-Host "[+] Port 5555 enabled! Phone Wi-Fi IP: $ip" -ForegroundColor Green
+                        Write-Host "[+] You can now unplug the USB cable and manage phone wirelessly!" -ForegroundColor Yellow
+                    } else {
+                        Write-Host "[!] Phone is not connected to Wi-Fi. Turn on Wi-Fi on phone first." -ForegroundColor Red
+                    }
+                }
+                "2" {
+                    if ($savedIp) {
+                        Write-Host "`n>>> Connecting to $savedIp:5555..." -ForegroundColor Cyan
+                        $res = (& $ADB connect "$savedIp:5555" | Out-String)
+                        Write-Host $res -ForegroundColor Green
+                    } else {
+                        Write-Host "[!] No saved IP found. Connect via USB first or enter IP manually." -ForegroundColor Yellow
+                    }
+                }
+                "3" {
+                    $customIp = Read-Host "Enter Phone IP address (e.g. 192.168.0.108)"
+                    $customPort = Read-Host "Enter Port (default 5555)"
+                    if (-not $customPort) { $customPort = "5555" }
+                    if ($customIp) {
+                        Write-Host "`n>>> Connecting to ${customIp}:${customPort}..." -ForegroundColor Cyan
+                        $res = (& $ADB connect "${customIp}:${customPort}" | Out-String)
+                        Write-Host $res -ForegroundColor Green
+                        $cfg = @{ last_ip = $customIp; port = [int]$customPort; auto_connect = $true }
+                        $cfg | ConvertTo-Json | Set-Content $cfgFile -Encoding UTF8
+                    }
+                }
+                "4" {
+                    Write-Host "`n>>> Android 11+ Wireless Debugging Pairing" -ForegroundColor Cyan
+                    Write-Host "1. On phone: Developer Options -> Wireless Debugging -> Pair device with pairing code" -ForegroundColor DarkGray
+                    $pairHost = Read-Host "Enter IP & Port from phone screen (e.g. 192.168.0.108:37123)"
+                    $pairCode = Read-Host "Enter 6-digit Wi-Fi Pairing Code"
+                    if ($pairHost -and $pairCode) {
+                        $res = (& $ADB pair $pairHost $pairCode | Out-String)
+                        Write-Host $res -ForegroundColor Green
+                    }
+                }
+                "5" {
+                    Write-Host "`n>>> Disconnecting wireless sessions..." -ForegroundColor Yellow
+                    & $ADB disconnect | Out-Host
+                }
             }
             Read-Host "`nPress Enter to return to menu..."
         }
