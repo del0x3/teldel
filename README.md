@@ -1,73 +1,89 @@
-# teldel — turning my phone into a dumb terminal
+# teldel — Android Productivity Terminal
 
-A set of ADB scripts and system tweaks I used to turn my Samsung Galaxy into a distraction-free, zero-browser utility phone. No root, doesn't trip Knox, completely reversible.
+[![Android](https://img.shields.io/badge/Android-10%2B-3DDC84?style=flat-square&logo=android&logoColor=white)](https://developer.android.com)
+[![Samsung Knox](https://img.shields.io/badge/Knox-0x0%20Untouched-0057B7?style=flat-square)](https://www.samsungknox.com)
+[![No Root](https://img.shields.io/badge/Root-Not%20Required-blueviolet?style=flat-square)]()
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+[![Interface](https://img.shields.io/badge/Interface-ADB%20CLI-black?style=flat-square&logo=powershell)](phone_manager.bat)
 
----
+A surgical, root-free ADB automation suite and system policy engine that converts modern Samsung Galaxy and Android smartphones into zero-distraction, monochrome productivity terminals.
 
-### Why?
-
-Last week I dumped my Android kernel usage stats and realized I averaged **10.4 hours a day** on my phone. 52 hours in a single week went to YouTube alone. That's literally a full-time job plus overtime spent staring at glowing pixels.
-
-I didn't want to buy a $300 "minimalist" e-ink dumbphone that can't run banking apps, 2FA, or Telegram. I wanted to keep modern hardware (good camera, battery life, secure enclave, messengers, Uber, banking) while completely ripping out the casino mechanics.
-
-So I plugged it into my PC and gutted the addiction loops over ADB.
+100% reversible in one click. Preserves Samsung Knox warranty status (`0x0`). Requires zero root privileges.
 
 ---
 
-### "Wait, you deleted the web browser?"
+## Core System Policies
 
-Yeah. People's first reaction is always: *"How do you survive without a browser on your phone?"*
-
-Honestly, what are you actually doing in a mobile browser in 2026?
-- Clicking some clickbait link from a group chat
-- Getting flashbanged by 3 cookie consent banners, a newsletter popup, and an autoplaying video ad
-- Scrolling past 12 paragraphs of AI-generated filler to find out what time a store closes
-
-If I genuinely need information on the go, I open Claude or ChatGPT. I ask the question, get the exact answer in three sentences, close the phone, and get on with my life.
-
-If I need to book a flight, fill out government paperwork, or do actual research, I open my laptop like a normal person. A mobile browser isn't a productivity tool — it's an excuse to doomscroll on the toilet while Google auctions your attention to ad brokers.
+- **Zero-Browser Policy**: Disables Google Chrome, WebViews, and system HTML viewers. Tapping HTTP links returns `No Activity found`.
+- **Controlled App Store**: Freezes Google Play Store and uninstalls Galaxy Store via `pm disable-user`. Controlled temporary unfreeze via CLI menu for required updates.
+- **Anti-Sideloading Enforcement**: Revokes `REQUEST_INSTALL_PACKAGES` across Telegram, WhatsApp, Discord, file managers, and cloud drives using Android AppOps.
+- **Sensory & Visual Detox**: Enforces system-wide hardware monochrome (`greyscale_mode 1`), Extra Dim, 0.0 ms window animations, and mutes haptic and audio feedback.
+- **Notification Badge Neutralization**: Sets `notification_badging 0` and removes badge listeners (`com.sec.android.app.launcher`). Status bar and notification shade push alerts remain 100% functional.
+- **Telemetry & Bloatware Stripped**: Deactivates background diagnostic logging, carrier agents, and continuous Wi-Fi/Bluetooth beacon scanning.
+- **DNS-over-TLS (DoT)**: Enforces CleanBrowsing Family Shield (`family-filter-dns.cleanbrowsing.org`) at socket level.
+- **Minimal Text Launcher**: Integrates [Olauncher](https://github.com/tanujnotes/Olauncher) (open source, GPLv3, zero ads, zero trackers).
 
 ---
 
-### What this actually does
+## Preserved Operational Perimeter
 
-1. **Kills entertainment & distraction apps:** YouTube, TikTok, Instagram, casual games, and food delivery feeds are neutralized. Crucially, third-party user apps are frozen via `pm disable-user` rather than buggy `pm uninstall -k` flags, preventing Android's PackageManager from entering an orphaned ghost-package state that breaks Google Play Store.
-2. **Zero-Browser:** Chrome and web view customizers disabled. Tapping an HTTP link in any app returns `No activity found`. The rabbit hole simply doesn't exist.
-3. **App Store on a leash:** Google Play is frozen (`pm disable-user`) and Galaxy Store is uninstalled. You can't impulsively download games at midnight. When you legitimately need to update banking apps, plug into your PC, run `phone_manager.bat`, press `1` to temporarily unfreeze it, update, and press `2` to lock it again.
-4. **Anti-sideloading:** Revoked `REQUEST_INSTALL_PACKAGES` from Telegram, file managers, browsers, and cloud drives via `appops`. Even if you download an APK, the OS refuses to install it.
-5. **Killed telemetry & carrier junk:** Stripped 15 background diagnostic daemons, Samsung DiagMon, McAfee scanner, and persistent Wi-Fi/Bluetooth beacon snooping.
-6. **Disabled RAM Plus (ZRAM swap):** Samsung enables a 4 GB virtual swap file on flash storage by default. On budget/midrange flash storage, this just causes I/O wait micro-stutters. Setting `ram_expand_size 0` lets the phone run purely on physical LPDDR RAM.
-7. **0 ms animations:** Set `window_animation_scale`, `transition_animation_scale`, and `animator_duration_scale` to `0`. Windows snap open instantly instead of sliding around.
-8. **Grayscale ("Gray Stone"):** Hardware daltonizer set to monochrome + Samsung One UI `system greyscale_mode 1` + Extra Dim enabled. Without bright saturated colors, your monkey brain stops treating your screen like a bush of ripe berries.
-9. **Eliminated red anxiety badges & sensory triggers:** Haptic feedback off, keypress clicks off, lock sounds off, and notification badges (red dots with numbers) completely eliminated by setting `notification_badging 0` and stripping the launcher's `NotificationListener`. Crucially, push notifications in the notification shade (status bar) remain 100% functional.
-10. **CleanBrowsing DoT:** System-wide DNS-over-TLS set to CleanBrowsing family filter. Blocks adult content, malware domains, and open bypass proxies at the socket layer.
-11. **Minimal text launcher:** Uses [Olauncher](https://github.com/tanujnotes/Olauncher) (open source, GPLv3, 0 trackers/ads). Clean text list instead of colorful app icons.
-
-### What still works:
-- Phone calls & SMS
-- Work messengers (Telegram, WhatsApp, Signal, Viber, Discord)
-- All incoming push notifications in the top notification shade
-- Banking apps (Monobank, Privat24, Raiffeisen, etc.)
-- 2FA authenticators (Google Auth, Bitwarden)
-- Camera (photos are still taken in full color; only the screen render is monochrome)
-- Navigation & essential city services (Google Maps, Kyiv Digital)
+The device retains all critical real-world utilities:
+- **Phone Calls, SMS & Contacts**
+- **Messengers**: Telegram, WhatsApp, Signal, Viber, Discord
+- **Push Notifications**: Incoming alerts in the top notification shade work normally
+- **Financial Services**: Monobank, Privat24, Raiffeisen, OTP, etc.
+- **Two-Factor Authentication**: Google Authenticator, Bitwarden, Microsoft Authenticator
+- **Camera Hardware**: Photos are captured in original full resolution and true color
+- **Navigation & Transit**: Google Maps, Waze, local transit utilities
 
 ---
 
-### Quick Start (Windows)
+## Repository Structure
 
-#### 1. Enable USB Debugging on your phone:
-- Go to `Settings` -> `About phone` -> `Software information`.
-- Tap `Build number` 7 times to unlock Developer options.
-- Go to `Settings` -> `Developer options` -> turn on **USB debugging**.
-- Connect phone to PC, check "Always allow from this computer" and accept.
-
-#### 2. Run the manager:
-Just double-click:
-```cmd
-phone_manager.bat
+```text
+teldel/
+├── phone_manager.bat       # Master Windows CLI runner (double-click to start)
+├── phone_manager.ps1       # Interactive device management console
+├── requirements.txt        # Environment spec (uses Python standard library only)
+├── LICENSE                 # MIT License
+├── README.md               # Technical documentation
+│
+├── scripts/                # Modular automation engines
+│   ├── apply_minimalism.bat   # 1-click full 18-step transformation
+│   ├── apply_minimalism.ps1   # Core transformation engine
+│   ├── restore_defaults.bat   # 1-click stock restoration
+│   ├── restore_defaults.ps1   # Core rollback engine
+│   ├── collect_stats.bat      # 1-click usage & dopamine data collection
+│   ├── collect_stats.py       # Usagestats parser & dopamine loop analyzer
+│   └── audit_olauncher.py     # DEX bytecode tracker & advertisement scanner
+│
+├── docs/                   # Interactive dashboards & technical reports
+│   ├── index.html             # Documentation and reports hub
+│   ├── dopamine_interactive_dashboard.html # Chart.js screen time analysis
+│   ├── step_by_step_transformation.html    # 18-step chronological execution breakdown
+│   └── full_system_transformation_report.html # System architecture whitepaper
+│
+└── data/                   # Generated analytics datasets
+    ├── parsed_stats.json      # Lifetime app screen time & launch counts
+    ├── multi_interval_stats.json # Daily, weekly, monthly interval statistics
+    └── deep_dopamine_analysis.json # Discrete sessions, micro-checks, and binges
 ```
-*(If you don't have ADB installed, download [Google Platform-Tools](https://developer.android.com/tools/releases/platform-tools) and extract `adb.exe` into this folder or add it to PATH).*
+
+---
+
+## Quick Start
+
+### 1. Enable USB Debugging on Device
+1. Navigate to **Settings** > **About phone** > **Software information**.
+2. Tap **Build number** 7 times to unlock **Developer options**.
+3. Open **Developer options** and enable **USB debugging**.
+4. Connect device to PC via USB cable, check *Always allow from this computer*, and confirm.
+
+### 2. Run Interactive Console
+Double-click `phone_manager.bat` or run:
+```powershell
+.\phone_manager.bat
+```
 
 ```text
 ================================================================
@@ -90,87 +106,90 @@ phone_manager.bat
 ================================================================
 ```
 
-To run the whole 18-step transformation directly:
+---
+
+## Direct Automation Commands
+
+### 1-Click Transformation
 ```powershell
 .\scripts\apply_minimalism.bat
 ```
 
----
+### 1-Click Rollback to Stock
+```powershell
+.\scripts\restore_defaults.bat
+```
 
-### Clean & Minimal Repo Structure
+### Collect App Usage & Dopamine Statistics
+```powershell
+.\scripts\collect_stats.bat
+# or
+python scripts\collect_stats.py
+```
 
-```text
-├── phone_manager.bat         # Master entry point (double-click to run)
-├── phone_manager.ps1         # Unified interactive console UI
-│
-├── docs/                     # Interactive HTML visualizers & documentation
-│   ├── index.html            # Hub linking all reports
-│   ├── step_by_step_transformation.html  # Detailed 18-step technical log
-│   ├── full_system_transformation_report.html # Architecture whitepaper
-│   └── dopamine_interactive_dashboard.html # Chart.js screen time analysis
-│
-├── scripts/                  # Clean modular automation engines
-│   ├── apply_minimalism.bat  # 1-click full 18-step setup
-│   ├── apply_minimalism.ps1  # Core minimalism engine
-│   ├── restore_defaults.bat  # 1-click full rollback
-│   ├── restore_defaults.ps1  # Core restoration engine
-│   ├── collect_stats.bat     # 1-click usage & dopamine collection
-│   ├── collect_stats.py      # Usage dump, parser & dopamine loop miner
-│   └── audit_olauncher.py    # Bytecode scanner verifying 0 trackers in launcher
-│
-└── data/                     # Generated analytics JSON data
-    ├── parsed_stats.json
-    ├── multi_interval_stats.json
-    └── deep_dopamine_analysis.json
+### Audit Launcher APK Bytecode
+```powershell
+python scripts\audit_olauncher.py
 ```
 
 ---
 
-### The Manual Commands (If you prefer running ADB yourself)
+## Manual ADB Reference
 
+For manual terminal execution on Windows, Linux, or macOS:
+
+### 1. Neutralize Distractions & Feeds
 ```bash
-# Baseline check
-adb devices
-
-# Neutralize timekillers (safe freeze prevents Play Store ghost locks)
 adb shell pm disable-user --user 0 com.google.android.youtube
 adb shell pm disable-user --user 0 com.zhiliaoapp.musically
 adb shell pm disable-user --user 0 com.instagram.android
 adb shell pm disable-user --user 0 com.linkedin.android
 adb shell pm disable-user --user 0 com.glovo
 adb shell pm disable-user --user 0 com.google.android.googlequicksearchbox
+```
 
-# Kill browser & stores
+### 2. Zero-Browser & Store Perimeter
+```bash
 adb shell pm disable-user --user 0 com.android.chrome
 adb shell pm uninstall -k --user 0 com.android.chrome
 adb shell pm disable-user --user 0 com.sec.android.app.chromecustomizations
 adb shell pm uninstall -k --user 0 com.sec.android.app.samsungapps
 adb shell pm disable-user --user 0 com.android.vending
+adb shell pm disable-user --user 0 com.samsung.android.video
+adb shell pm disable-user --user 0 com.android.htmlviewer
+```
 
-# Block APK sideloading
+### 3. Anti-Sideloading Permissions
+```bash
 adb shell settings put secure install_non_market_apps 0
 adb shell cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES deny
 adb shell cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES deny
 adb shell cmd appops set com.discord REQUEST_INSTALL_PACKAGES deny
 adb shell cmd appops set com.whatsapp REQUEST_INSTALL_PACKAGES deny
+```
 
-# Clean telemetry & bloatware
+### 4. Remove Telemetry & Background Daemons
+```bash
 adb shell pm uninstall -k --user 0 com.aura.oobe.samsung.gl
 adb shell pm uninstall -k --user 0 com.samsung.android.cidmanager
 adb shell pm disable-user --user 0 imslogger
 adb shell pm disable-user --user 0 diagmonagent
 adb shell pm disable-user --user 0 ipsgeofence
 adb shell pm disable-user --user 0 sm.devicesecurity
+```
 
-# Hardware & animations
+### 5. Hardware & Animation Optimization (0.0 ms)
+```bash
 adb shell settings put global ram_expand_size 0
 adb shell settings put global window_animation_scale 0
 adb shell settings put global transition_animation_scale 0
 adb shell settings put global animator_duration_scale 0
 adb shell settings put global wifi_scan_always_enabled 0
 adb shell settings put global ble_scan_always_enabled 0
+```
 
-# Grayscale (AOSP + Samsung One UI) & Sensory Detox
+### 6. Monochrome Display & Sensory Detox
+```bash
 adb shell settings put system greyscale_mode 1
 adb shell settings put secure accessibility_display_daltonizer 0
 adb shell settings put secure accessibility_display_daltonizer_enabled 1
@@ -181,30 +200,20 @@ adb shell settings put system lockscreen_sounds_enabled 0
 adb shell settings put secure notification_badging 0
 adb shell settings put system badge_app_icon_type 0
 adb shell settings put system screen_off_timeout 30000
+```
 
-# Private DNS (CleanBrowsing DoT)
+### 7. Enforce DNS-over-TLS (CleanBrowsing)
+```bash
 adb shell settings put global private_dns_mode hostname
 adb shell settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
 ```
 
 ---
 
-### How to Rollback
+## Manual Rollback Reference
 
-If you decide you want to revert everything back to stock settings without wiping your phone or losing data:
-
-Double-click `scripts\restore_defaults.bat` (or select option `8` in `phone_manager.bat`).
-
-The rollback script automatically:
-1. **Reinstalls & unfreezes applications**: Restores Chrome, YouTube, Google Play Store, Galaxy Store, and preinstalled apps via `cmd package install-existing` and `pm enable`.
-2. **Restores full-color display**: Deactivates Samsung One UI native monochrome (`system greyscale_mode 0`), hardware daltonizer, and Extra Dim.
-3. **Restores stock Samsung One UI launcher**: Automatically reactivates Samsung One UI Home as default and uninstalls `Olauncher`.
-4. **Restores installation permissions**: Re-enables APK sideloading and `REQUEST_INSTALL_PACKAGES` for messengers, files, and browsers.
-5. **Restores system feel & DNS**: Resets animations to 1.0x, haptics, sounds, badges, and sets Private DNS back to opportunistic default.
-
-Or manually:
 ```bash
-# 1. Reinstall and enable core apps
+# 1. Restore applications & application stores
 adb shell cmd package install-existing com.android.vending
 adb shell cmd package install-existing com.sec.android.app.samsungapps
 adb shell cmd package install-existing com.android.chrome
@@ -214,21 +223,21 @@ adb shell pm enable com.sec.android.app.samsungapps
 adb shell pm enable com.android.chrome
 adb shell pm enable com.google.android.youtube
 
-# 2. Restore full color display (Samsung + AOSP)
+# 2. Restore full-color display
 adb shell settings put system greyscale_mode 0
 adb shell settings put secure accessibility_display_daltonizer_enabled 0
 adb shell settings put secure reduce_bright_colors_activated 0
 
-# 3. Restore Samsung One UI Home
+# 3. Restore Samsung One UI Home launcher
 adb shell cmd package set-home-activity com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity
 adb shell pm uninstall app.olauncher
 adb shell am start -a android.intent.action.MAIN -c android.intent.category.HOME
 
-# 4. Restore APK installations & Sideloading
+# 4. Restore sideloading permissions
 adb shell settings put secure install_non_market_apps 1
 adb shell cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES allow
 
-# 5. Restore animations, sounds, and network DNS
+# 5. Restore animations, haptics, sounds, badges, and default DNS
 adb shell settings put global window_animation_scale 1.0
 adb shell settings put global transition_animation_scale 1.0
 adb shell settings put global animator_duration_scale 1.0
@@ -243,20 +252,14 @@ adb shell settings put global private_dns_mode opportunistic
 
 ---
 
-### FAQ
+## Technical Considerations
 
-**Does this trip Samsung Knox or void warranty?**  
-No. Knox trips only when you flash unauthorized bootloaders or custom recovery partitions (Odin/rooting). All these changes run in user space via standard `adb shell pm` and `adb shell settings` commands. Knox stays `0x0`.
-
-**Can I run this on Mac or Linux?**  
-Yes. The `.bat` and `.ps1` files are convenience wrappers for Windows, but the ADB commands are standard POSIX shell commands. Just copy-paste the commands from the manual section into your terminal.
-
-**What phone was this tested on?**  
-Tested on a Samsung Galaxy A16 running One UI 6 (Android 14), but the ADB commands apply to virtually any modern Android device (One UI, Pixel UI, Motorola, etc.).
+- **Package State Integrity**: Third-party applications are disabled using `pm disable-user --user 0` instead of `pm uninstall -k --user 0`. The `-k` flag on non-system apps creates orphaned `installed=false` package records, which corrupts Google Play Store reinstallations.
+- **Knox Security Integrity**: Standard ADB shell configuration modifies user-space system settings tables (`global`, `secure`, `system`). No kernel binaries, recovery partitions, or bootloaders are modified. Knox warranty counter remains intact at `0x0`.
 
 ---
 
-### License
+## License
 
-MIT. Do whatever you want with it.  
-Olauncher is by [Tanuj Notes](https://github.com/tanujnotes/Olauncher) under GPLv3.
+This project is licensed under the [MIT License](LICENSE).  
+Olauncher is licensed under [GPLv3](https://github.com/tanujnotes/Olauncher).
