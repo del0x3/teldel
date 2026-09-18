@@ -126,6 +126,10 @@ settings put system greyscale_mode 1
 settings put secure accessibility_display_daltonizer 0
 settings put secure accessibility_display_daltonizer_enabled 1
 settings put secure reduce_bright_colors_activated 1
+settings put secure reduce_bright_colors_level 80
+settings put secure reduce_bright_colors_persist_across_reboots 1
+settings put system blue_light_filter_night_dim 1
+cmd uimode night yes 2>/dev/null
 settings put system haptic_feedback_enabled 0
 settings put system sound_effects_enabled 0
 settings put system lockscreen_sounds_enabled 0

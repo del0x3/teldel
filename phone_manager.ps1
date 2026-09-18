@@ -204,6 +204,8 @@ else
     settings put secure accessibility_display_daltonizer 0
     settings put secure accessibility_display_daltonizer_enabled 1
     settings put secure reduce_bright_colors_activated 1
+    settings put secure reduce_bright_colors_level 80
+    settings put secure reduce_bright_colors_persist_across_reboots 1
     echo "MONOCHROME"
 fi
 '@
