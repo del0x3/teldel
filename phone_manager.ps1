@@ -31,6 +31,10 @@ function Resolve-Adb {
 }
 
 $ADB = Resolve-Adb
+if ($ADB) {
+    # Pre-warm ADB daemon so commands execute instantaneously without cold-start lag
+    & $ADB start-server 2>$null | Out-Null
+}
 
 function Show-Header {
     Clear-Host

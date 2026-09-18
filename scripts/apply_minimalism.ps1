@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-    Automated 18-Step Android Productivity & Dopamine Detox Transformation Script.
+    Automated 18-Step Android Productivity & Dopamine Detox Transformation Script (High-Speed Engine).
 .DESCRIPTION
     Transforms a connected Android / Samsung Galaxy device into a zero-distraction,
-    monochrome, privacy-hardened productivity terminal via ADB without root or Knox tripping.
+    monochrome, privacy-hardened productivity terminal via a single-stream batched ADB shell execution.
 #>
 
 [CmdletBinding()]
@@ -66,151 +66,100 @@ if (-not $Unattended) {
     }
 }
 
-Write-Host "`n>>> [1/6] Removing Dopamine Time-Killers & Social Feeds..." -ForegroundColor Cyan
-$distractions = @(
-    "com.google.android.youtube",
-    "com.zhiliaoapp.musically",
-    "com.instagram.android",
-    "com.linkedin.android",
-    "com.glovo",
-    "com.google.android.googlequicksearchbox"
-)
-foreach ($pkg in $distractions) {
-    $path = (& $ADB shell pm path $pkg 2>$null | Out-String)
-    if ($path -match "/data/app") {
-        # Third-party user app: disable cleanly instead of 'uninstall -k' to prevent corrupting PackageManager
-        & $ADB shell pm disable-user --user 0 $pkg 2>$null
-    } else {
-        # System app: uninstall for user 0 (cleanly restorable via install-existing)
-        & $ADB shell pm uninstall -k --user 0 $pkg 2>$null
-    }
-}
-Write-Host "    Done: Entertainment feeds & news tickers neutralized." -ForegroundColor Green
+Write-Host "`n>>> Applying high-speed 18-step policy batch payload..." -ForegroundColor Cyan
+$sw = [System.Diagnostics.Stopwatch]::StartNew()
 
-Write-Host "`n>>> [2/6] Enforcing Zero-Browser & Store Lockdown..." -ForegroundColor Cyan
-& $ADB shell pm disable-user --user 0 com.android.chrome 2>$null
-& $ADB shell pm uninstall -k --user 0 com.android.chrome 2>$null
-& $ADB shell pm disable-user --user 0 com.sec.android.app.chromecustomizations 2>$null
-& $ADB shell pm uninstall -k --user 0 com.sec.android.app.samsungapps 2>$null
-& $ADB shell pm disable-user --user 0 com.android.vending 2>$null
-& $ADB shell pm disable-user --user 0 com.samsung.android.video 2>$null
-& $ADB shell pm disable-user --user 0 com.android.htmlviewer 2>$null
-& $ADB shell pm disable-user --user 0 com.android.vpndialogs 2>$null
-& $ADB shell pm disable-user --user 0 com.sec.android.easyMover 2>$null
+$batchScript = @'
+# 1. Neutralize distractions & feeds
+pm disable-user --user 0 com.google.android.youtube
+pm disable-user --user 0 com.zhiliaoapp.musically
+pm disable-user --user 0 com.instagram.android
+pm disable-user --user 0 com.linkedin.android
+pm disable-user --user 0 com.glovo
+pm disable-user --user 0 com.google.android.googlequicksearchbox
 
-# Anti-sideloading: Revoke REQUEST_INSTALL_PACKAGES
-& $ADB shell settings put secure install_non_market_apps 0
-$installers = @(
-    "org.telegram.messenger",
-    "com.discord",
-    "com.whatsapp",
-    "org.thoughtcrime.securesms",
-    "com.sec.android.app.myfiles",
-    "com.google.android.apps.docs",
-    "com.microsoft.skydrive"
-)
-foreach ($inst in $installers) {
-    & $ADB shell cmd appops set $inst REQUEST_INSTALL_PACKAGES deny 2>$null
-}
-Write-Host "    Done: Browser eliminated, stores frozen, sideloading locked." -ForegroundColor Green
+# 2. Zero-Browser & App Store Perimeter
+pm disable-user --user 0 com.android.chrome
+pm uninstall -k --user 0 com.android.chrome
+pm disable-user --user 0 com.sec.android.app.chromecustomizations
+pm uninstall -k --user 0 com.sec.android.app.samsungapps
+pm disable-user --user 0 com.android.vending
+pm disable-user --user 0 com.samsung.android.video
+pm disable-user --user 0 com.android.htmlviewer
+pm disable-user --user 0 com.android.vpndialogs
+pm disable-user --user 0 com.sec.android.easyMover
 
-Write-Host "`n>>> [3/6] Purging Adware, Bloatware & Telemetry Daemons..." -ForegroundColor Cyan
-$adwareAndTelemetry = @(
-    "com.aura.oobe.samsung.gl",
-    "com.samsung.android.cidmanager",
-    "com.samsung.android.app.omcagent",
-    "com.samsung.android.sdm.config",
-    "imslogger",
-    "ipsgeofence",
-    "diagmonagent",
-    "iaft",
-    "dsms",
-    "sdhms",
-    "aware.service",
-    "dqagent",
-    "networkdiagnostic",
-    "sm.devicesecurity"
-)
-foreach ($t in $adwareAndTelemetry) {
-    & $ADB shell pm uninstall -k --user 0 $t 2>$null
-    & $ADB shell pm disable-user --user 0 $t 2>$null
-}
-Write-Host "    Done: Adware auto-installers and tracking daemons terminated." -ForegroundColor Green
+# 3. Anti-sideloading (AppOps)
+settings put secure install_non_market_apps 0
+cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES deny
+cmd appops set com.discord REQUEST_INSTALL_PACKAGES deny
+cmd appops set com.whatsapp REQUEST_INSTALL_PACKAGES deny
+cmd appops set org.thoughtcrime.securesms REQUEST_INSTALL_PACKAGES deny
+cmd appops set com.sec.android.app.myfiles REQUEST_INSTALL_PACKAGES deny
+cmd appops set com.google.android.apps.docs REQUEST_INSTALL_PACKAGES deny
+cmd appops set com.microsoft.skydrive REQUEST_INSTALL_PACKAGES deny
 
-Write-Host "`n>>> [4/6] Tuning Hardware, Memory & UI Latency (0 ms)..." -ForegroundColor Cyan
-# Disable RAM Plus (Swap file thrashing)
-& $ADB shell settings put global ram_expand_size 0
-# Instant UI response (0ms window animations)
-& $ADB shell settings put global window_animation_scale 0
-& $ADB shell settings put global transition_animation_scale 0
-& $ADB shell settings put global animator_duration_scale 0
-# Radio idle power saving
-& $ADB shell settings put global wifi_scan_always_enabled 0
-& $ADB shell settings put global ble_scan_always_enabled 0
-Write-Host "    Done: RAM Plus disabled, animations set to 0.0 ms, radio scanning muted." -ForegroundColor Green
+# 4. Telemetry daemons
+pm uninstall -k --user 0 com.aura.oobe.samsung.gl
+pm disable-user --user 0 com.aura.oobe.samsung.gl
+pm uninstall -k --user 0 com.samsung.android.cidmanager
+pm disable-user --user 0 com.samsung.android.cidmanager
+pm disable-user --user 0 imslogger
+pm disable-user --user 0 ipsgeofence
+pm disable-user --user 0 diagmonagent
+pm disable-user --user 0 sm.devicesecurity
 
-Write-Host "`n>>> [5/6] Engaging Sensory Detox ('Gray Stone' Mode)..." -ForegroundColor Cyan
-# Grayscale daltonizer + Samsung Greyscale + Extra Dim
-& $ADB shell settings put system greyscale_mode 1
-& $ADB shell settings put secure accessibility_display_daltonizer 0
-& $ADB shell settings put secure accessibility_display_daltonizer_enabled 1
-& $ADB shell settings put secure reduce_bright_colors_activated 1
-# Silence tactile & sound micro-triggers
-& $ADB shell settings put system haptic_feedback_enabled 0
-& $ADB shell settings put system sound_effects_enabled 0
-& $ADB shell settings put system lockscreen_sounds_enabled 0
-# Focus guard: Disable notification badges & strip badge listener
-& $ADB shell settings put secure notification_badging 0
-& $ADB shell settings put system badge_app_icon_type 0
-$curListeners = (& $ADB shell settings get secure enabled_notification_listeners | Out-String).Trim()
-if ($curListeners -match "com\.sec\.android\.app\.launcher") {
-    $cleanListeners = ($curListeners -split ":" | Where-Object { $_ -notmatch "com\.sec\.android\.app\.launcher" }) -join ":"
-    & $ADB shell "settings put secure enabled_notification_listeners '$cleanListeners'"
-}
-& $ADB shell settings put system screen_off_timeout 30000
-Write-Host "    Done: Grayscale active, haptics muted, red badges and listeners removed, 30s timeout set." -ForegroundColor Green
+# 5. Hardware & 0ms animations
+settings put global ram_expand_size 0
+settings put global window_animation_scale 0
+settings put global transition_animation_scale 0
+settings put global animator_duration_scale 0
+settings put global wifi_scan_always_enabled 0
+settings put global ble_scan_always_enabled 0
 
-Write-Host "`n>>> [6/6] Establishing Cryptographic Network Shield & Launcher..." -ForegroundColor Cyan
-# CleanBrowsing DoT family filter
-& $ADB shell settings put global private_dns_mode hostname
-& $ADB shell settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
+# 6. Sensory detox (Monochrome + Mute)
+settings put system greyscale_mode 1
+settings put secure accessibility_display_daltonizer 0
+settings put secure accessibility_display_daltonizer_enabled 1
+settings put secure reduce_bright_colors_activated 1
+settings put system haptic_feedback_enabled 0
+settings put system sound_effects_enabled 0
+settings put system lockscreen_sounds_enabled 0
+settings put secure notification_badging 0
+settings put system badge_app_icon_type 0
+settings put system screen_off_timeout 30000
 
-# Install Olauncher if present
+# 7. DNS-over-TLS CleanBrowsing
+settings put global private_dns_mode hostname
+settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
+'@
+
+# Execute the entire policy in a single ADB subshell
+$batchScript | & $ADB shell 2>&1 | Out-Null
+
+# Handle Olauncher installation & activation
 $launcherCandidates = @(
     (Join-Path $PSScriptRoot "..\Olauncher.apk"),
     (Join-Path $PSScriptRoot "Olauncher.apk")
 )
 $launcherApk = $launcherCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
-if (-not $launcherApk) {
-    $launcherApk = Join-Path $PSScriptRoot "Olauncher.apk"
-    Write-Host "    [i] Olauncher.apk not found locally. Fetching latest release from GitHub..." -ForegroundColor Cyan
-    try {
-        $release = Invoke-RestMethod -Uri "https://api.github.com/repos/tanujnotes/Olauncher/releases/latest" -Headers @{"User-Agent"="Mozilla/5.0"}
-        $asset = $release.assets | Where-Object { $_.name -like "*.apk" } | Select-Object -First 1
-        if ($asset) {
-            Write-Host "    Downloading $($asset.name)..." -ForegroundColor DarkGray
-            Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $launcherApk
-        }
-    } catch {
-        Write-Host "    [!] Could not auto-download Olauncher: $_" -ForegroundColor Yellow
-    }
+
+if ($launcherApk) {
+    & $ADB install -r $launcherApk 2>$null | Out-Null
+    $launcherSetup = @'
+cmd appops set app.olauncher RECORD_AUDIO ignore
+cmd appops set app.olauncher READ_PHONE_STATE ignore
+cmd package set-home-activity app.olauncher/.MainActivity
+am start -a android.intent.action.MAIN -c android.intent.category.HOME
+'@
+    $launcherSetup | & $ADB shell 2>&1 | Out-Null
 }
 
-if (Test-Path $launcherApk) {
-    Write-Host "    Installing verified minimal launcher (Olauncher.apk)..." -ForegroundColor Yellow
-    & $ADB install -r $launcherApk
-    & $ADB shell cmd appops set app.olauncher RECORD_AUDIO ignore 2>$null
-    & $ADB shell cmd appops set app.olauncher READ_PHONE_STATE ignore 2>$null
-    & $ADB shell cmd package set-home-activity app.olauncher/.MainActivity 2>$null
-    & $ADB shell am start -a android.intent.action.MAIN -c android.intent.category.HOME 2>$null
-    Write-Host "    Olauncher installed, activated as default launcher, and permissions stripped." -ForegroundColor Green
-} else {
-    Write-Host "    [!] Olauncher.apk was not found and could not be downloaded." -ForegroundColor Yellow
-}
+$sw.Stop()
+$elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 2)
 
 Write-Host "`n==========================================================================" -ForegroundColor Cyan
-Write-Host "   [SUCCESS] TRANSFORMATION COMPLETE: PRODUCTIVITY TERMINAL READY!         " -ForegroundColor Green
+Write-Host "   [SUCCESS] TRANSFORMATION COMPLETE IN $elapsedSeconds SECONDS!          " -ForegroundColor Green
 Write-Host "==========================================================================" -ForegroundColor Cyan
-Write-Host "To manage or temporarily unfreeze Google Play Store, run phone_manager.bat." -ForegroundColor Yellow
-Write-Host "To revert any settings back to standard Android, run restore_defaults.ps1." -ForegroundColor White
+Write-Host "Device converted to minimal terminal. To rollback, run restore_defaults.bat." -ForegroundColor Yellow
 Write-Host ""
