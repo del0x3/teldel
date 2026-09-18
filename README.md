@@ -49,10 +49,12 @@ teldel/
 ├── README.md               # Technical documentation
 │
 ├── scripts/                # Modular automation engines
-│   ├── apply_minimalism.bat   # 1-click full 18-step transformation
-│   ├── apply_minimalism.ps1   # Core transformation engine
-│   ├── restore_defaults.bat   # 1-click stock restoration
-│   ├── restore_defaults.ps1   # Core rollback engine
+│   ├── apply_minimalism.bat   # 1-click full 18-step transformation (Windows)
+│   ├── apply_minimalism.ps1   # PowerShell automation wrapper
+│   ├── teldel_minimal.sh      # Native on-device POSIX shell engine (cross-platform)
+│   ├── restore_defaults.bat   # 1-click stock restoration (Windows)
+│   ├── restore_defaults.ps1   # PowerShell rollback wrapper
+│   ├── teldel_stock.sh        # Native on-device POSIX rollback engine (cross-platform)
 │   ├── collect_stats.bat      # 1-click usage & dopamine data collection
 │   ├── collect_stats.py       # Usagestats parser & dopamine loop analyzer
 │   └── audit_olauncher.py     # DEX bytecode tracker & advertisement scanner
@@ -89,12 +91,15 @@ Double-click `phone_manager.bat` or run:
 ================================================================
        ANDROID PRODUCTIVITY TERMINAL - PHONE MANAGER
 ================================================================
+ [STATUS] Battery: 85% | Mode: [MINIMAL TERMINAL] | Screen: [B/W]
+          Store: [LOCKED] | DNS: [CleanBrowsing DoT]
+================================================================
 
   [1] Temporarily ENABLE Google Play Store  (for app updates)
   [2] DISABLE Google Play Store          (restore lockdown)
 
   [3] Mirror Phone Screen to PC          (scrcpy stream)
-  [4] Toggle Display Mode: B/W <--> COLOR (quick toggle)
+  [4] Toggle Display Mode: B/W <--> COLOR (fast toggle)
   [5] Express Battery, RAM & Security Perimeter Audit
 
   [6] Apply Full Minimalism Transformation (18-step setup)

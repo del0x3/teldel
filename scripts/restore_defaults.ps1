@@ -142,7 +142,12 @@ settings put global private_dns_mode opportunistic
 '@
 
 # Pipe the entire batch payload into a single adb shell process
-$batchScript | & $ADB shell 2>&1 | Out-Null
+$scriptFile = Join-Path $PSScriptRoot "teldel_stock.sh"
+if (Test-Path $scriptFile) {
+    Get-Content $scriptFile | & $ADB shell 2>&1 | Out-Null
+} else {
+    $batchScript | & $ADB shell 2>&1 | Out-Null
+}
 
 $sw.Stop()
 $elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 2)

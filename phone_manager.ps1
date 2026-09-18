@@ -36,17 +36,71 @@ if ($ADB) {
     & $ADB start-server 2>$null | Out-Null
 }
 
+function Get-DeviceStatus {
+    $devsText = (& $ADB devices 2>$null | Out-String)
+    if ($devsText -notmatch "\tdevice") {
+        return @{ Connected = $false }
+    }
+    
+    $query = @'
+grey=$(settings get system greyscale_mode 2>/dev/null)
+home=$(cmd package resolve-activity -a android.intent.action.MAIN -c android.intent.category.HOME 2>/dev/null | grep -o 'app.olauncher\|com.sec.android.app.launcher' | head -n 1)
+vending=$(pm list packages -e com.android.vending 2>/dev/null)
+bat=$(dumpsys battery 2>/dev/null | grep -o 'level: [0-9]*' | head -n 1 | cut -d ' ' -f 2)
+dns=$(settings get global private_dns_mode 2>/dev/null)
+echo "$grey|$home|$vending|$bat|$dns"
+'@
+    $raw = ($query | & $ADB shell 2>$null | Out-String).Trim()
+    $parts = $raw -split "\|"
+    
+    return @{
+        Connected   = $true
+        IsGrey      = ($parts[0] -eq "1")
+        IsMinimal   = ($parts[1] -match "olauncher")
+        IsPlayStore = ($parts[2] -match "com.android.vending")
+        Battery     = if ($parts[3]) { "$($parts[3])%" } else { "N/A" }
+        IsDnsSecure = ($parts[4] -eq "hostname")
+    }
+}
+
 function Show-Header {
     Clear-Host
     Write-Host "================================================================" -ForegroundColor Cyan
     Write-Host "       ANDROID PRODUCTIVITY TERMINAL - PHONE MANAGER" -ForegroundColor Yellow
+    Write-Host "================================================================" -ForegroundColor Cyan
+    
+    $st = Get-DeviceStatus
+    if ($st.Connected) {
+        $modeText = if ($st.IsMinimal) { "MINIMAL TERMINAL" } else { "STOCK ONE UI" }
+        $modeColor = if ($st.IsMinimal) { "Green" } else { "Yellow" }
+        
+        $colorText = if ($st.IsGrey) { "B/W" } else { "COLOR" }
+        $colorColor = if ($st.IsGrey) { "DarkGray" } else { "Magenta" }
+        
+        $storeText = if ($st.IsPlayStore) { "UNFROZEN" } else { "LOCKED" }
+        $storeColor = if ($st.IsPlayStore) { "Yellow" } else { "Green" }
+        
+        $dnsText = if ($st.IsDnsSecure) { "CleanBrowsing DoT" } else { "Default DHCP" }
+        
+        Write-Host " [STATUS] Battery: " -NoNewline -ForegroundColor White
+        Write-Host "$($st.Battery)" -NoNewline -ForegroundColor Cyan
+        Write-Host " | Mode: " -NoNewline -ForegroundColor White
+        Write-Host "[$modeText]" -NoNewline -ForegroundColor $modeColor
+        Write-Host " | Screen: " -NoNewline -ForegroundColor White
+        Write-Host "[$colorText]" -ForegroundColor $colorColor
+        Write-Host "          Store: " -NoNewline -ForegroundColor DarkGray
+        Write-Host "[$storeText]" -NoNewline -ForegroundColor $storeColor
+        Write-Host " | DNS: [$dnsText]" -ForegroundColor DarkGray
+    } else {
+        Write-Host " [STATUS] Device: DISCONNECTED (Connect phone with USB debugging)" -ForegroundColor DarkGray
+    }
     Write-Host "================================================================" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "  [1] Temporarily ENABLE Google Play Store  (for app updates)" -ForegroundColor Green
     Write-Host "  [2] DISABLE Google Play Store          (restore lockdown)" -ForegroundColor Red
     Write-Host ""
     Write-Host "  [3] Mirror Phone Screen to PC          (scrcpy stream)" -ForegroundColor Cyan
-    Write-Host "  [4] Toggle Display Mode: B/W <--> COLOR (quick toggle)" -ForegroundColor Magenta
+    Write-Host "  [4] Toggle Display Mode: B/W <--> COLOR (fast toggle)" -ForegroundColor Magenta
     Write-Host "  [5] Express Battery, RAM & Security Perimeter Audit" -ForegroundColor White
     Write-Host ""
     Write-Host "  [6] Apply Full Minimalism Transformation (18-step setup)" -ForegroundColor DarkCyan

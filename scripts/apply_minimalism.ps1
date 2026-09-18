@@ -158,8 +158,13 @@ cmd package set-home-activity app.olauncher/.MainActivity
 am start -a android.intent.action.MAIN -c android.intent.category.HOME
 '@
 
-# Execute the entire policy in a single ADB subshell
-$batchScript | & $ADB shell 2>&1 | Out-Null
+# Execute the policy in a single ADB subshell
+$scriptFile = Join-Path $PSScriptRoot "teldel_minimal.sh"
+if (Test-Path $scriptFile) {
+    Get-Content $scriptFile | & $ADB shell 2>&1 | Out-Null
+} else {
+    $batchScript | & $ADB shell 2>&1 | Out-Null
+}
 
 $sw.Stop()
 $elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 2)
