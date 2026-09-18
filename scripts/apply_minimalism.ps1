@@ -79,6 +79,19 @@ if (-not $olauncherInstalled) {
         (Join-Path $PSScriptRoot "Olauncher.apk")
     )
     $launcherApk = $launcherCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+    if (-not $launcherApk) {
+        $fallbackPath = Join-Path $PSScriptRoot "Olauncher.apk"
+        Write-Host "    [*] Fetching verified open-source Olauncher APK from GitHub..." -ForegroundColor DarkGray
+        try {
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+            Invoke-WebRequest -Uri "https://github.com/tanujnotes/Olauncher/releases/latest/download/Olauncher.apk" -OutFile $fallbackPath -UseBasicParsing -TimeoutSec 30
+            if (Test-Path $fallbackPath) {
+                $launcherApk = $fallbackPath
+            }
+        } catch {
+            Write-Host "    [!] Could not auto-download Olauncher: $_" -ForegroundColor Yellow
+        }
+    }
     if ($launcherApk) {
         Write-Host "    [+] First-time install of verified minimal launcher (Olauncher)..." -ForegroundColor DarkGray
         & $ADB install -r $launcherApk 2>$null | Out-Null
@@ -167,10 +180,11 @@ if (Test-Path $scriptFile) {
 }
 
 $sw.Stop()
-$elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 2)
+$elapsedMs = [math]::Round($sw.Elapsed.TotalMilliseconds, 1)
+$elapsedSeconds = [math]::Round($sw.Elapsed.TotalSeconds, 3)
 
 Write-Host "`n==========================================================================" -ForegroundColor Cyan
-Write-Host "   [SUCCESS] TRANSFORMATION COMPLETE IN $elapsedSeconds SECONDS!          " -ForegroundColor Green
+Write-Host "   [SUCCESS] TRANSFORMATION COMPLETE IN $elapsedSeconds s ($elapsedMs ms)! " -ForegroundColor Green
 Write-Host "==========================================================================" -ForegroundColor Cyan
 Write-Host "Device converted to minimal terminal. To rollback, run restore_defaults.bat." -ForegroundColor Yellow
 Write-Host ""

@@ -41,6 +41,7 @@ settings put secure accessibility_display_daltonizer 0
 settings put secure reduce_bright_colors_activated 0
 
 # 4. Restore stock Samsung One UI launcher & disable Olauncher
+cmd role add-role-holder --user 0 android.app.role.HOME com.sec.android.app.launcher 2>/dev/null
 cmd package set-home-activity com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity 2>/dev/null
 pm disable-user --user 0 app.olauncher 2>/dev/null
 am start -a android.intent.action.MAIN -c android.intent.category.HOME 2>/dev/null

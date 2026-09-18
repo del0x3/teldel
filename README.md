@@ -18,7 +18,7 @@ A surgical, root-free ADB automation suite and system policy engine that convert
 - **Controlled App Store**: Freezes Google Play Store and uninstalls Galaxy Store via `pm disable-user`. Controlled temporary unfreeze via CLI menu for required updates.
 - **Anti-Sideloading Enforcement**: Revokes `REQUEST_INSTALL_PACKAGES` across Telegram, WhatsApp, Discord, file managers, and cloud drives using Android AppOps.
 - **Sensory & Visual Detox**: Enforces system-wide hardware monochrome (`greyscale_mode 1`), Extra Dim, 0.0 ms window animations, and mutes haptic and audio feedback.
-- **Notification Badge Neutralization**: Sets `notification_badging 0` and removes badge listeners (`com.sec.android.app.launcher`). Status bar and notification shade push alerts remain 100% functional.
+- **Notification Discipline**: Suppresses intrusive heads-up popup banners (`heads_up_notifications_enabled 0`) and strips red app badge counts (`notification_badging 0`). Status bar and notification shade push alerts remain 100% functional with full text and action buttons.
 - **Telemetry & Bloatware Stripped**: Deactivates background diagnostic logging, carrier agents, and continuous Wi-Fi/Bluetooth beacon scanning.
 - **DNS-over-TLS (DoT)**: Enforces CleanBrowsing Family Shield (`family-filter-dns.cleanbrowsing.org`) at socket level.
 - **Minimal Text Launcher**: Integrates [Olauncher](https://github.com/tanujnotes/Olauncher) (open source, GPLv3, zero ads, zero trackers).
@@ -202,6 +202,7 @@ adb shell settings put secure reduce_bright_colors_activated 1
 adb shell settings put system haptic_feedback_enabled 0
 adb shell settings put system sound_effects_enabled 0
 adb shell settings put system lockscreen_sounds_enabled 0
+adb shell settings put global heads_up_notifications_enabled 0
 adb shell settings put secure notification_badging 0
 adb shell settings put system badge_app_icon_type 0
 adb shell settings put system screen_off_timeout 30000
@@ -234,8 +235,9 @@ adb shell settings put secure accessibility_display_daltonizer_enabled 0
 adb shell settings put secure reduce_bright_colors_activated 0
 
 # 3. Restore Samsung One UI Home launcher
+adb shell cmd role add-role-holder --user 0 android.app.role.HOME com.sec.android.app.launcher
 adb shell cmd package set-home-activity com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity
-adb shell pm uninstall app.olauncher
+adb shell pm disable-user --user 0 app.olauncher
 adb shell am start -a android.intent.action.MAIN -c android.intent.category.HOME
 
 # 4. Restore sideloading permissions
@@ -249,6 +251,7 @@ adb shell settings put global animator_duration_scale 1.0
 adb shell settings put system haptic_feedback_enabled 1
 adb shell settings put system sound_effects_enabled 1
 adb shell settings put system lockscreen_sounds_enabled 1
+adb shell settings put global heads_up_notifications_enabled 1
 adb shell settings put secure notification_badging 1
 adb shell settings put system screen_off_timeout 60000
 adb shell settings delete global private_dns_specifier

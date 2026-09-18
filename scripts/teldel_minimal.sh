@@ -71,6 +71,7 @@ settings put global private_dns_specifier family-filter-dns.cleanbrowsing.org
 pm enable app.olauncher 2>/dev/null
 cmd appops set app.olauncher RECORD_AUDIO ignore 2>/dev/null
 cmd appops set app.olauncher READ_PHONE_STATE ignore 2>/dev/null
+cmd role add-role-holder --user 0 android.app.role.HOME app.olauncher 2>/dev/null
 cmd package set-home-activity app.olauncher/.MainActivity 2>/dev/null
 am start -a android.intent.action.MAIN -c android.intent.category.HOME 2>/dev/null
 

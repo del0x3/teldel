@@ -44,7 +44,7 @@ function Get-DeviceStatus {
     
     $query = @'
 grey=$(settings get system greyscale_mode 2>/dev/null)
-home=$(cmd package resolve-activity -a android.intent.action.MAIN -c android.intent.category.HOME 2>/dev/null | grep -o 'app.olauncher\|com.sec.android.app.launcher' | head -n 1)
+home=$(cmd role get-role-holders android.app.role.HOME 2>/dev/null)
 vending=$(pm list packages -e com.android.vending 2>/dev/null)
 bat=$(dumpsys battery 2>/dev/null | grep -o 'level: [0-9]*' | head -n 1 | cut -d ' ' -f 2)
 dns=$(settings get global private_dns_mode 2>/dev/null)
