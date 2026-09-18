@@ -31,25 +31,26 @@ If I need to book a flight, fill out government paperwork, or do actual research
 
 ### What this actually does
 
-1. **Kills entertainment apps:** YouTube, TikTok, Instagram, casual games, and food delivery apps are uninstalled for `user 0`.
+1. **Kills entertainment & distraction apps:** YouTube, TikTok, Instagram, casual games, and food delivery feeds are neutralized. Crucially, third-party user apps are frozen via `pm disable-user` rather than buggy `pm uninstall -k` flags, preventing Android's PackageManager from entering an orphaned ghost-package state that breaks Google Play Store.
 2. **Zero-Browser:** Chrome and web view customizers disabled. Tapping an HTTP link in any app returns `No activity found`. The rabbit hole simply doesn't exist.
 3. **App Store on a leash:** Google Play is frozen (`pm disable-user`) and Galaxy Store is uninstalled. You can't impulsively download games at midnight. When you legitimately need to update banking apps, plug into your PC, run `phone_manager.bat`, press `1` to temporarily unfreeze it, update, and press `2` to lock it again.
-4. **Anti-sideloading:** Revoked `REQUEST_INSTALL_PACKAGES` from Telegram, file managers, and cloud drives via `appops`. Even if you download an APK, the OS refuses to install it.
+4. **Anti-sideloading:** Revoked `REQUEST_INSTALL_PACKAGES` from Telegram, file managers, browsers, and cloud drives via `appops`. Even if you download an APK, the OS refuses to install it.
 5. **Killed telemetry & carrier junk:** Stripped 15 background diagnostic daemons, Samsung DiagMon, McAfee scanner, and persistent Wi-Fi/Bluetooth beacon snooping.
 6. **Disabled RAM Plus (ZRAM swap):** Samsung enables a 4 GB virtual swap file on flash storage by default. On budget/midrange flash storage, this just causes I/O wait micro-stutters. Setting `ram_expand_size 0` lets the phone run purely on physical LPDDR RAM.
 7. **0 ms animations:** Set `window_animation_scale`, `transition_animation_scale`, and `animator_duration_scale` to `0`. Windows snap open instantly instead of sliding around.
-8. **Grayscale ("Gray Stone"):** Hardware daltonizer set to monochrome + Extra Dim enabled. Without bright saturated colors, your monkey brain stops treating your screen like a bush of ripe berries. Instagram in black-and-white looks like surveillance footage.
-9. **Muted sensory triggers:** Haptic feedback off, keypress clicks off, lock sounds off, notification badges (the red anxiety dots) disabled, screen timeout set to 30s.
+8. **Grayscale ("Gray Stone"):** Hardware daltonizer set to monochrome + Samsung One UI `system greyscale_mode 1` + Extra Dim enabled. Without bright saturated colors, your monkey brain stops treating your screen like a bush of ripe berries.
+9. **Eliminated red anxiety badges & sensory triggers:** Haptic feedback off, keypress clicks off, lock sounds off, and notification badges (red dots with numbers) completely eliminated by setting `notification_badging 0` and stripping the launcher's `NotificationListener`. Crucially, push notifications in the notification shade (status bar) remain 100% functional.
 10. **CleanBrowsing DoT:** System-wide DNS-over-TLS set to CleanBrowsing family filter. Blocks adult content, malware domains, and open bypass proxies at the socket layer.
 11. **Minimal text launcher:** Uses [Olauncher](https://github.com/tanujnotes/Olauncher) (open source, GPLv3, 0 trackers/ads). Clean text list instead of colorful app icons.
 
 ### What still works:
 - Phone calls & SMS
-- Work messengers (Telegram, WhatsApp, Signal)
-- Banking apps (Monobank, Privat24, etc.)
+- Work messengers (Telegram, WhatsApp, Signal, Viber, Discord)
+- All incoming push notifications in the top notification shade
+- Banking apps (Monobank, Privat24, Raiffeisen, etc.)
 - 2FA authenticators (Google Auth, Bitwarden)
 - Camera (photos are still taken in full color; only the screen render is monochrome)
-- Navigation & ride-sharing (Google Maps, Uber)
+- Navigation & essential city services (Google Maps, Kyiv Digital)
 
 ---
 
@@ -126,13 +127,13 @@ To run the whole 18-step transformation in one shot:
 # Baseline check
 adb devices
 
-# Remove timekillers
-adb shell pm uninstall -k --user 0 com.google.android.youtube
-adb shell pm uninstall -k --user 0 com.zhiliaoapp.musically
-adb shell pm uninstall -k --user 0 com.instagram.android
-adb shell pm uninstall -k --user 0 com.linkedin.android
-adb shell pm uninstall -k --user 0 com.glovo
-adb shell pm uninstall -k --user 0 com.google.android.googlequicksearchbox
+# Neutralize timekillers (safe freeze prevents Play Store ghost locks)
+adb shell pm disable-user --user 0 com.google.android.youtube
+adb shell pm disable-user --user 0 com.zhiliaoapp.musically
+adb shell pm disable-user --user 0 com.instagram.android
+adb shell pm disable-user --user 0 com.linkedin.android
+adb shell pm disable-user --user 0 com.glovo
+adb shell pm disable-user --user 0 com.google.android.googlequicksearchbox
 
 # Kill browser & stores
 adb shell pm disable-user --user 0 com.android.chrome
@@ -164,7 +165,8 @@ adb shell settings put global animator_duration_scale 0
 adb shell settings put global wifi_scan_always_enabled 0
 adb shell settings put global ble_scan_always_enabled 0
 
-# Grayscale & sound triggers
+# Grayscale (AOSP + Samsung One UI) & Sensory Detox
+adb shell settings put system greyscale_mode 1
 adb shell settings put secure accessibility_display_daltonizer 0
 adb shell settings put secure accessibility_display_daltonizer_enabled 1
 adb shell settings put secure reduce_bright_colors_activated 1
@@ -172,6 +174,7 @@ adb shell settings put system haptic_feedback_enabled 0
 adb shell settings put system sound_effects_enabled 0
 adb shell settings put system lockscreen_sounds_enabled 0
 adb shell settings put secure notification_badging 0
+adb shell settings put system badge_app_icon_type 0
 adb shell settings put system screen_off_timeout 30000
 
 # Private DNS (CleanBrowsing DoT)
