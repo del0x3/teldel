@@ -3,7 +3,34 @@
 # teldel - Stock One UI Profile (Autonomous High-Speed Native Engine)
 # ==============================================================================
 
-# 1. Restore applications & application stores
+# 1. Restore stock Samsung One UI launcher & Home screen (Instant response)
+cmd role add-role-holder --user 0 android.app.role.HOME com.sec.android.app.launcher 2>/dev/null
+input keyevent 3 2>/dev/null
+
+# 2. Restore full-color display (Samsung One UI + AOSP daltonizer + Extra Dim)
+settings put system greyscale_mode 0 2>/dev/null
+settings put secure accessibility_display_daltonizer_enabled 0 2>/dev/null
+settings put secure accessibility_display_daltonizer 0 2>/dev/null
+settings put secure reduce_bright_colors_activated 0 2>/dev/null
+
+# 3. Restore animations & hardware settings
+settings put global window_animation_scale 1.0 2>/dev/null
+settings put global transition_animation_scale 1.0 2>/dev/null
+settings put global animator_duration_scale 1.0 2>/dev/null
+settings put global ram_expand_size 4 2>/dev/null
+settings put global wifi_scan_always_enabled 1 2>/dev/null
+settings put global ble_scan_always_enabled 1 2>/dev/null
+
+# 4. Restore sensory feedback, notification badges, banners & screen timeout
+settings put system haptic_feedback_enabled 1 2>/dev/null
+settings put system sound_effects_enabled 1 2>/dev/null
+settings put system lockscreen_sounds_enabled 1 2>/dev/null
+settings put secure notification_badging 1 2>/dev/null
+settings put system badge_app_icon_type 0 2>/dev/null
+settings put global heads_up_notifications_enabled 1 2>/dev/null
+settings put system screen_off_timeout 60000 2>/dev/null
+
+# 5. Restore applications & application stores
 ENABLED=$(pm list packages -e 2>/dev/null)
 
 for pkg in \
@@ -29,7 +56,7 @@ do
     esac
 done
 
-# 2. Restore installation & sideloading permissions
+# 6. Restore installation & sideloading permissions
 settings put secure install_non_market_apps 1 2>/dev/null
 cmd appops set org.telegram.messenger REQUEST_INSTALL_PACKAGES allow 2>/dev/null
 cmd appops set com.discord REQUEST_INSTALL_PACKAGES allow 2>/dev/null
@@ -41,33 +68,6 @@ cmd appops set com.microsoft.skydrive REQUEST_INSTALL_PACKAGES allow 2>/dev/null
 cmd appops set com.android.chrome REQUEST_INSTALL_PACKAGES allow 2>/dev/null
 cmd appops set com.sec.android.app.samsungapps REQUEST_INSTALL_PACKAGES allow 2>/dev/null
 cmd appops set com.android.vending REQUEST_INSTALL_PACKAGES allow 2>/dev/null
-
-# 3. Restore full-color display (Samsung One UI + AOSP daltonizer + Extra Dim)
-settings put system greyscale_mode 0 2>/dev/null
-settings put secure accessibility_display_daltonizer_enabled 0 2>/dev/null
-settings put secure accessibility_display_daltonizer 0 2>/dev/null
-settings put secure reduce_bright_colors_activated 0 2>/dev/null
-
-# 4. Restore stock Samsung One UI launcher
-cmd role add-role-holder --user 0 android.app.role.HOME com.sec.android.app.launcher 2>/dev/null
-input keyevent 3 2>/dev/null
-
-# 5. Restore animations & hardware settings
-settings put global window_animation_scale 1.0 2>/dev/null
-settings put global transition_animation_scale 1.0 2>/dev/null
-settings put global animator_duration_scale 1.0 2>/dev/null
-settings put global ram_expand_size 4 2>/dev/null
-settings put global wifi_scan_always_enabled 1 2>/dev/null
-settings put global ble_scan_always_enabled 1 2>/dev/null
-
-# 6. Restore sensory feedback, notification badges, banners & screen timeout
-settings put system haptic_feedback_enabled 1 2>/dev/null
-settings put system sound_effects_enabled 1 2>/dev/null
-settings put system lockscreen_sounds_enabled 1 2>/dev/null
-settings put secure notification_badging 1 2>/dev/null
-settings put system badge_app_icon_type 0 2>/dev/null
-settings put global heads_up_notifications_enabled 1 2>/dev/null
-settings put system screen_off_timeout 60000 2>/dev/null
 
 # 7. Restore network DNS (opportunistic DHCP default)
 settings delete global private_dns_specifier 2>/dev/null

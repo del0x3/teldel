@@ -27,6 +27,20 @@ public abstract class BaseSwitcherActivity extends Activity {
         executeAll();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        executedShizuku = false;
+        executeAll();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
+
     protected abstract boolean isStock();
     protected abstract String getScriptPath();
     protected abstract String getSuccessMessage();
@@ -44,9 +58,6 @@ public abstract class BaseSwitcherActivity extends Activity {
 
         // 3. Shizuku Deep Execution (Freeze/Unfreeze apps & Role Manager)
         runShizukuIfAvailable();
-
-        // Finish activity after brief delay to allow IPC dispatch
-        handler.postDelayed(this::finish, 1000);
     }
 
     private void runShizukuIfAvailable() {
@@ -61,6 +72,7 @@ public abstract class BaseSwitcherActivity extends Activity {
                 }
             };
             Shizuku.addBinderReceivedListenerSticky(listener);
+            handler.postDelayed(this::cleanupAndExit, 1500);
         }
     }
 
@@ -70,6 +82,7 @@ public abstract class BaseSwitcherActivity extends Activity {
 
         if (Shizuku.checkSelfPermission() != PackageManager.PERMISSION_GRANTED) {
             Log.w(TAG, "Shizuku permission not granted");
+            cleanupAndExit();
             return;
         }
 
@@ -82,8 +95,18 @@ public abstract class BaseSwitcherActivity extends Activity {
                 Log.i(TAG, "Shizuku script finished with code: " + code);
             } catch (Exception e) {
                 Log.e(TAG, "Shizuku execution error: " + e.getMessage());
+            } finally {
+                handler.post(this::cleanupAndExit);
             }
         }).start();
+    }
+
+    private void cleanupAndExit() {
+        try {
+            finishAndRemoveTask();
+        } catch (Throwable ignored) {
+            finish();
+        }
     }
 
     private void putSecureInt(String name, int val) {

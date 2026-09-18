@@ -25,6 +25,9 @@
             android:name=".StockModeActivity"
             android:label="@string/switch_to_stock"
             android:icon="@drawable/ic_stock"
+            android:noHistory="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +39,9 @@
             android:name=".MinimalModeActivity"
             android:label="@string/switch_to_minimal"
             android:icon="@drawable/ic_minimal"
+            android:noHistory="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
